@@ -50,6 +50,36 @@ export default function Home() {
           </CardContent>
         </Card>
 
+        {/* Work Experience Section */}
+        <Card className="mb-8 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Work Experience</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-amber-800">🛡 Palo Alto Networks | Senior Technical Writer (September 2022 - September 2023)</h3>
+              <ul className="text-gray-400 space-y-1">
+                <li>Maintained and transitioned API reference documentation for 40+ APIs</li>
+                <li>Led migration of the API reference site to pan.dev</li>
+                <li>Streamlined CI/CD documentation workflows</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-amber-800">📝 Tech Copywriter | RashidMa.com (2019 - 2022)</h3>
+              <ul className="text-gray-400 space-y-1">
+                <li>Specialized in SaaS & technical copywriting</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-amber-800">💾 Software Engineering Experience (2010 - 2018)</h3>
+              <ul className="text-gray-400 space-y-1">
+                <li>Held senior engineering roles at Baker Hughes, Digital Fleet, leadPops, Adicio, PACCAR, Quad/Graphics, and University of Nevada, Reno</li>
+                <li>Experience in cloud infrastructure (AWS)</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Projects Section */}
         <Card className="mb-8 border-gray-700">
           <CardHeader>
