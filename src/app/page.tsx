@@ -14,7 +14,7 @@ export default function Home() {
             </Avatar>
             <CardTitle className="text-3xl font-bold">Rashid Mak</CardTitle>
             <CardDescription className="text-lg text-teal-900">
-              Web3 Developer | DeFi Enthusiast | Technical Writer
+              Web3 Developer | Explorer of Agentic Systems | Technical Writer
             </CardDescription>
             <p className="text-gray-600 mt-2">📍 Austin, Texas, United States</p>
           </CardHeader>
