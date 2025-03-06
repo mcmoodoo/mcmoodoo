@@ -1,101 +1,89 @@
-import Image from "next/image";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export default function Home() {
-	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-				<Image
-					className="dark:invert"
-					src="/next.svg"
-					alt="Next.js logo"
-					width={180}
-					height={38}
-					priority
-				/>
-				<ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-					<li className="mb-2">
-						Get started by editing{" "}
-						<code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-							src/app/page.tsx
-						</code>
-						.
-					</li>
-					<li>Save and see your changes instantly.</li>
-				</ol>
+  return (
+    <main className="min-h-screen p-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+      <div className="max-w-4xl mx-auto">
+        {/* Profile Section */}
+        <Card className="mb-8 border-gray-700">
+          <CardHeader className="flex flex-col items-center text-center">
+            <Avatar className="w-32 h-32 mb-4">
+              <AvatarImage src="/profile-placeholder.jpg" />
+              <AvatarFallback>RM</AvatarFallback>
+            </Avatar>
+            <CardTitle className="text-3xl font-bold">Rashid Mak</CardTitle>
+            <CardDescription className="text-lg text-gray-300">
+              Web3 Developer | DeFi Enthusiast | Technical Writer
+            </CardDescription>
+            <p className="text-gray-400 mt-2">📍 Austin, Texas, United States</p>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-gray-300">
+              Web3 dev & DeFi dork with a quirky mix of skills, combining development with technical writing.
+              Actively navigating EVM, SVM, StarkNet, and exploring Arbitrum Stylus to build impactful DeFi solutions.
+            </p>
+          </CardContent>
+        </Card>
 
-				<div className="flex gap-4 items-center flex-col sm:flex-row">
-					<a
-						className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image
-							className="dark:invert"
-							src="/vercel.svg"
-							alt="Vercel logomark"
-							width={20}
-							height={20}
-						/>
-						Deploy now
-					</a>
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Read our docs
-					</a>
-				</div>
-			</main>
-			<footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/file.svg"
-						alt="File icon"
-						width={16}
-						height={16}
-					/>
-					Learn
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/window.svg"
-						alt="Window icon"
-						width={16}
-						height={16}
-					/>
-					Examples
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/globe.svg"
-						alt="Globe icon"
-						width={16}
-						height={16}
-					/>
-					Go to nextjs.org →
-				</a>
-			</footer>
-		</div>
-	);
+        {/* Skills Section */}
+        <Card className="mb-8 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Technical Skills</CardTitle>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="font-semibold text-gray-300 mb-2">Blockchain & Web3</h3>
+              <ul className="text-gray-400 space-y-1">
+                <li>Smart Contract Development: Solidity, Cairo</li>
+                <li>Blockchain Ecosystems: Ethereum (EVM), Solana (SVM), StarkNet, Arbitrum Stylus</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-300 mb-2">Programming Languages</h3>
+              <ul className="text-gray-400 space-y-1">
+                <li>Web3 & Backend: Solidity, Rust, C++</li>
+                <li>Full Stack: C#, Java, Python, React</li>
+                <li>Scripting & Automation: Bash, Python</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Projects Section */}
+        <Card className="mb-8 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Notable Projects & Achievements</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-gray-300">🏆 EthGlobal 2024 Hackathon Partner Prize Winner</h3>
+              <p className="text-gray-400">Project: CollaSwitch (Automated Collateral Swapper)</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-300">🚀 UnPin | Web3 Builder (September 2023 - Present)</h3>
+              <p className="text-gray-400">Building at EthGlobal, dAGI, Lambda, EthOnline, easyA hackathons worldwide.</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Education Section */}
+        <Card className="border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">Education</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-gray-300">🎓 University of Nevada, Reno (2008 - 2012)</h3>
+              <p className="text-gray-400">B.S. in Computer Science & Engineering</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-300">🎓 National School of Physics & Math (FIZMAT) (2003 - 2006)</h3>
+              <p className="text-gray-400">Focus: Math & Computer Science</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </main>
+  );
 }
