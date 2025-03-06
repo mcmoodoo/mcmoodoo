@@ -10,7 +10,7 @@ export default function Home() {
           <CardHeader className="flex flex-col items-center text-center">
             <Avatar className="w-32 h-32 mb-4">
               <AvatarImage src="/rashid-profile.jpg" />
-              <AvatarFallback>RM</AvatarFallback>
+              <AvatarFallback>Rashid</AvatarFallback>
             </Avatar>
             <CardTitle className="text-3xl font-bold">Rashid Mak</CardTitle>
             <CardDescription className="text-lg text-teal-900">
