@@ -209,12 +209,12 @@ const ExperienceCard: React.FC<Experience & { isLeft: boolean }> = ({
 	skills,
 	isLeft,
 }) => (
-	<div className={`flex w-full ${isLeft ? 'justify-start' : 'justify-end'}`}>
-		<motion.div 
-			whileHover={{ scale: 1.02 }} 
-			whileTap={{ scale: 0.98 }} 
+	<div className={`flex w-full ${isLeft ? "justify-start" : "justify-end"}`}>
+		<motion.div
+			whileHover={{ scale: 1.02 }}
+			whileTap={{ scale: 0.98 }}
 			layout
-			className={`w-5/6 md:w-[45%] ${isLeft ? 'mr-auto' : 'ml-auto'}`}
+			className={`w-5/6 md:w-[45%] ${isLeft ? "mr-auto" : "ml-auto"}`}
 		>
 			<Card className="p-4 shadow-md rounded-xl bg-white border border-gray-100">
 				<CardContent className="p-0">
@@ -258,7 +258,7 @@ const ExperienceSection: React.FC = () => (
 		<div className="relative">
 			{/* Timeline vertical line */}
 			<TimelineNode />
-			
+
 			<div className="flex flex-col gap-16">
 				{experiences.map((exp, index) => (
 					<div key={index} className="relative">

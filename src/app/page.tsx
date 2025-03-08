@@ -25,8 +25,8 @@ const pageContent = {
 			title: "Blockchain & Web3",
 			items: [
 				"Solidity on Etherem, Base, Arbitrum",
-        "Cairo on Starknet",
-        "Rust on Arbitrum Stylus"
+				"Cairo on Starknet",
+				"Rust on Arbitrum Stylus",
 			],
 		},
 		fullstack: {
@@ -128,83 +128,90 @@ export default function Home() {
 				</Card>
 
 				{/* Skills Section */}
-				<Card className="mb-8 border border-gray-300 shadow-md rounded-lg">
-					<CardHeader className="bg-gray-100 rounded-t-lg px-6 py-4">
-						<CardTitle className="text-2xl font-bold text-gray-800">
-							Technical Skills
-						</CardTitle>
-					</CardHeader>
-					<CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-						{/* Blockchain Skills */}
-						<div>
-							<h3 className="font-semibold text-lg text-gray-700 mb-3">
-								{pageContent.skills.blockchain.title}
-							</h3>
-							<ul className="space-y-2">
-								{pageContent.skills.blockchain.items.map((item, index) => (
-									<li key={index} className="flex items-center text-gray-600">
-										<svg
-											className="w-4 h-4 text-blue-600 mr-2"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-										>
-											<path
-												fillRule="evenodd"
-												d="M10 2a8 8 0 100 16 8 8 0 000-16zM7.707 10.293a1 1 0 011.414 0L10 11.172l1.879-1.879a1 1 0 111.414 1.414l-2.586 2.586a1 1 0 01-1.414 0l-2.586-2.586a1 1 0 010-1.414z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										{item}
-									</li>
-								))}
-							</ul>
-						</div>
+				<section id="skills">
+					<Card className="mb-8 border border-gray-300 shadow-md rounded-lg">
+						<CardHeader className="bg-gray-100 rounded-t-lg px-6 py-4">
+							<CardTitle className="text-2xl font-bold text-gray-800">
+								Technical Skills
+							</CardTitle>
+						</CardHeader>
+						<CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+							{/* Blockchain Skills */}
+							<div>
+								<h3 className="font-semibold text-lg text-gray-700 mb-3">
+									{pageContent.skills.blockchain.title}
+								</h3>
+								<ul className="space-y-2">
+									{pageContent.skills.blockchain.items.map((item, index) => (
+										<li key={index} className="flex items-center text-gray-600">
+											<svg
+												className="w-4 h-4 text-blue-600 mr-2"
+												fill="currentColor"
+												viewBox="0 0 20 20"
+											>
+												<path
+													fillRule="evenodd"
+													d="M10 2a8 8 0 100 16 8 8 0 000-16zM7.707 10.293a1 1 0 011.414 0L10 11.172l1.879-1.879a1 1 0 111.414 1.414l-2.586 2.586a1 1 0 01-1.414 0l-2.586-2.586a1 1 0 010-1.414z"
+													clipRule="evenodd"
+												/>
+											</svg>
+											{item}
+										</li>
+									))}
+								</ul>
+							</div>
 
-						{/* Programming Skills */}
-						<div>
-							<h3 className="font-semibold text-lg text-gray-700 mb-3">
-								{pageContent.skills.fullstack.title}
-							</h3>
-							<ul className="space-y-2">
-								{pageContent.skills.fullstack.items.map((item, index) => (
-									<li key={index} className="flex items-center text-gray-600">
-										<svg
-											className="w-4 h-4 text-green-600 mr-2"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-										>
-											<path
-												fillRule="evenodd"
-												d="M10 2a8 8 0 100 16 8 8 0 000-16zM7.707 10.293a1 1 0 011.414 0L10 11.172l1.879-1.879a1 1 0 111.414 1.414l-2.586 2.586a1 1 0 01-1.414 0l-2.586-2.586a1 1 0 010-1.414z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										{item}
-									</li>
-								))}
-							</ul>
-						</div>
-					</CardContent>
-				</Card>
+							{/* Programming Skills */}
+							<div>
+								<h3 className="font-semibold text-lg text-gray-700 mb-3">
+									{pageContent.skills.fullstack.title}
+								</h3>
+								<ul className="space-y-2">
+									{pageContent.skills.fullstack.items.map((item, index) => (
+										<li key={index} className="flex items-center text-gray-600">
+											<svg
+												className="w-4 h-4 text-green-600 mr-2"
+												fill="currentColor"
+												viewBox="0 0 20 20"
+											>
+												<path
+													fillRule="evenodd"
+													d="M10 2a8 8 0 100 16 8 8 0 000-16zM7.707 10.293a1 1 0 011.414 0L10 11.172l1.879-1.879a1 1 0 111.414 1.414l-2.586 2.586a1 1 0 01-1.414 0l-2.586-2.586a1 1 0 010-1.414z"
+													clipRule="evenodd"
+												/>
+											</svg>
+											{item}
+										</li>
+									))}
+								</ul>
+							</div>
+						</CardContent>
+					</Card>
+				</section>
 
 				{/* Education Section */}
-				<Card className="mt-4 border-gray-200 shadow-sm">
-					<CardHeader>
-						<CardTitle className="text-xl font-bold">Education</CardTitle>
-					</CardHeader>
-					<CardContent className="space-y-4">
-						{pageContent.education.map((edu, index) => (
-							<div key={index}>
-								<h3 className="font-semibold text-gray-700">
-									{edu.institution} ({edu.period})
-								</h3>
-								<p className="text-gray-600">{edu.degree || edu.focus}</p>
-							</div>
-						))}
-					</CardContent>
-				</Card>
+				<section id="education">
+					<Card className="mt-4 mb-8 border-gray-200 shadow-sm">
+						<CardHeader>
+							<CardTitle className="text-xl font-bold">Education</CardTitle>
+						</CardHeader>
+						<CardContent className="space-y-4">
+							{pageContent.education.map((edu, index) => (
+								<div key={index}>
+									<h3 className="font-semibold text-gray-700">
+										{edu.institution} ({edu.period})
+									</h3>
+									<p className="text-gray-600">{edu.degree || edu.focus}</p>
+								</div>
+							))}
+						</CardContent>
+					</Card>
+				</section>
 
-				<ExperienceSection />
+				{/* Experience Section */}
+				<section id="experience">
+					<ExperienceSection />
+				</section>
 			</div>
 		</main>
 	);
