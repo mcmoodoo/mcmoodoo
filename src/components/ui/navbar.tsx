@@ -1,19 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X, Linkedin, Github, Twitter, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { SocialLinks } from "./SocialLinks";
 
 type NavItem = {
 	label: string;
 	href: string;
-};
-
-type SocialLink = {
-	icon: React.ElementType;
-	href: string;
-	label: string;
 };
 
 const navItems: NavItem[] = [
@@ -21,13 +16,6 @@ const navItems: NavItem[] = [
 	{ label: "Experience", href: "#experience" },
 	{ label: "Skills", href: "#skills" },
 	{ label: "Education", href: "#education" },
-];
-
-const socialLinks: SocialLink[] = [
-	{ icon: Linkedin, href: "https://www.linkedin.com/in/mcmoodoo", label: "LinkedIn" },
-	{ icon: Twitter, href: "https://x.com/mcmoodoo", label: "X" },
-	{ icon: MessageSquare, href: "https://medium.com/@mcmoodoo", label: "Medium" },
-	{ icon: Github, href: "https://github.com/mcmoodoo", label: "GitHub" },
 ];
 
 export function NavBar() {
@@ -62,22 +50,9 @@ export function NavBar() {
 								))}
 							</div>
 						</div>
-						
+
 						{/* Social Links */}
-						<div className="hidden md:flex items-center space-x-3 ml-6">
-							{socialLinks.map((item) => (
-								<Link
-									key={item.label}
-									href={item.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-gray-600 hover:text-blue-600 transition-colors"
-									aria-label={item.label}
-								>
-									<item.icon className="h-5 w-5" />
-								</Link>
-							))}
-						</div>
+						<SocialLinks className="hidden md:flex ml-6" />
 
 						{/* Mobile Menu Button */}
 						<div className="md:hidden ml-4">
@@ -114,22 +89,10 @@ export function NavBar() {
 							{item.label}
 						</Link>
 					))}
-					
+
 					{/* Social Links (Mobile) */}
-					<div className="flex items-center space-x-4 pt-2 px-3">
-						{socialLinks.map((item) => (
-							<Link
-								key={item.label}
-								href={item.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-gray-600 hover:text-blue-600 transition-colors"
-								aria-label={item.label}
-								onClick={() => setIsMenuOpen(false)}
-							>
-								<item.icon className="h-5 w-5" />
-							</Link>
-						))}
+					<div className="pt-2 px-3">
+						<SocialLinks onClick={() => setIsMenuOpen(false)} />
 					</div>
 				</div>
 			</div>

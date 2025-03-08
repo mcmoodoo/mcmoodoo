@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ExperienceSection from "@/components/Experience";
-import { useRef } from "react";
 
 // Content data as a JSON object
 const pageContent = {
