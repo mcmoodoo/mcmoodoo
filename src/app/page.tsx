@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import ExperienceSection from '@/components/Experience';
 
 export default function Home() {
   return (
@@ -79,6 +80,8 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
+
+        <ExperienceSection />
 
         {/* Projects Section */}
         <Card className="mb-8 border-gray-700">
