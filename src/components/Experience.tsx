@@ -200,45 +200,74 @@ const experiences: Experience[] = [
 	},
 ];
 
-const ExperienceCard: React.FC<Experience> = ({
+const ExperienceCard: React.FC<Experience & { isLeft: boolean }> = ({
 	title,
 	company,
 	duration,
 	location,
 	description,
 	skills,
+	isLeft,
 }) => (
-	<motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} layout>
-		<Card className="p-5 shadow-md rounded-xl bg-white border border-gray-100 flex flex-row items-start gap-4">
-			<CardContent className="flex-1">
-				<h3 className="text-lg font-semibold">{title}</h3>
-				<p className="text-gray-500">
-					{company} • {duration}
-				</p>
-				<p className="text-sm text-gray-400">{location}</p>
-				<p className="mt-2 text-gray-700">{description}</p>
-				<div className="mt-3 flex flex-wrap gap-2">
-					{skills.map((skill, index) => (
-						<Badge
-							key={index}
-							className="bg-blue-50 text-blue-700 px-2 py-1 rounded-md text-xs"
-						>
-							{skill}
-						</Badge>
-					))}
-				</div>
-			</CardContent>
-		</Card>
-	</motion.div>
+	<div className={`flex w-full ${isLeft ? 'justify-start' : 'justify-end'}`}>
+		<motion.div 
+			whileHover={{ scale: 1.02 }} 
+			whileTap={{ scale: 0.98 }} 
+			layout
+			className={`w-5/6 md:w-[45%] ${isLeft ? 'mr-auto' : 'ml-auto'}`}
+		>
+			<Card className="p-4 shadow-md rounded-xl bg-white border border-gray-100">
+				<CardContent className="p-0">
+					<h3 className="text-lg font-semibold">{title}</h3>
+					<p className="text-gray-500">
+						{company} • {duration}
+					</p>
+					<p className="text-sm text-gray-400">{location}</p>
+					<p className="mt-2 text-gray-700">{description}</p>
+					<div className="mt-3 flex flex-wrap gap-2">
+						{skills.map((skill, index) => (
+							<Badge
+								key={index}
+								className="bg-blue-50 text-blue-700 px-2 py-1 rounded-md text-xs"
+							>
+								{skill}
+							</Badge>
+						))}
+					</div>
+				</CardContent>
+			</Card>
+		</motion.div>
+	</div>
+);
+
+const TimelineNode: React.FC = () => (
+	<div className="absolute top-0 left-1/2 transform -translate-x-1/2 h-full flex flex-col items-center">
+		<div className="w-1 h-full bg-blue-400 rounded-full"></div>
+	</div>
+);
+
+const TimelineDot: React.FC = () => (
+	<div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+		<div className="w-5 h-5 bg-blue-500 rounded-full z-10 shadow-md"></div>
+	</div>
 );
 
 const ExperienceSection: React.FC = () => (
-	<div className="container mx-auto">
-		<h2 className="text-2xl font-bold mb-6">Experience</h2>
-		<div className="flex flex-col gap-4">
-			{experiences.map((exp, index) => (
-				<ExperienceCard key={index} {...exp} />
-			))}
+	<div className="container mx-auto py-10">
+		<h2 className="text-2xl font-bold mb-10 text-center">Experience</h2>
+		<div className="relative">
+			{/* Timeline vertical line */}
+			<TimelineNode />
+			
+			<div className="flex flex-col gap-16">
+				{experiences.map((exp, index) => (
+					<div key={index} className="relative">
+						{/* Timeline dot for each experience */}
+						<TimelineDot />
+						<ExperienceCard {...exp} isLeft={index % 2 === 0} />
+					</div>
+				))}
+			</div>
 		</div>
 	</div>
 );

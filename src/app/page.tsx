@@ -187,8 +187,6 @@ export default function Home() {
 					</CardContent>
 				</Card>
 
-				<ExperienceSection />
-
 				{/* Education Section */}
 				<Card className="mt-4 border-gray-200 shadow-sm">
 					<CardHeader>
@@ -205,6 +203,8 @@ export default function Home() {
 						))}
 					</CardContent>
 				</Card>
+
+				<ExperienceSection />
 			</div>
 		</main>
 	);
