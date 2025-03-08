@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Rashid Mak",
+	title: "Rashid McMoodoo",
 	description: "Rashid's Personal Site",
 };
 

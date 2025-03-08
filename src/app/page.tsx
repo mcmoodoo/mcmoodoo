@@ -40,7 +40,6 @@ const pageContent = {
 	workExperience: [
 		{
 			title: "Web3 Builder",
-			// company: "UnPin",
 			period: "September 2023 - Present",
 			items: [
 				"Building DeFi and Web3 solutions at hackathons around the globe",
@@ -120,7 +119,7 @@ export default function Home() {
 						)}
 					</CardHeader>
 					<CardContent className="text-center px-6 pb-6">
-						<p className="text-gray-700 leading-relaxed line-clamp-4">
+						<p className="text-gray-700 leading-relaxed line-clamp-6">
 							{pageContent.profile.bio || "No bio available."}
 						</p>
 					</CardContent>

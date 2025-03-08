@@ -200,21 +200,20 @@ const experiences: Experience[] = [
 	},
 ];
 
-const ExperienceCard: React.FC<Experience & { isLeft: boolean }> = ({
+const ExperienceCard: React.FC<Experience> = ({
 	title,
 	company,
 	duration,
 	location,
 	description,
 	skills,
-	isLeft,
 }) => (
-	<div className={`flex w-full ${isLeft ? "justify-start" : "justify-end"}`}>
+	<div className="flex w-full justify-end">
 		<motion.div
 			whileHover={{ scale: 1.02 }}
 			whileTap={{ scale: 0.98 }}
 			layout
-			className={`w-5/6 md:w-[45%] ${isLeft ? "mr-auto" : "ml-auto"}`}
+			className="w-[85%] md:w-[90%] ml-auto"
 		>
 			<Card className="p-4 shadow-md rounded-xl bg-white border border-gray-100">
 				<CardContent className="p-0">
@@ -241,13 +240,13 @@ const ExperienceCard: React.FC<Experience & { isLeft: boolean }> = ({
 );
 
 const TimelineNode: React.FC = () => (
-	<div className="absolute top-0 left-1/2 transform -translate-x-1/2 h-full flex flex-col items-center">
+	<div className="absolute top-0 left-[5%] md:left-[5%] transform -translate-x-1/2 h-full flex flex-col items-center">
 		<div className="w-1 h-full bg-blue-400 rounded-full"></div>
 	</div>
 );
 
 const TimelineDot: React.FC = () => (
-	<div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+	<div className="absolute left-[5%] md:left-[5%] transform -translate-x-1/2 flex items-center justify-center">
 		<div className="w-5 h-5 bg-blue-500 rounded-full z-10 shadow-md"></div>
 	</div>
 );
@@ -259,12 +258,12 @@ const ExperienceSection: React.FC = () => (
 			{/* Timeline vertical line */}
 			<TimelineNode />
 
-			<div className="flex flex-col gap-16">
+			<div className="flex flex-col gap-6">
 				{experiences.map((exp, index) => (
 					<div key={index} className="relative">
 						{/* Timeline dot for each experience */}
 						<TimelineDot />
-						<ExperienceCard {...exp} isLeft={index % 2 === 0} />
+						<ExperienceCard {...exp} />
 					</div>
 				))}
 			</div>
