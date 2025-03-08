@@ -3,13 +3,13 @@
 import { Github, Linkedin, MessageSquare, Twitter } from "lucide-react";
 import Link from "next/link";
 
-export type SocialLink = {
+type SocialLink = {
 	icon: React.ElementType;
 	href: string;
 	label: string;
 };
 
-export const defaultSocialLinks: SocialLink[] = [
+const defaultSocialLinks: SocialLink[] = [
 	{
 		icon: Linkedin,
 		href: "https://www.linkedin.com/in/mcmoodoo",

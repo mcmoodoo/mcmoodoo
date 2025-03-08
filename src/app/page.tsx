@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ExperienceSection from "@/components/Experience";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 // Content data as a JSON object
 const pageContent = {
@@ -122,6 +124,17 @@ export default function Home() {
 						<p className="text-gray-700 leading-relaxed line-clamp-6">
 							{pageContent.profile.bio || "No bio available."}
 						</p>
+						<a
+							href="https://mcmoodoo.s3.us-east-1.amazonaws.com/Rashid_McMoodoo_Resume.pdf"
+							download
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Button className="mt-4" variant="default">
+								<Download className="w-4 h-4 mr-2" />
+								Resume
+							</Button>
+						</a>
 					</CardContent>
 				</Card>
 
