@@ -17,9 +17,8 @@ const pageContent = {
 	profile: {
 		name: "Rashid McMoodoo",
 		image: "/rashid-profile.jpg",
-		title: "Software Engineer | Technical Writer | Web3 Builder",
+		title: "Full-stack Engineer | Technical Writer | Web3 Builder",
 		location: "📍 Austin, Texas, United States",
-		bio: "Full-stack Engineer & Technical Writer. Web3 Builder, EthGlobal prize winner. Led API docs at Palo Alto Networks. Expertise in cloud infrastructure, full-stack dev, and tech documentation.",
 	},
 	skills: {
 		blockchain: {
@@ -122,7 +121,33 @@ export default function Home() {
 					</CardHeader>
 					<CardContent className="text-center px-6 pb-6">
 						<p className="text-gray-700 leading-relaxed line-clamp-6">
-							{pageContent.profile.bio || "No bio available."}
+							Linux Geek🐧. Experienced in deploying and provisioning cloud
+							resources⛅ on <span className="font-medium">AWS</span> and{" "}
+							<span className="font-medium">GCP</span>
+							<br />
+							Previously owned{" "}
+							<span className="font-semibold">
+								<a
+									href="https://pan.dev/prisma-cloud/api/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-blue-600 hover:underline"
+								>
+									API documentation at Palo Alto Networks
+								</a>
+							</span>
+							. <span className="font-semibold">Web3 Builder</span> &{" "}
+							<span className="font-semibold">
+								🏆{" "}
+								<a
+									href="https://x.com/mcmoodoo/status/1862729690538287298"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-blue-600 hover:underline"
+								>
+									EthGlobal Prize Winner
+								</a>
+							</span>
 						</p>
 						<a
 							href="https://mcmoodoo.s3.us-east-1.amazonaws.com/Rashid_McMoodoo_Resume.pdf"
