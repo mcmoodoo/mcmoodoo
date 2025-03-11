@@ -124,3 +124,29 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+/* Mermaid Diagram Styles */
+.mermaid-wrapper {
+	@apply w-full;
+}
+
+.mermaid-wrapper svg {
+	@apply mx-auto max-w-full h-auto;
+	min-height: 200px;
+}
+
+/* Ensure diagrams don't overflow their containers */
+.mermaid-wrapper foreignObject {
+	overflow: visible;
+}
+
+/* Improve contrast for diagram text */
+.mermaid-wrapper .label {
+	@apply text-foreground font-medium;
+}
+
+/* Fix diagram spacing and overflow issues */
+.mermaid-wrapper .nodes,
+.mermaid-wrapper .clusters {
+	@apply my-2;
+}
