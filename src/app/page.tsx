@@ -114,18 +114,16 @@ export default function Home() {
 							{pageContent.profile.title}
 						</CardDescription>
 						{pageContent.profile.location && (
-							<p className="text-gray-500 mt-1">
+							<p className="text-gray-500 text-sm">
 								{pageContent.profile.location}
 							</p>
 						)}
 					</CardHeader>
-					<CardContent className="text-center px-6 pb-6">
+					<CardContent className="text-center px-4 md:px-20 pb-6">
 						<p className="text-gray-700 leading-relaxed line-clamp-6">
-							Linux Geek🐧. Experienced in deploying and provisioning cloud
-							resources⛅ on <span className="font-medium">AWS</span> and{" "}
-							<span className="font-medium">GCP</span>
-							<br />
-							Previously owned{" "}
+							Linux Geek🐧. Deployed and provisioned cloud resources⛅ on{" "}
+							<span className="font-medium">AWS</span> and{" "}
+							<span className="font-medium">GCP</span>. Previously owned{" "}
 							<span className="font-semibold">
 								<a
 									href="https://pan.dev/prisma-cloud/api/"
@@ -135,17 +133,17 @@ export default function Home() {
 								>
 									API documentation at Palo Alto Networks
 								</a>
+								.{" "}
 							</span>
-							. <span className="font-semibold">Web3 Builder</span> &{" "}
+							<span className="font-semibold">Web3 Builder</span> &{" "}
 							<span className="font-semibold">
-								🏆{" "}
 								<a
 									href="https://x.com/mcmoodoo/status/1862729690538287298"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-blue-600 hover:underline"
 								>
-									EthGlobal Prize Winner
+									EthGlobal Prize Winner 🏆
 								</a>
 							</span>
 						</p>
