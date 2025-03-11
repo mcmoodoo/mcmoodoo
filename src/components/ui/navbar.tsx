@@ -12,10 +12,9 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-	{ label: "Home", href: "/" },
-	{ label: "Experience", href: "#experience" },
-	{ label: "Skills", href: "#skills" },
-	{ label: "Education", href: "#education" },
+	{ label: "Profile", href: "/" },
+	{ label: "Experience", href: "/#experience" },
+	{ label: "Posts", href: "/blog" },
 ];
 
 export function NavBar() {
