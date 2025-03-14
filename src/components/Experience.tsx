@@ -50,21 +50,21 @@ const experiences: Experience[] = [
 			"jq",
 		],
 	},
-	{
-		title: "Tech Copywriter",
-		company: "RashidMa.com",
-		duration: "Jan 2019 - Aug 2022 (3 yrs 8 mos)",
-		location: "Remote",
-		description:
-			"Created concise and compelling copy for SaaS companies. Client acquisition through prospecting, cold emails, and LinkedIn outreach.",
-		skills: [
-			"Markdown",
-			"Technical Writing",
-			"Technical Documentation",
-			"Writing",
-			"Sales Prospecting",
-		],
-	},
+	// {
+	// 	title: "Tech Copywriter",
+	// 	company: "RashidMa.com",
+	// 	duration: "Jan 2019 - Aug 2022 (3 yrs 8 mos)",
+	// 	location: "Remote",
+	// 	description:
+	// 		"Created concise and compelling copy for SaaS companies. Client acquisition through prospecting, cold emails, and LinkedIn outreach.",
+	// 	skills: [
+	// 		"Markdown",
+	// 		"Technical Writing",
+	// 		"Technical Documentation",
+	// 		"Writing",
+	// 		"Sales Prospecting",
+	// 	],
+	// },
 	{
 		title: "Senior Software Engineer",
 		company: "Baker Hughes",

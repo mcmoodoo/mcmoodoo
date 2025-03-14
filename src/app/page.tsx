@@ -38,45 +38,45 @@ const pageContent = {
 			],
 		},
 	},
-	workExperience: [
-		{
-			title: "Web3 Builder",
-			period: "September 2023 - Present",
-			items: [
-				"Building DeFi and Web3 solutions at hackathons around the globe",
-				"EthGlobal 2024 Hackathon Prize Winner. Project: CollaSwitch (Automated Collateral Swapper)",
-			],
-		},
-		{
-			title: "Senior Technical Writer",
-			company: "Palo Alto Networks",
-			period: "2022 - 2023",
-			items: [
-				"Maintained API reference documentation for 40+ unique APIs",
-				"Transitioned the API reference site to pan.dev with enhanced UI",
-				"Implemented docs-as-code workflow through CI/CD pipelines",
-			],
-		},
-		{
-			title: "Tech Copywriter",
-			company: "RashidMa.com",
-			period: "2019 - 2022",
-			items: [
-				"Created concise and compelling copy for SaaS companies",
-				"Developed technical documentation and marketing content",
-			],
-		},
-		{
-			title: "Senior Software Engineering Roles",
-			company: "",
-			period: "2010 - 2018",
-			items: [
-				"Senior Software Engineer at Baker Hughes (2018)",
-				"Senior Solutions Architect at Digital Fleet (2016-2017)",
-				"Software Engineering positions at leadPops, Adicio, PACCAR, NSHE (2010-2016)",
-			],
-		},
-	],
+	// workExperience: [
+	// 	{
+	// 		title: "Web3 Builder",
+	// 		period: "September 2023 - Present",
+	// 		items: [
+	// 			"Building DeFi and Web3 solutions at hackathons around the globe",
+	// 			"EthGlobal 2024 Hackathon Prize Winner. Project: CollaSwitch (Automated Collateral Swapper)",
+	// 		],
+	// 	},
+	// 	{
+	// 		title: "Senior Technical Writer",
+	// 		company: "Palo Alto Networks",
+	// 		period: "2022 - 2023",
+	// 		items: [
+	// 			"Maintained API reference documentation for 40+ unique APIs",
+	// 			"Transitioned the API reference site to pan.dev with enhanced UI",
+	// 			"Implemented docs-as-code workflow through CI/CD pipelines",
+	// 		],
+	// 	},
+	// 	 {
+	// 	 	title: "Tech Copywriter",
+	// 	 	company: "RashidMa.com",
+	// 	 	period: "2019 - 2022",
+	// 	 	items: [
+	// 	 		"Created concise and compelling copy for SaaS companies",
+	// 	 		"Developed technical documentation and marketing content",
+	// 	 	],
+	// 	 },
+	// 	{
+	// 		title: "Senior Software Engineering Roles",
+	// 		company: "",
+	// 		period: "2010 - 2018",
+	// 		items: [
+	// 			"Senior Software Engineer at Baker Hughes (2018)",
+	// 			"Senior Solutions Architect at Digital Fleet (2016-2017)",
+	// 			"Software Engineering positions at leadPops, Adicio, PACCAR, NSHE (2010-2016)",
+	// 		],
+	// 	},
+	// ],
 	education: [
 		{
 			institution: "University of Nevada, Reno",
