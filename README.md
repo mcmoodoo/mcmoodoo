@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Education and interests in school
+        - wanting to be a match teacher, switching to Computer Engineering
+            - gravitating toward software rather than low-level circuit troubleshooting
+            - switching to Computer Science
+        - being introduced to, Linux, OOP, and manual memory management through C++
+        - getting interested in AI and taking Genetic Algorithms, Neural Networks.
 
-## Getting Started
+## Professional Background
 
-First, run the development server:
+        - starting while in school helping researchers in the Brain Computation Lab
+            - linux administration
+            - python scripting, helping them to automate some of the tasks needed to interact with the 10k-neuron brain simulator deployed elsewhere on campus
+            - building brainstem project in Java as part of our Senior projects class
+### Quad Graphics
+            - maintaing a legacy scheduling tool built in C++
+                - rewriting parts of it in C# interop code to bring garbage collection to the legacy app
+            - finding and fixing memory leaks (what were some of the tools to help with that?)
+            - add WCF services development for integration with other services
+            - my introduction to git version control and micro-service architecture
+            - Skills: WCF · C++ · Git · C# · Software Development · ASP.NET · Software Troubleshooting · SQL · Subversion
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Paccar-Kenworth truck plant
+            - Launched a new ASP.NET responsive web app for mobile and desktop use
+            - Independently developed and released a dashboard application whose backend gleaned data from numerous low-level systems into a singular SQL database for processing and display in the browser
+            - Skills: HTML 5 · JavaScript · Git · C# · Software Development · VB.NET · CSS · ASP.NET · SQL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Adicio
+            - Boosted an existing web app with new features
+            - Collaborated with product owners to prioritize and tackle the backlog effectively
+            - Wrote bash and python automation scripts- Boosted an existing web app with new features - Collaborated with product owners to prioritize and tackle the backlog effectively - Wrote bash and python automation scripts
+            Skills: PHP · MySQL · HTML 5 · JavaScript · Continuous Integration and Continuous Delivery (CI/CD) · Git · Software Development · Symfony Framework · CSS · Linux · Python · Bash · Software Troubleshooting · SQL
+        - leadPops
+            - Led a development of a new marketing automation platformLed a development of a new marketing automation platform
+            - Skills: PHP · MySQL · HTML 5 · React.js · JavaScript · Amazon Web Services (AWS) · Continuous Integration and Continuous Delivery (CI/CD) · Git · Software Development · CSS · Linux · Python · SQL · Zend Framework
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Digital Fleet
+            - Designed and managed AWS cloud infrastructure
+            - Innovated a legacy web app and built its replacement using MEAN stack
+            - Wrote technical documentation and user manuals
+            - Mentored junior SEs and conducted code reviews- Designed and managed AWS cloud infrastructure - Innovated a legacy web app and built its replacement using MEAN stack - Wrote technical documentation and user manuals - Mentored junior SEs and conducted code reviews
+            Skills: HTML 5 · JavaScript · Markdown · Product Demonstration · AngularJS · Amazon Web Services (AWS) · Continuous Integration and Continuous Delivery (CI/CD) · Git · Docker · Software Development · Node.js · CSS · ASP.NET · Software Troubleshooting · Technical Documentation · MongoDB
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+### Technical Copywriter
+    Creating concise and compelling copy | Writing engaging and effective content for SaaS companies 
 
-To learn more about Next.js, take a look at the following resources:
+    Client acquisition via:
+    - Prospecting clients
+    - Outreach via cold emails
+    - Direct messaging on LinkedInCreating concise and compelling copy | Writing engaging and effective content for SaaS companies Client acquisition via: - Prospecting clients - Outreach via cold emails - Direct messaging on LinkedIn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Skills: Markdown · Technical Writing · Technical Documentation · Writing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Tehnical Writer at Palo Alto Networks
 
-## Deploy on Vercel
+ Palo Alto Networks · Full-timePalo Alto Networks · Full-time Sep 2022 - Sep 2023 · 1 yr 1 moSep 2022 to Sep 2023 · 1 yr 1 mo Santa Clara, California, United States · RemoteSanta Clara, California, United States · Remote
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+        1. Maintained API reference documentation. Curated, verified, and released documentation for more than forty unique APIs, each containing between ten and eighty endpoints. Striving for readability and overall clarity of the API reference doc site, I’ve been regularly updating it with the most up-to-date OpenAPI specification files gleaned from the development teams using a docs-as-code workflow.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+        2. I have transitioned the entire API reference site to its new home at https://pan.dev with an enhanced user interface and more robust search indexing capabilities.
+
+        3. I have validated, refined, and propagated the latest updates from dev teams to the tech docs site by:
+         - adding and refining swagger annotations within each repository’s source code
+         - pushing it through the CI/CD pipeline and obtaining the generated OpenAPI specification file
+         - updating the API reference doc repo with an updated OpenAPI spec file
+         - verifying and creating a PR1. Maintained API reference documentation. Curated, verified, and released documentation for more than forty unique APIs, each containing between ten and eighty endpoints. Striving for readability and overall clarity of the API reference doc site, I’ve been regularly updating it with the most up-to-date OpenAPI specification files gleaned from the development teams using a docs-as-code workflow. 2. I have transitioned the entire API reference site to its new home at https://pan.dev with an enhanced user interface and more robust search indexing capabilities. 3. I have validated, refined, and propagated the latest updates from dev teams to the tech docs site by: - adding and refining swagger annotations within each repository’s source code - pushing it through the CI/CD pipeline and obtaining the generated OpenAPI specification file - updating the API reference doc repo with an updated OpenAPI spec file - verifying and creating a PR
+        Skills: Python (Programming Language) · OpenAPI Specification (OAS) · Markdown · Technical Writing · Git · Swagger API · Technical Documentation · Writing · jq
+
+
+### Transition to Web3/Crypto
+    Building at various hackathons around the globe: EthGlobal, dAGI, Lambda, EthOnline, Starknet, easyABuilding at various hackathons around the globe: EthGlobal, dAGI, Lambda, EthOnline, Starknet, easyA
+
+    Skills: Solidity · Foundry · Rust (Programming Language) · EVM · Blockchain · Ethereum
+
