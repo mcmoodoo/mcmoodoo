@@ -21,7 +21,7 @@ const experiences: Experience[] = [
 		duration: "Sep 2023 - Present",
 		location: "Worldwide | Remote",
 		description:
-			"🏆 EthGlobal 2024 Hackathon Prize Winner - CollaSwitch Automated Collateral Swapper | Participated at EthGlobal, dAGI, Lambda, EthOnline, easyA, Starknet Winter Hackathon",
+			"Actively participated in Web3 hackathons, including ETHGlobal, Starknet Winter Hackathon, dAGI, Lambda, EthOnline, and easyA. 🏆 ETHGlobal 2024 Prize Winner for CollaSwitch — an automated collateral swapper.",
 		skills: [
 			"Solidity",
 			"Foundry",
@@ -33,12 +33,12 @@ const experiences: Experience[] = [
 		],
 	},
 	{
-		title: "Senior Technical Writer",
+		title: "Hybrid Senior Technical Writer / Engineer",
 		company: "Palo Alto Networks",
 		duration: "Sep 2022 - Sep 2023 (1 yr 1 mo)",
 		location: "Santa Clara, California | Remote",
 		description:
-			"Maintained API reference documentation for over forty unique APIs, transitioned the entire API reference site to pan.dev with enhanced UI and search capabilities, validated and refined updates from development teams through a docs-as-code workflow.",
+			"Led docs-as-code transition and single-handedly migrated legacy API docs to a new domain. Improved accuracy and DX through CI/CD engineering in 30+ codebases. Collaborated with engineering teams to clearly expose backend systems via APIs. Wrote SDK code snippets in Go, Python, Java, and Node. Owned and maintained API reference docs.",
 		skills: [
 			"Python",
 			"OpenAPI Specification",
@@ -71,7 +71,7 @@ const experiences: Experience[] = [
 		duration: "Feb 2018 - Dec 2018 (11 mos)",
 		location: "Minden, NV",
 		description:
-			"Developed a native mobile application, wrote test cases and technical documentation, and conducted Git code reviews.",
+			"Contributed to the development of Scout portable devices for machine condition monitoring using C++, HTML5, Angular, and CSS. Also built a comprehensive testing framework in C# to validate system performance and reliability.",
 		skills: [
 			"HTML5",
 			"JavaScript",
@@ -93,7 +93,7 @@ const experiences: Experience[] = [
 		duration: "Sep 2016 - Jun 2017 (10 mos)",
 		location: "Greater Chicago Area",
 		description:
-			"Designed and managed AWS cloud infrastructure, rebuilt a legacy web app using the MEAN stack, wrote technical documentation and user manuals, mentored junior software engineers.",
+			"Provisioned and managed AWS cloud infrastructure; rebuilt a legacy web app using Angular, Node, and MongoDB; created technical documentation and user manuals; mentored junior software engineers.",
 		skills: [
 			"HTML5",
 			"JavaScript",
@@ -113,7 +113,7 @@ const experiences: Experience[] = [
 		company: "leadPops, Inc.",
 		duration: "Nov 2015 - Jun 2016 (8 mos)",
 		location: "Greater San Diego Area",
-		description: "Led the development of a new marketing automation platform.",
+		description: "Led development of a marketing automation platform and end-to-end lead generation and conversion optimization suite using Angular, PHP7, and Zend Framework—empowering service-based businesses to capture, engage, and convert more leads.",
 		skills: [
 			"PHP",
 			"MySQL",
