@@ -148,7 +148,7 @@ export default function Home() {
 							</span>
 						</p>
 						<a
-							href="https://mcmoodoo.s3.us-east-1.amazonaws.com/Rashid_McMoodoo_Resume.pdf"
+							href="https://mcmoodoo.s3.us-east-1.amazonaws.com/Resume_Rashid_Mak.pdf"
 							download
 							target="_blank"
 							rel="noopener noreferrer"
