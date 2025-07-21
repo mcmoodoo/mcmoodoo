@@ -9,12 +9,12 @@ import { SocialLinks } from "./SocialLinks";
 type NavItem = {
 	label: string;
 	href: string;
-  target: string;
+	target: string;
 };
 
 const navItems: NavItem[] = [
 	{ label: "Profile", href: "/", target: "_self" },
-	{ label: "Background", href: "/#experience", target:"_self" },
+	{ label: "Background", href: "/#experience", target: "_self" },
 	{ label: "Blog", href: "https://blog.mcmoodoo.com", target: "_blank" },
 ];
 
@@ -43,7 +43,7 @@ export function NavBar() {
 									<Link
 										key={item.label}
 										href={item.href}
-                    target={item.target}
+										target={item.target}
 										className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
 									>
 										{item.label}

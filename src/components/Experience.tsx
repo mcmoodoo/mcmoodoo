@@ -113,7 +113,8 @@ const experiences: Experience[] = [
 		company: "leadPops, Inc.",
 		duration: "Nov 2015 - Jun 2016 (8 mos)",
 		location: "Greater San Diego Area",
-		description: "Led development of a marketing automation platform and end-to-end lead generation and conversion optimization suite using Angular, PHP7, and Zend Framework—empowering service-based businesses to capture, engage, and convert more leads.",
+		description:
+			"Led development of a marketing automation platform and end-to-end lead generation and conversion optimization suite using Angular, PHP7, and Zend Framework—empowering service-based businesses to capture, engage, and convert more leads.",
 		skills: [
 			"PHP",
 			"MySQL",
