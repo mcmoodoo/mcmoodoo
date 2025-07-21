@@ -225,9 +225,9 @@ const ExperienceCard: React.FC<Experience> = ({
 					<p className="text-sm text-gray-400">{location}</p>
 					<p className="mt-2 text-gray-700">{description}</p>
 					<div className="mt-3 flex flex-wrap gap-2">
-						{skills.map((skill, index) => (
+						{skills.map((skill) => (
 							<Badge
-								key={index}
+								key={skill}
 								className="bg-blue-50 text-blue-700 px-2 py-1 rounded-md text-xs"
 							>
 								{skill}
@@ -260,8 +260,8 @@ const ExperienceSection: React.FC = () => (
 			<TimelineNode />
 
 			<div className="flex flex-col gap-6">
-				{experiences.map((exp, index) => (
-					<div key={index} className="relative">
+				{experiences.map((exp) => (
+					<div key={exp.company} className="relative">
 						{/* Timeline dot for each experience */}
 						<TimelineDot />
 						<ExperienceCard {...exp} />

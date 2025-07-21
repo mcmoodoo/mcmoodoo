@@ -176,12 +176,14 @@ export default function Home() {
 									{pageContent.skills.blockchain.title}
 								</h3>
 								<ul className="space-y-2">
-									{pageContent.skills.blockchain.items.map((item, index) => (
-										<li key={index} className="flex items-center text-gray-600">
+									{pageContent.skills.blockchain.items.map((item) => (
+										<li key={item} className="flex items-center text-gray-600">
 											<svg
 												className="w-4 h-4 text-blue-600 mr-2"
 												fill="currentColor"
 												viewBox="0 0 20 20"
+												role="img"
+												aria-label="Checkmark"
 											>
 												<path
 													fillRule="evenodd"
@@ -201,12 +203,14 @@ export default function Home() {
 									{pageContent.skills.fullstack.title}
 								</h3>
 								<ul className="space-y-2">
-									{pageContent.skills.fullstack.items.map((item, index) => (
-										<li key={index} className="flex items-center text-gray-600">
+									{pageContent.skills.fullstack.items.map((item) => (
+										<li key={item} className="flex items-center text-gray-600">
 											<svg
 												className="w-4 h-4 text-green-600 mr-2"
 												fill="currentColor"
 												viewBox="0 0 20 20"
+												role="img"
+												aria-label="Checkmark"
 											>
 												<path
 													fillRule="evenodd"
@@ -230,8 +234,8 @@ export default function Home() {
 							<CardTitle className="text-xl font-bold">Education</CardTitle>
 						</CardHeader>
 						<CardContent className="space-y-4">
-							{pageContent.education.map((edu, index) => (
-								<div key={index}>
+							{pageContent.education.map((edu) => (
+								<div key={edu.institution}>
 									<h3 className="font-semibold text-gray-700">
 										{edu.institution} ({edu.period})
 									</h3>
