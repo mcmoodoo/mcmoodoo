@@ -3,7 +3,7 @@ export const profile = {
 	title: 'Software Engineer | Technical Writer',
 	institute: '',
 	author_name: 'Rashid McMoodoo', // Author name to be highlighted in the papers section
-	sidebar_title: 'Rashid McMoodoo', // Title/name displayed in the sidebar
+	sidebar_title: 'Rashid', // Title/name displayed in the sidebar
 	research_areas: [
 		// { title: 'Physics', description: 'Brief description of the research interest', field: 'physics' },
 	],
