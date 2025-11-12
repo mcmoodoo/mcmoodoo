@@ -1,74 +1,103 @@
-## Education and interests in school
-        - wanting to be a match teacher, switching to Computer Engineering
-            - gravitating toward software rather than low-level circuit troubleshooting
-            - switching to Computer Science
-        - being introduced to, Linux, OOP, and manual memory management through C++
-        - getting interested in AI and taking Genetic Algorithms, Neural Networks.
+# Astro Academia Documentation
 
-## Professional Background
+## What is Astro Academia?
 
-        - starting while in school helping researchers in the Brain Computation Lab
-            - linux administration
-            - python scripting, helping them to automate some of the tasks needed to interact with the 10k-neuron brain simulator deployed elsewhere on campus
-            - building brainstem project in Java as part of our Senior projects class
-### Quad Graphics
-            - maintaing a legacy scheduling tool built in C++
-                - rewriting parts of it in C# interop code to bring garbage collection to the legacy app
-            - finding and fixing memory leaks (what were some of the tools to help with that?)
-            - add WCF services development for integration with other services
-            - my introduction to git version control and micro-service architecture
-            - Skills: WCF · C++ · Git · C# · Software Development · ASP.NET · Software Troubleshooting · SQL · Subversion
+Astro Academia is a personal academic website built using Astro, a modern static site generator. The website is designed to showcase academic achievements, research papers, blog posts, and a CV. It is fast, responsive, and easy to maintain, making it an ideal platform for academics and researchers to present their work.
 
-### Paccar-Kenworth truck plant
-            - Launched a new ASP.NET responsive web app for mobile and desktop use
-            - Independently developed and released a dashboard application whose backend gleaned data from numerous low-level systems into a singular SQL database for processing and display in the browser
-            - Skills: HTML 5 · JavaScript · Git · C# · Software Development · VB.NET · CSS · ASP.NET · SQL
+If you find Astro Academia useful or appreciate my work, consider supporting me! Your support helps keep this project maintained and encourages further development. 🚀✨
 
-### Adicio
-            - Boosted an existing web app with new features
-            - Collaborated with product owners to prioritize and tackle the backlog effectively
-            - Wrote bash and python automation scripts- Boosted an existing web app with new features - Collaborated with product owners to prioritize and tackle the backlog effectively - Wrote bash and python automation scripts
-            Skills: PHP · MySQL · HTML 5 · JavaScript · Continuous Integration and Continuous Delivery (CI/CD) · Git · Software Development · Symfony Framework · CSS · Linux · Python · Bash · Software Troubleshooting · SQL
-        - leadPops
-            - Led a development of a new marketing automation platformLed a development of a new marketing automation platform
-            - Skills: PHP · MySQL · HTML 5 · React.js · JavaScript · Amazon Web Services (AWS) · Continuous Integration and Continuous Delivery (CI/CD) · Git · Software Development · CSS · Linux · Python · SQL · Zend Framework
+<a href="https://buymeacoffee.com/maiobarbero" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<a href="https://www.producthunt.com/products/astro-academia?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-astro&#0045;academia" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1026976&theme=light&t=1760776422941" alt="Astro&#0032;Academia - Academic&#0032;website&#0032;template | Product Hunt" style="width: 189px; height: 41px;" width="189" height="41" /></a>
 
-### Digital Fleet
-            - Designed and managed AWS cloud infrastructure
-            - Innovated a legacy web app and built its replacement using MEAN stack
-            - Wrote technical documentation and user manuals
-            - Mentored junior SEs and conducted code reviews- Designed and managed AWS cloud infrastructure - Innovated a legacy web app and built its replacement using MEAN stack - Wrote technical documentation and user manuals - Mentored junior SEs and conducted code reviews
-            Skills: HTML 5 · JavaScript · Markdown · Product Demonstration · AngularJS · Amazon Web Services (AWS) · Continuous Integration and Continuous Delivery (CI/CD) · Git · Docker · Software Development · Node.js · CSS · ASP.NET · Software Troubleshooting · Technical Documentation · MongoDB
+## How to use it
 
+Fork this repository to create your new website starting from this template.
 
-### Technical Copywriter
-    Creating concise and compelling copy | Writing engaging and effective content for SaaS companies 
+## How to Create a CV Using the `cv.ts` File
 
-    Client acquisition via:
-    - Prospecting clients
-    - Outreach via cold emails
-    - Direct messaging on LinkedInCreating concise and compelling copy | Writing engaging and effective content for SaaS companies Client acquisition via: - Prospecting clients - Outreach via cold emails - Direct messaging on LinkedIn
+The `cv.ts` file located in the `src/data/` directory is used to define the structure and content of your CV. This file exports an object containing various sections of your CV, such as education, experience, publications, and more.
 
-    Skills: Markdown · Technical Writing · Technical Documentation · Writing
+### Example Structure of `cv.ts`
 
-### Tehnical Writer at Palo Alto Networks
+```typescript
+export const cv = {
+  education: [
+    {
+      degree: "Ph.D. in Computer Science",
+      institution: "University of Example",
+      year: "2020",
+    },
+    {
+      degree: "M.Sc. in Computer Science",
+      institution: "University of Example",
+      year: "2016",
+    },
+  ],
+  experience: [
+    {
+      title: "Research Scientist",
+      company: "Example Research Lab",
+      year: "2021-Present",
+    },
+    {
+      title: "Software Engineer",
+      company: "Tech Company",
+      year: "2016-2021",
+    },
+  ],
+  // Add more sections as needed
+};
+```
 
- Palo Alto Networks · Full-timePalo Alto Networks · Full-time Sep 2022 - Sep 2023 · 1 yr 1 moSep 2022 to Sep 2023 · 1 yr 1 mo Santa Clara, California, United States · RemoteSanta Clara, California, United States · Remote
+To create or update your CV, modify the `cv.ts` file with your personal information and achievements. The CV will be automatically rendered on the CV page of your website.
 
-        1. Maintained API reference documentation. Curated, verified, and released documentation for more than forty unique APIs, each containing between ten and eighty endpoints. Striving for readability and overall clarity of the API reference doc site, I’ve been regularly updating it with the most up-to-date OpenAPI specification files gleaned from the development teams using a docs-as-code workflow.
+## How to Use the `settings.ts` File
 
-        2. I have transitioned the entire API reference site to its new home at https://pan.dev with an enhanced user interface and more robust search indexing capabilities.
+The `settings.ts` file located in the `src/` directory is used to configure various settings for your Astro Academia website. This file exports an object containing settings such as site title, description, social media links, and more.
 
-        3. I have validated, refined, and propagated the latest updates from dev teams to the tech docs site by:
-         - adding and refining swagger annotations within each repository’s source code
-         - pushing it through the CI/CD pipeline and obtaining the generated OpenAPI specification file
-         - updating the API reference doc repo with an updated OpenAPI spec file
-         - verifying and creating a PR1. Maintained API reference documentation. Curated, verified, and released documentation for more than forty unique APIs, each containing between ten and eighty endpoints. Striving for readability and overall clarity of the API reference doc site, I’ve been regularly updating it with the most up-to-date OpenAPI specification files gleaned from the development teams using a docs-as-code workflow. 2. I have transitioned the entire API reference site to its new home at https://pan.dev with an enhanced user interface and more robust search indexing capabilities. 3. I have validated, refined, and propagated the latest updates from dev teams to the tech docs site by: - adding and refining swagger annotations within each repository’s source code - pushing it through the CI/CD pipeline and obtaining the generated OpenAPI specification file - updating the API reference doc repo with an updated OpenAPI spec file - verifying and creating a PR
-        Skills: Python (Programming Language) · OpenAPI Specification (OAS) · Markdown · Technical Writing · Git · Swagger API · Technical Documentation · Writing · jq
+### Example Structure of `settings.ts`
 
+```typescript
+export const settings = {
+  siteTitle: "Astro Academia",
+  siteDescription: "A personal academic website built with Astro.",
+  socialLinks: {
+    twitter: "https://twitter.com/yourusername",
+    github: "https://github.com/yourusername",
+    linkedin: "https://linkedin.com/in/yourusername",
+  },
+  // Add more settings as needed
+};
+```
 
-### Transition to Web3/Crypto
-    Building at various hackathons around the globe: EthGlobal, dAGI, Lambda, EthOnline, Starknet, easyABuilding at various hackathons around the globe: EthGlobal, dAGI, Lambda, EthOnline, Starknet, easyA
+To customize your website settings, modify the `settings.ts` file with your desired values. These settings will be used throughout your website to display the appropriate information.
 
-    Skills: Solidity · Foundry · Rust (Programming Language) · EVM · Blockchain · Ethereum
+## Where to Find the Blog Collection and Where to Add New Blog Posts
 
+The blog collection is located in the `src/content/BlogPosts/` directory. Each blog post is a Markdown file with a `.md` extension. The blog posts are named sequentially (e.g., `post1.md`, `post2.md`, etc.).
+
+### Adding a New Blog Post
+
+1. Navigate to the `src/content/BlogPosts/` directory.
+2. Create a new Markdown file for your blog post (e.g., `post1.md`).
+3. Add the content of your blog post using Markdown syntax. Include frontmatter at the top of the file to define metadata such as title, date, and tags.
+
+### Example Blog Post (`post11.md`)
+
+```markdown
+---
+title: "New Blog Post"
+date: "2023-10-01"
+tags: ["research", "astro"]
+excerpt: "Some short paragraphs"
+---
+
+# New Blog Post
+
+This is the content of the new blog post. Write your article here using Markdown syntax.
+```
+
+Once you have added the new blog post, it will be automatically included in the blog collection and displayed on the blog page of your website.
+
+## Deploy
+The template provides a workflow to deploy the website on Github pages as a static website.

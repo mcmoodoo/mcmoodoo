@@ -1,39 +1,29 @@
 {
-	"name": "mcmoodoo.com",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "bun next dev --turbopack",
-		"build": "bun next build",
-		"start": "bun next start",
-		"lint": "bun biome lint",
-		"fix": "bun biome lint --write",
-		"format": "bun biome format --write",
-		"knip": "bun knip"
-	},
-	"dependencies": {
-		"@biomejs/biome": "^2.1.2",
-		"@radix-ui/react-avatar": "^1.1.10",
-		"@radix-ui/react-slot": "^1.2.3",
-		"@types/uuid": "^10.0.0",
-		"class-variance-authority": "^0.7.1",
-		"clsx": "^2.1.1",
-		"framer-motion": "^12.23.6",
-		"lucide-react": "^0.525.0",
-		"mermaid": "^11.9.0",
-		"next": "15.4.2",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
-		"tailwind-merge": "^3.3.1",
-		"tailwindcss-animate": "^1.0.7",
-		"uuid": "^11.1.0"
-	},
-	"devDependencies": {
-		"@tailwindcss/postcss": "^4.1.11",
-		"@types/node": "^24.0.15",
-		"@types/react": "^19.1.8",
-		"@types/react-dom": "^19.1.6",
-		"knip": "^5.62.0",
-		"typescript": "^5.8.3"
-	}
+  "name": "astro-academia",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.1.4",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.4",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "astro": "^5.14.5",
+    "mermaid": "^11.12.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^3.4.17",
+    "theme-change": "^2.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "daisyui": "^4.12.23"
+  }
 }

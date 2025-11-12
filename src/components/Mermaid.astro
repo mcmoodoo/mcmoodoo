@@ -1,0 +1,301 @@
+---
+// Mermaid component to initialize and render Mermaid diagrams
+---
+
+<div id="mermaid-init"></div>
+
+<script is:inline>
+  (function() {
+    // Load Mermaid from CDN
+    if (typeof window === 'undefined') return;
+    
+    let mermaidLoaded = false;
+    let mermaidLib = null;
+    
+    function loadMermaid() {
+      return new Promise((resolve, reject) => {
+        if (mermaidLoaded && mermaidLib) {
+          resolve(mermaidLib);
+          return;
+        }
+        
+        if (window.mermaid) {
+          mermaidLib = window.mermaid;
+          mermaidLoaded = true;
+          resolve(mermaidLib);
+          return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+        script.onload = () => {
+          mermaidLib = window.mermaid;
+          mermaidLoaded = true;
+          resolve(mermaidLib);
+        };
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    
+    // Initialize Mermaid with theme based on current theme
+    function getTheme() {
+      const isDark = document.documentElement.classList.contains('dark') || 
+                     document.documentElement.getAttribute('data-theme') === 'dark' ||
+                     window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return isDark ? 'dark' : 'default';
+    }
+    
+    async function initMermaid() {
+      try {
+        const mermaid = await loadMermaid();
+        
+        console.log('Initializing Mermaid with theme:', getTheme());
+        
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: getTheme(),
+          securityLevel: 'loose',
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+          },
+        });
+        
+        // Mermaid diagram keywords to detect
+        const mermaidKeywords = [
+          'graph', 'flowchart', 'sequenceDiagram', 'classDiagram', 'stateDiagram',
+          'erDiagram', 'journey', 'gantt', 'pie', 'gitgraph', 'mindmap', 'timeline',
+          'C4Context', 'C4Container', 'C4Component', 'C4Dynamic', 'C4Deployment'
+        ];
+        
+        // Find all code blocks and filter for Mermaid diagrams
+        const allCodeBlocks = document.querySelectorAll('pre code');
+        const mermaidElements = Array.from(allCodeBlocks).filter((code) => {
+          const text = (code.textContent || '').trim();
+          // Check if the code starts with a Mermaid keyword
+          return mermaidKeywords.some(keyword => 
+            text.toLowerCase().startsWith(keyword.toLowerCase())
+          );
+        });
+        
+        if (mermaidElements.length === 0) {
+          console.log('No Mermaid diagrams found.');
+          return;
+        }
+        
+        console.log(`Found ${mermaidElements.length} Mermaid diagrams`);
+        
+        mermaidElements.forEach((element, index) => {
+          // Skip if already processed
+          if (element.closest('.mermaid-processed')) {
+            console.log(`Skipping already processed diagram ${index}`);
+            return;
+          }
+          
+          const code = element.textContent || '';
+          if (!code.trim()) {
+            console.warn(`Empty code block at index ${index}`);
+            return;
+          }
+          
+          console.log(`Processing Mermaid diagram ${index}:`, code.substring(0, 50) + '...');
+          
+          const id = `mermaid-${index}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+          
+          // Get the parent pre element
+          const pre = element.closest('pre');
+          if (!pre) {
+            console.warn('Mermaid code block not inside a pre element');
+            return;
+          }
+          
+          // Mark as processed and store index for potential re-insertion
+          pre.classList.add('mermaid-processed');
+          pre.setAttribute('data-mermaid-index', index.toString());
+          
+          // Create a container div
+          const container = document.createElement('div');
+          container.className = 'mermaid-container my-8';
+          container.id = id;
+          container.setAttribute('data-code', code);
+          
+          // Show loading state
+          container.innerHTML = '<p>Loading diagram...</p>';
+          
+          // Insert container after the pre element, then hide the pre
+          if (pre.parentNode) {
+            pre.parentNode.insertBefore(container, pre.nextSibling);
+            pre.style.display = 'none';
+            console.log(`Inserted diagram ${index} container after pre element`);
+          } else {
+            console.error(`Diagram ${index}: pre element has no parent!`);
+            // Fallback: try to replace
+            try {
+              pre.replaceWith(container);
+              console.log(`Replaced pre with container for diagram ${index}`);
+            } catch (e) {
+              console.error(`Failed to insert diagram ${index}:`, e);
+              return;
+            }
+          }
+          
+          // Verify container is in DOM before rendering
+          if (!document.body.contains(container)) {
+            console.error(`Diagram ${index} container not in DOM after insertion!`);
+            // Try to find the pre and insert again
+            const processedPre = document.querySelector(`pre.mermaid-processed[data-mermaid-index="${index}"]`);
+            if (processedPre && processedPre.parentNode) {
+              processedPre.parentNode.insertBefore(container, processedPre.nextSibling);
+              processedPre.style.display = 'none';
+              console.log(`Re-inserted diagram ${index} container`);
+            } else {
+              console.error(`Could not re-insert diagram ${index} - pre element not found`);
+              return;
+            }
+          }
+          
+          console.log(`Attempting to render diagram ${index} with code length: ${code.length}`);
+          
+          // Render the mermaid diagram
+          mermaid.render(id, code).then(({ svg }) => {
+            console.log(`Successfully rendered diagram ${index}, SVG length: ${svg.length}`);
+            
+            // Double-check container is still in DOM
+            if (!document.body.contains(container)) {
+              console.error(`Diagram ${index} container lost from DOM during rendering! Re-inserting...`);
+              const processedPre = document.querySelector(`pre.mermaid-processed[data-mermaid-index="${index}"]`);
+              if (processedPre && processedPre.parentNode) {
+                processedPre.parentNode.insertBefore(container, processedPre.nextSibling);
+                processedPre.style.display = 'none';
+              } else {
+                console.error(`Cannot re-insert diagram ${index} - pre not found`);
+                return;
+              }
+            }
+            
+            container.innerHTML = svg;
+            // Make sure container is visible
+            container.style.display = 'block';
+            container.style.visibility = 'visible';
+            container.style.opacity = '1';
+            
+            // Final verification
+            const isInDOM = document.body.contains(container);
+            console.log(`Diagram ${index} - Final check - In DOM: ${isInDOM}, Parent:`, container.parentElement?.tagName);
+          }).catch((error) => {
+            console.error(`Mermaid rendering error for diagram ${index}:`, error);
+            console.error('Error details:', error.message, error.stack);
+            container.innerHTML = `<p class="text-error">Error rendering Mermaid diagram: ${error.message}</p>`;
+          });
+        });
+      } catch (error) {
+        console.error('Error loading or initializing Mermaid:', error);
+      }
+    }
+    
+    // Wait for content to be fully loaded
+    function waitForContent() {
+      const maxAttempts = 10;
+      let attempts = 0;
+      
+      const checkAndInit = () => {
+        attempts++;
+        const hasContent = document.querySelector('article') || document.querySelector('.prose');
+        
+        if (hasContent || attempts >= maxAttempts) {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              initMermaid().catch(err => {
+                console.error('Error initializing Mermaid:', err);
+              });
+            }, 100);
+          });
+        } else {
+          setTimeout(checkAndInit, 100);
+        }
+      };
+      
+      checkAndInit();
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', waitForContent);
+    } else {
+      waitForContent();
+    }
+    
+    // Re-initialize on theme change
+    const observer = new MutationObserver(async () => {
+      try {
+        const mermaid = await loadMermaid();
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: getTheme(),
+          securityLevel: 'loose',
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+          },
+        });
+        
+        // Re-render existing diagrams
+        const existingDiagrams = document.querySelectorAll('.mermaid-container');
+        existingDiagrams.forEach((container) => {
+          const code = container.getAttribute('data-code');
+          if (code) {
+            const id = container.id || `mermaid-${Date.now()}`;
+            mermaid.render(id, code).then(({ svg: newSvg }) => {
+              container.innerHTML = newSvg;
+            });
+          }
+        });
+      } catch (error) {
+        console.error('Error re-initializing Mermaid on theme change:', error);
+      }
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    });
+  })();
+</script>
+
+<style>
+  .mermaid-container {
+    display: block !important;
+    visibility: visible !important;
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    overflow-x: auto;
+  }
+  
+  .mermaid-container svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .mermaid-processed {
+    display: none !important;
+  }
+  
+  /* Ensure mermaid diagrams are visible in prose */
+  .prose .mermaid-container,
+  article .mermaid-container,
+  div .mermaid-container {
+    display: block !important;
+    visibility: visible !important;
+    margin: 2rem 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Override any prose styles that might hide code blocks */
+  .prose pre.mermaid-processed {
+    display: none !important;
+  }
+</style>
