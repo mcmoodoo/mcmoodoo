@@ -28,71 +28,71 @@ end.
 
 Clumsily clicking and pecking one key at a time, I managed to change it to “Hello Rashid.” Measurable progress.
 
-Over the next few months, I learned the essentials—one bug at a time.
-
-### Variables and Data Types
+Over the next few months, my knowledge base has expanded to something like this:
 
 ```pascal
-var age: integer;
-age := 13;
-```
+program LearningPascal;
 
-### Operators
+{ Variables and Data Types - declaring and assigning values }
+var
+  age: integer;
+  name: string;
+  nums: array[1..3] of integer;
+  f: text;
 
-```pascal
-writeln(age + 1);  { math finally useful }
-```
-
-### Input / Output
-
-```pascal
-readln(name);
-writeln('Hello, ', name);
-```
-
-### Conditionals
-
-```pascal
-if age >= 18 then writeln('Adult') else writeln('Not yet');
-```
-
-### Loops
-
-```pascal
-for i := 1 to 5 do writeln('Counting: ', i);
-```
-
-### Procedures and Functions
-
-```pascal
+{ Functions - reusable blocks of code that return a value }
 function Square(x: integer): integer;
 begin
-  Square := x * x;
+  Square := x * x;  { math finally useful }
 end;
-```
 
-### Arrays
+begin
+  { Variables and assignment }
+  age := 13;
+  name := 'Rashid';
 
-```pascal
-var nums: array[1..3] of integer = (1, 2, 3);
-```
+  { Operators - doing math with variables }
+  writeln(age + 1);  { output: 14 }
 
-### File Handling
+  { Input / Output - getting data from user and displaying it }
+  readln(name);
+  writeln('Hello, ', name);
 
-```pascal
-assign(f, 'data.txt');
-rewrite(f);
-writeln(f, 'Saved!');
-close(f);
+  { Conditionals - making decisions }
+  if age >= 18 then
+    writeln('Adult')
+  else
+    writeln('Not yet');
+
+  { Loops - repeating actions }
+  for i := 1 to 5 do
+    writeln('Counting: ', i);
+
+  { Arrays - storing multiple values }
+  nums[1] := 1;
+  nums[2] := 2;
+  nums[3] := 3;
+
+  { File Handling - reading from and writing to files }
+  assign(f, 'data.txt');
+  rewrite(f);
+  writeln(f, 'Saved!');
+  close(f);
+
+  { Using functions }
+  writeln('Square of 5 is: ', Square(5));
+end.
 ```
 
 By then, I could read, write, loop, and curse at the compiler like a pro!
 
 ## The Terminal Moment
 
-I still remember my first real programming class at the University of Nevada—CS135. A small room, a whiteboard, and a humming projector. This time it was C++. I fell in love with it—the loops, the classes, the satisfying verbosity. Maybe it was the font on the professor’s screen, or maybe the moment he compiled code not with a button, but with a command in a mysterious window called the terminal. I was hooked.
+I still remember my first real programming class at the University of Nevada—CS135. A small room, a whiteboard, and a humming projector. This time it was C++.
 
-For months, it was all C++—coding in vim at the Linux Lab, then compiling from the terminal with make. That's where I learned to exit out of `vim` (Ha!)
+I fell in love with it—the loops, the classes, the satisfying verbosity. Maybe it was the font on the professor’s screen, or maybe the moment he compiled code not with a button, but with a command in a mysterious window called the terminal. I was hooked.
+
+For months, it was all `C++`, `vim`, and compiling from the terminal with make at the Linux Lab. That's where I learned to exit out of `vim` (Ha! p.s. `Esc` + `:q` + enter for those who are still stuck...)
 
 No code completion, no syntax highlighting, no LSPs—just me, brute-forcing my way through the compiler.
 
