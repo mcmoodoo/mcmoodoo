@@ -34,53 +34,27 @@ Over the next few months, my knowledge base has expanded to something like this:
 ```pascal
 program LearningPascal;
 
-{ Variables and Data Types - declaring and assigning values }
 var
   age: integer;
   name: string;
-  nums: array[1..3] of integer;
-  f: text;
 
-{ Functions - reusable blocks of code that return a value }
 function Square(x: integer): integer;
 begin
   Square := x * x;  { math finally useful }
 end;
 
 begin
-  { Variables and assignment }
   age := 13;
   name := 'Rashid';
-
-  { Operators - doing math with variables }
-  writeln(age + 1);  { output: 14 }
-
-  { Input / Output - getting data from user and displaying it }
-  readln(name);
-  writeln('Hello, ', name);
-
-  { Conditionals - making decisions }
+  
   if age >= 18 then
     writeln('Adult')
   else
     writeln('Not yet');
-
-  { Loops - repeating actions }
+    
   for i := 1 to 5 do
     writeln('Counting: ', i);
-
-  { Arrays - storing multiple values }
-  nums[1] := 1;
-  nums[2] := 2;
-  nums[3] := 3;
-
-  { File Handling - reading from and writing to files }
-  assign(f, 'data.txt');
-  rewrite(f);
-  writeln(f, 'Saved!');
-  close(f);
-
-  { Using functions }
+    
   writeln('Square of 5 is: ', Square(5));
 end.
 ```
