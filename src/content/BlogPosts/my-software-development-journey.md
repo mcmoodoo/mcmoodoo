@@ -104,36 +104,86 @@ My first job. Cold Wisconsin fall. A printing press factory turning out thick ma
 
 I ended up rewriting the core arrange logic, boosting performance by 2000%. Sure, the rewrite was the senior dev’s idea, but I was the one rolling up my sleeves and doing the C++ magic—this time on Windows (sad face).
 
-## The next few years
+## From Assembly Lines to Concrete Lines
 
 My desire to travel always nudged me to look for a new city, state, country.
 
-First Ohio where I ended up writing
+### Ohio — Assembly Lines and Real-Time Data
 
-Ohio
-San Diego: career cast PHP, MySQL, terminal, vim.
-Chicago: C# codebase back end hosted on AWS.
+When I started working at the Kenworth Plant in Ohio—where a brand-new semi came off the line every eight minutes—I noticed how much time workers lost just trying to get updates from other stations.
+I pulled raw PLC data into MS SQL Server, cleaned and parsed it with stored procedures, functions, and views, then built a pure-JavaScript app that refreshed via XHR without full page reloads.
+We pushed the live metrics—timing, station status, and overall line health—to big screens along the mainline so workers could simply look up and know exactly what was happening across the line.
+
+### San Diego — Linux, Vim, and Finding My Pace
+
+Then came San Diego. I joined a small online classifieds company where most of the stack ran on PHP and Symfony. What I loved most was the Linux-heavy culture—my workstation was a Mac, but I had full SSH access to the Linux server racks and my own workspace there.
+That setup pushed me to sharpen my Vim workflow and get genuinely fluent with Linux.
+
+The pace forced me to level up fast: understanding what PMs needed, translating it quickly into code, and turning around features without friction. PHP wasn’t my favorite language, but its dynamic, scripting nature with some OOP made it workable.
+The only real curveball was the source control system—Perforce—strange at first, but I eventually got into the rhythm.
+
+I also learned Puppet, a configuration management tool that lets you define your server state once and enforce it consistently across environments. And I discovered how MySQL master–slave replication worked (yes, the slaves were read-only), which opened my eyes to scaling the data layer.
+Nginx handled our load balancing, and that was the first time I got to work closely with strong DevOps engineers—a huge influence on how I think about infrastructure today.
+
+### Chicago — Concrete, Telemetry, and Carrying the Pager
+
+Then came Chicago, where I joined a small startup serving the ready-mix industry by delivering telemetry and operational data to concrete companies nationwide.
+It was surprisingly fun—I even rode along with drivers to see how concrete was loaded, transported, and poured on-site.
+
+Every truck had an Android tablet running our app, which handled ticketing and real-time telemetry so drivers always knew their assigned jobs and customers could track their concrete en route.
+There was hardware involved too, though my world was the software.
+
+We ran two systems: a large legacy platform built with raw JavaScript, C#, and MS SQL Server, and a new platform with a React frontend and MongoDB.
+That also meant I was back on Windows. For a stretch, I was solely responsible for all software and infrastructure, which was stressful but transformative.
+
+I deployed, configured, and monitored AWS resources constantly. When traffic spikes overwhelmed our MSSQL instances, I scaled them vertically until we built more robust solutions.
+I set up deployment pipelines from GitHub to EC2, handled new domains in Route 53, and generally put out fires while keeping the systems alive.
+I leveled up fast here—both technically and operationally.
+
+### GE — Vibrations, C++, and High-Stakes Engineering
+
+Then I joined GE, working on a small four-person team building a portable condition-monitoring device for on-site engineers.
+It measured vibration in rotating machinery—turbines, compressors, pumps, motors—to detect mechanical issues before they turned into failures worth tens of millions. The value of the product was enormous.
+
+I was back to C++, writing the small, fast computations that powered the device: Fourier transforms, time- and spatial-domain analyses, and other signal-processing routines running directly on Android hardware.
+We used C# strictly for testing—mostly owned by QA, though I wrote a fair share of tests myself. And thankfully, the source control was back to Git.
 
 ## Copywriting
 
-I started writing content and website copy for SaaS companies, leaning on my software engineering background. I quickly built a full roster of clients. Writing so much became exhausting—back then, LLMs didn’t exist. I relied on my 100+ WPM typing speed, the Hemingway app for clarity, and countless hours polishing drafts until they felt like masterpieces (or at least I thought so, ha!).
+Then came copywriting. As a kid, I loved writing—engaging stories, sharp essays, pieces teachers read aloud to the class. I wrote poems, even songs. But somewhere along the way, I set that craft aside and went all-in on math, eventually landing in a math-physics–specialized high school.
 
-## From coding to technical writing
+Years later, wanting to build my own business, I figured I could help SaaS companies by writing copy for products I genuinely understood from the technical side. I started with website copy and technical content, and it quickly snowballed into a full marketing gig centered on inbound promotion.
 
-I walked in to find API reference docs being assembled manually—things humans really weren’t meant to do. These docs should have been generated automatically from OpenAPI and Swagger specs via CI/CD, across more than 30 repositories, each owned by a different team.
+I took the craft seriously: I read books on writing, copywriting, and advertising (yes—Ogilvy), and joined a community of successful copywriters in the space. Most of them came from marketing backgrounds, but I soaked up everything and learned a ton from them.
 
-I wasn’t just writing docs — I was deep in the code. I pulled from dozens of repositories, built projects locally, and wired CI/CD pipelines that generated OpenAPI specs straight into our documentation. Somewhere along the way, “writing” started to feel a lot like engineering.
+I built a full roster of SaaS clients and wrote constantly. This was before LLMs existed, so everything was manual. I leaned on my 100+ WPM typing speed, the Hemingway app for clarity, and countless late nights polishing drafts until they felt like masterpieces—or at least I convinced myself they were. Writing at that volume was exhausting, but it sharpened my thinking and my ability to communicate technical ideas with precision.
 
-But what really shaped me were the customer calls. Sitting with teams from Goldman Sachs or Morgan Stanley, walking them through APIs I’d documented, I saw how clarity could make or break adoption. It taught me that great software isn’t just about elegant code — it’s about making complexity understandable.
+## The unexpected return to writing
+
+I walked in to find API reference docs being assembled manually—tasks humans were never meant to do. These docs should have been generated automatically from OpenAPI and Swagger specs through CI/CD, especially with more than 30 repositories owned by different teams. Instead, everything was stitched together by hand.
+
+I was hired as a Senior Technical Writer with an engineering background. The team was made up of writers, but they needed someone who could own API documentation end-to-end, streamline spec generation, and raise the quality of user guides, tutorials, and code samples so they actually spoke to developers. The docs were missing authority and clarity, and the company needed someone who understood both engineering and writing. My blend of software experience and copywriting made me an unusual—but perfect—fit.
+
+Once onboarded, I quickly learned the real issue: most of the docs were outdated (as happens everywhere), and the OpenAPI/Swagger files didn’t reflect the actual deployed software. That meant the API reference was… politely put, inaccurate. Customers trying to integrate programmatically were furious. Their auto-generated SDKs never worked out of the box. Routes were broken, parameters were wrong, endpoints were missing, and the response descriptions were often misleading or incomplete.
+
+There was a lot to fix. This is where my background across languages, systems, and frameworks became invaluable. I dove into the engineering repos—reading code, tracing logic, and updating annotations so the generated specs matched reality. I proposed generating OpenAPI files as part of each team’s CI/CD pipeline. At first it was optional, purely informational. Eventually, we enforced it: the build failed if the spec didn’t generate cleanly. Engineers hated it, and it was painful for everyone—but that pain spared our customers from far worse.
+
+As the specs stabilized, I turned my attention to migrating the reference docs to a new platform already used by DevRel. Other doc teams had begun moving there, but their migrations were smaller in scope. I asked for approval to move our much larger doc set, and after two weeks of discussion, got the green light.
+
+It took two weeks to prepare the entire migration and another two to wait for the scheduled cutover. We moved everything to Docusaurus v2 and launched the new site at pan.dev, retiring the old one within a month.
+
+I wasn’t just writing docs—I was deep in the code, shaping pipelines, and making documentation an engineering asset instead of an afterthought. And the customer calls with teams like Goldman Sachs and Morgan Stanley drove it home: clarity isn’t a luxury. It determines whether a product gets adopted or abandoned.
 
 ## The Pivot: Diving into Web3
 
-In 2023, I quit my job to roam the world and hack at every possible Web3 hackathon, while attending conferences like EthCC, DevCon, SmartCon, and Consensus.
+In 2023, I quit my job, packed a backpack, and started hopping between Web3 hackathons and conferences—EthCC, DevCon, SmartCon, Consensus—anything that would let me learn, build, and meet other obsessed engineers.
 
-My first win came in Brussels, teaming up with an Italian developer I met on Discord—we took third place and $3k. I was hooked.
+My first win came in Brussels, where I paired up with an Italian developer I’d only met on Discord. We took third place and $3K, and that tiny victory flipped a switch in me.
 
-Later that year, at EthGlobal Bangkok, I teamed up with two DeFi enthusiasts and won bounties from CowSwap, Euler, Pyth, and Brevis, totaling nearly $9k.
+Later that year in Bangkok, I teamed up with two DeFi enthusiasts at EthGlobal and won bounties from CowSwap, Euler, Pyth, and Brevis—nearly $9K in total.
 
-But my proudest win was EthGlobal NYC, building solo in the Uniswap Foundation v4 hooks track. I created a custom pool for rebasing tokens—ETH/stETH—pivoting constantly over 72 hours and iterating even while working alone. The rebasing idea came from a UF judge, and I started it just twenty hours before submission.
+But the moment I’m most proud of was EthGlobal NYC. It was a 36-hour hackathon, and I spent the first 24 pivoting—throwing out idea after idea until nothing felt right. Then one of the Uniswap Foundation judges mentioned an angle involving rebasing tokens, and it clicked: an ETH/stETH rebasing pool built on v4 hooks.
+
+I sketched the design, hacked together a quick prototype to prove it could work, and then built the entire project solo in the final 10 hours. Chaotic, exhausting, and somehow exactly the kind of challenge I love. The project ended up winning 3rd place from the Uniswap Foundation, and it’s still the build I’m most proud of.
 
 _What's your software development journey? I'd love to hear about the turning points and lessons that shaped your path. Feel free to reach out on [Twitter](https://x.com/mcmoodoo) or connect on [LinkedIn](https://linkedin.com/in/yourprofile)._
