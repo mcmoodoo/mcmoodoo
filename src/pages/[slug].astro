@@ -150,7 +150,7 @@ const { Content } = await render(post);
 			});
 		}
 		
-		// Run on load and after delays to catch all rendered content
+		// Run on initial load
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', () => {
 				setTimeout(fixCodeBlockStyles, 100);
@@ -160,6 +160,12 @@ const { Content } = await render(post);
 			setTimeout(fixCodeBlockStyles, 100);
 			setTimeout(fixCodeBlockStyles, 500);
 		}
+		
+		// CRITICAL: Also run after Astro view transitions
+		document.addEventListener('astro:page-load', () => {
+			setTimeout(fixCodeBlockStyles, 100);
+			setTimeout(fixCodeBlockStyles, 500);
+		});
 	}
 </script>
 
