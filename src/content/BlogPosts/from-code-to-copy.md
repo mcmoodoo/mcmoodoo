@@ -25,6 +25,10 @@ My engineering background became an asset. I could translate complex technical c
 
 One of my key projects was ghostwriting technical content for [XLAB Steampunk's blog](https://steampunk.si/blog/)—an Ansible automation specialist working closely with Red Hat. Writing about enterprise Ansible collections, automation deployment, and DevOps practices deepened my understanding of how to communicate complex infrastructure concepts to both technical and business audiences.
 
+I even built my own copywriting website at rashidma.com (now archived at [rashidma-react.vercel.app](https://rashidma-react.vercel.app/)). While the formatting got mangled during migration, it serves as a memento of this pivotal career chapter.
+
+![RashidMa Copywriting Website Archive](/images/rashidma-website-snapshot.png)
+
 ## Five Key Lessons
 
 ### 1. Features ≠ Benefits
