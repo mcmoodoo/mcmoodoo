@@ -17,7 +17,7 @@ excerpt: "Currently, leveraged Polymarket positions are built manually through M
 
 # Borrowing Against Polymarket Positions using Morpho Markets through Vaults V2
 
-_How a chance encounter at Sky Connect during DevConnect Week nudged me to look in the direction of looping collateral through Morpho Vaults v2_
+_How a chance encounter at Sky Connect during DevConnect Week sparked the idea of looping collateral through Morpho Vaults V2_
 
 ---
 
@@ -25,13 +25,13 @@ _How a chance encounter at Sky Connect during DevConnect Week nudged me to look 
 
 The Sky (MakerDAO) event during DevConnect Week was the kind of place where you'd casually bump into OGs from the lending/borrowing world. Under the clear night sky, I ended up chatting with Merlin, one of Morpho's co-founders.
 
-We talked about Morpho V2, and I asked about fixed rates—when they were coming. Merlin said that now that V2 vaults are live, the team is pushing to release the full V2 rollout, including fixed rates, in Q1 2025.
+We talked about Morpho V2, and I asked about fixed rates—when they were coming. Merlin said that now V2 vaults are live, the team is pushing to release the full V2 rollout, including fixed rates, in Q1 2025.
 
 Then Martin Krung (@martinkrung) from Curve joined us. I introduced myself and mentioned I was in the Uniswap Hooks Cohort with the Uniswap Foundation and Atrium Academy, so I'd been neck-deep in v4 hooks. Martin immediately brought up Curve's pool design and shifted the discussion toward concentrated liquidity. After a minute, I joked that it was a bit heavy for such a relaxed night, we laughed, and drifted back to Morpho V2.
 
 As Merlin explained the shift from Vault V1 to V2, something clicked: instead of depositing wrapped Polymarket shares directly into Morpho Blue, I should be depositing into the V2 vault, which then routes those shares across destinations (Morpho Markets, V1 vaults, etc.).
 
-Bottom line: the adapter-based architecture is the core innovation—it enables vault share composability and collateral use. The other three features (liquidity controls, safety guarantees, cross-protocol allocation) handle risk and capital deployment in the leverage loop.
+Bottom line: the adapter-based architecture is the core innovation—it enables vault share composability and collateral use. Additional features like liquidity controls, safety guarantees, and cross-protocol allocation handle risk and capital deployment in the leverage loop.
 
 ## The Foundation: Current Leveraged Prediction Positions
 
@@ -43,7 +43,7 @@ Let traders borrow stablecoins against those wrapped positions through Morpho Ma
 
 We knew degens would push it to the edge, so looping was possible, but had to be done manually. It became a prediction-markets × DeFi-lending POC, and it worked: users could take leveraged positions on prediction outcomes using their wrapped tokens as collateral.
 
-A single chain version of the Leveraged Polymarket Positions is [here](https://github.com/mcmoodoo/leveraged-prediction-positions). It focuses on Morpho as the custom lending/borrowing layer.
+A single-chain version of the leveraged prediction positions is [here](https://github.com/mcmoodoo/leveraged-prediction-positions). It focuses on Morpho as the custom lending/borrowing layer.
 
 **Currently, borrowing loops are manual**—each user has to manage leverage themselves:
 
@@ -63,7 +63,7 @@ This works, but it's manual, risky, and requires constant monitoring. With Vault
 
 ## The Vision: Automatic Borrowing Loops with Vaults V2
 
-Now that I was looking at Morpho Vaults v2, I thought why not enable automatic leverage?
+Now that I was looking at Morpho Vaults V2, I thought: why not enable automatic leverage?
 
 Instead of each user manually managing leverage, they would deposit wrapped prediction tokens into a Vault V2. The vault strategy would handle the borrowing loop automatically:
 
@@ -76,13 +76,13 @@ Instead of each user manually managing leverage, they would deposit wrapped pred
 5. **Wraps the new tokens** and re-deposits them as collateral
 6. **Repeats automatically** until target LTV/health factor is reached
 
-Depositors just hold vault shares, but under the hood the strategy loops collateral to create leveraged exposure with defined parameters (max leverage, borrow cost, oracle sanity checks, etc.).
+Depositors just hold vault shares, but under the hood, the strategy loops collateral to create leveraged exposure with defined parameters (max leverage, borrow cost, oracle sanity checks, etc.).
 
 ---
 
 ## What's Next
 
-Considering that vaults v2 work with any protocol via Adapters, it's quite possible to include other destinations for fund reallocation, diversifying yield and risk.
+Considering that Vaults V2 work with any protocol via adapters, it's quite possible to include other destinations for fund reallocation, diversifying yield and risk.
 
 I'm exploring how to implement this borrowing adapter for prediction markets. The foundation is there: Morpho Blue for lending, Vault V2 for strategy abstraction, and the prediction market infrastructure already in place.
 
