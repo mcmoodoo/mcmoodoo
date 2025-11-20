@@ -17,7 +17,7 @@ excerpt: "Currently, leveraged Polymarket positions are built manually through M
 
 # Borrowing Against Polymarket Positions using Morpho Markets through Vaults V2
 
-_How a chance encounter at Sky Connect during DevConnect Week sparked the next phase of leveraged prediction positions_
+_How a chance encounter at Sky Connect during DevConnect Week nudged me to look in the direction of looping collateral through Morpho Vaults v2_
 
 ---
 
@@ -42,6 +42,8 @@ Wrap Polymarket tokens (ERC1155 → ERC20)
 Let traders borrow stablecoins against those wrapped positions through Morpho Markets (around 77% LTV). This is the current implementation—leverage is available, but borrowing loops must be managed manually.
 
 We knew degens would push it to the edge, so looping was possible, but had to be done manually. It became a prediction-markets × DeFi-lending POC, and it worked: users could take leveraged positions on prediction outcomes using their wrapped tokens as collateral.
+
+A single chain version of the Leveraged Polymarket Positions is [here](https://github.com/mcmoodoo/leveraged-prediction-positions). It focuses on Morpho as the custom lending/borrowing layer.
 
 **Currently, borrowing loops are manual**—each user has to manage leverage themselves:
 
