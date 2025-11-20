@@ -1,6 +1,6 @@
 ---
 title: "Borrowing Against Polymarket Positions using Morpho Markets through Vaults V2"
-date: "2025-01-15"
+date: "2025-11-19"
 tags:
   [
     "DeFi",
