@@ -31,6 +31,22 @@ As Merlin explained the shift from Vault V1 to V2, something clicked: instead of
 
 Bottom line: the adapter-based architecture is the core innovation—it enables vault share composability and collateral use. Additional features like liquidity controls, safety guarantees, and cross-protocol allocation handle risk and capital deployment in the leverage loop.
 
+<figure class="blog-figure">
+  <img
+    src="/images/morpho-curve-sky-connect.jpg"
+    alt="Photo of Rashid McMoodoo with Merlin Egalite of Morpho and Martin Krung of Curve Finance during DevConnect's Sky Connect meetup."
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>
+    Rashid McMoodoo with
+    <a href="https://x.com/MerlinEgalite" target="_blank" rel="noopener noreferrer">Merlin Egalite</a>,
+    founder of Morpho, and
+    <a href="https://x.com/martinkrung" target="_blank" rel="noopener noreferrer">Martin Krung</a>,
+    head of BD at Curve Finance, captured at Sky Connect during DevConnect Week.
+  </figcaption>
+</figure>
+
 ## The Foundation: Current Leveraged Prediction Positions
 
 Back in June 2025 at Permissionless NYC, I teamed up with Arsenii to build a DeFi layer for borrowing against Polymarket positions. The plan was to stay on Polygon to integrate natively with Polymarket, but the hackathon's sponsor constraints pushed us to bring the liquidity to BNB—so we added a cross-chain component. The core logic was simple:
