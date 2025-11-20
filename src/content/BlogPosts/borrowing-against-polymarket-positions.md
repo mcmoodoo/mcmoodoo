@@ -55,6 +55,8 @@ Wrap Polymarket tokens (ERC1155 → ERC20)
 
 Let traders borrow stablecoins against those wrapped positions through Morpho Markets (around 77% LTV). This is the current implementation—leverage is available, but borrowing loops must be managed manually.
 
+If you want to see the exact architecture that inspired this post, the original implementation lives in the open-source repo [leveraged-prediction-positions](https://github.com/mcmoodoo/leveraged-prediction-positions); the blog walks through how Vaults V2 extends the concepts in that codebase into a full borrowing loop strategy.
+
 We knew degens would push it to the edge, so looping was possible, but had to be done manually. It became a prediction-markets × DeFi-lending POC, and it worked: users could take leveraged positions on prediction outcomes using their wrapped tokens as collateral.
 
 A single-chain version of the leveraged prediction positions is [here](https://github.com/mcmoodoo/leveraged-prediction-positions). It focuses on Morpho as the custom lending/borrowing layer.
