@@ -15,8 +15,6 @@ tags:
 excerpt: "Currently, leveraged Polymarket positions are built manually through Morpho Markets. Here's how Morpho Vaults V2's adapter architecture will enable automatic borrowing loops—transforming manual loops into protocol-level strategies."
 ---
 
-# Borrowing Against Polymarket Positions using Morpho Markets through Vaults V2
-
 _How a chance encounter at Sky Connect during DevConnect Week sparked the idea of looping collateral through Morpho Vaults V2_
 
 ---
