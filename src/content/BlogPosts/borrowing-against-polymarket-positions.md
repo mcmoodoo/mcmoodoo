@@ -23,6 +23,8 @@ _How a chance encounter at Sky Connect during DevConnect Week sparked the idea o
 
 The Sky (MakerDAO) event during DevConnect Week was the kind of place where you'd casually bump into OGs from the lending/borrowing world. Under the clear night sky, I ended up chatting with Merlin, one of Morpho's co-founders.
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ran into <a href="https://twitter.com/MerlinEgalite?ref_src=twsrc%5Etfw">@MerlinEgalite</a> at the Sky Connect by <a href="https://twitter.com/SkyEcosystem?ref_src=twsrc%5Etfw">@SkyEcosystem</a> (ex-<a href="https://twitter.com/MakerDAO?ref_src=twsrc%5Etfw">@MakerDAO</a>) in Buenos Aires during DevConnect week and were later joined by <a href="https://twitter.com/martinkrung?ref_src=twsrc%5Etfw">@martinkrung</a> from <a href="https://twitter.com/CurveFinance?ref_src=twsrc%5Etfw">@CurveFinance</a>.<br><br>We chatted about <a href="https://twitter.com/Morpho?ref_src=twsrc%5Etfw">@Morpho</a> V2 vaults, and that&#39;s when it clicked 💡<br><br>Back in June at <a href="https://twitter.com/Permissionless?ref_src=twsrc%5Etfw">@Permissionless</a> in… <a href="https://t.co/BWVTWCqf9M">pic.twitter.com/BWVTWCqf9M</a></p>&mdash; Rashid McMoodoo (@mcmoodoo) <a href="https://twitter.com/mcmoodoo/status/1991439567845577094?ref_src=twsrc%5Etfw">November 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 We talked about Morpho V2, and I asked about fixed rates—when they were coming. Merlin said that now V2 vaults are live, the team is pushing to release the full V2 rollout, including fixed rates, in Q1 2025.
 
 Then Martin Krung (@martinkrung) from Curve joined us. I introduced myself and mentioned I was in the Uniswap Hooks Cohort with the Uniswap Foundation and Atrium Academy, so I'd been neck-deep in v4 hooks. Martin immediately brought up Curve's pool design and shifted the discussion toward concentrated liquidity. After a minute, I joked that it was a bit heavy for such a relaxed night, we laughed, and drifted back to Morpho V2.
@@ -30,22 +32,6 @@ Then Martin Krung (@martinkrung) from Curve joined us. I introduced myself and m
 As Merlin explained the shift from Vault V1 to V2, something clicked: instead of depositing wrapped Polymarket shares directly into Morpho Blue, I should be depositing into the V2 vault, which then routes those shares across destinations (Morpho Markets, V1 vaults, etc.).
 
 Bottom line: the adapter-based architecture is the core innovation—it enables vault share composability and collateral use. Additional features like liquidity controls, safety guarantees, and cross-protocol allocation handle risk and capital deployment in the leverage loop.
-
-<figure class="blog-figure">
-  <img
-    src="/images/morpho-curve-sky-connect.jpg"
-    alt="Photo of Rashid McMoodoo with Merlin Egalite of Morpho and Martin Krung of Curve Finance during DevConnect's Sky Connect meetup."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Rashid McMoodoo with
-    <a href="https://x.com/MerlinEgalite" target="_blank" rel="noopener noreferrer">Merlin Egalite</a>,
-    founder of Morpho, and
-    <a href="https://x.com/martinkrung" target="_blank" rel="noopener noreferrer">Martin Krung</a>,
-    head of BD at Curve Finance, captured at Sky Connect during DevConnect Week.
-  </figcaption>
-</figure>
 
 ## The Foundation: Current Leveraged Prediction Positions
 
