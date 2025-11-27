@@ -17,6 +17,8 @@ Entertained by my punchy message, <a href="https://x.com/panditdhamdhere?s=20" t
 
 So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows.
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Thanks to <a href="https://twitter.com/panditdhamdhere?ref_src=twsrc%5Etfw">@panditdhamdhere</a> for introducing me to <a href="https://twitter.com/stoczek_eth?ref_src=twsrc%5Etfw">@stoczek_eth</a>. Had a chance to learn about <a href="https://twitter.com/mimicfi?ref_src=twsrc%5Etfw">@mimicfi</a>&#39;s approach to automating <a href="https://twitter.com/hashtag/DeFi?src=hash&amp;ref_src=twsrc%5Etfw">#DeFi</a> and reducing &quot;time-to-chain&quot;<br><br>Got connected with <a href="https://twitter.com/facuspagnuolo?ref_src=twsrc%5Etfw">@facuspagnuolo</a> who walked me through the technical details first-hand.<br><br>I wrote up the full… <a href="https://t.co/4aC6SxVrNY">pic.twitter.com/4aC6SxVrNY</a></p>&mdash; Rashid McMoodoo (@mcmoodoo) <a href="https://twitter.com/mcmoodoo/status/1994075230264873039?ref_src=twsrc%5Etfw">November 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the `@mimicprotocol/cli` package and built with oclif for a clean developer experience.
 
 So I just installed it globally for convenience:
