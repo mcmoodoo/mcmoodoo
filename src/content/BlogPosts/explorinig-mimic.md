@@ -40,6 +40,8 @@ yarn global add @mimicprotocol/cli
 - Build to validate, generate artifacts, and compile
 - Deploy the output to the task registry for relayers
 
+> Companion walkthrough repo: <a href="https://github.com/mcmoodoo/token-transfer-with-mimic" target="_blank" rel="noopener noreferrer">mcmoodoo/token-transfer-with-mimic</a>
+
 ## Initialize the project
 
 I started by creating a new working directory with:
