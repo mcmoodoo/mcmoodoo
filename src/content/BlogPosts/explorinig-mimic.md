@@ -5,7 +5,9 @@ excerpt: "Placeholder entry for an upcoming post on Mimic."
 tags: ["Placeholder"]
 ---
 
-I found out about mimic, a cross-chain automation layer, at DevConnect BA. I was referred by someone from Uniswap Cup who I approached after this Telegram chat message in the Uniswap Cup team chat where all the team players were added and we were randomly discussing cleat length, ball size, and other nonsense:
+Mimic, a cross-chain DeFi automation layer, first landed on my radar through an unexpected chain of events at DevConnect BA 2025.
+
+I’d joined the Uniswap Hooks Incubator run by Atrium Academy, which earned me a spot on their Uniswap Cup team. That got me dropped into a chaotic Telegram group where players debated everything from cleat length to ball size. Since I was trying to get the attention of top DeFi teams, I fired off a deliberately bold message to shake things up:
 
 ![the notorious Telegram message](/images/notorious-tg-message.png)
 
