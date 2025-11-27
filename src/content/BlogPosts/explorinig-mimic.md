@@ -13,7 +13,7 @@ I’d joined the Uniswap Hooks Incubator run by <a href="https://atrium.academy/
 
 ![the notorious Telegram message](/images/notorious-tg-message.png)
 
-<a href="https://x.com/panditdhamdhere?s=20" target="_blank" rel="noopener noreferrer">Pandit</a> reached out to me and recommended to contact <a href="https://x.com/stoczek_eth?s=20" target="_blank" rel="noopener noreferrer">Lukasz</a> from <a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a> who quickly gave me a rundown of their three layer architecture. It kinda clicked right off the bat considering my three year long DeFi journey. Smart contract development and deployment tooling is to say lightly not so friendly for an average dev coming from a conventional Web2 background like me.
+Entertained by my punchy message, <a href="https://x.com/panditdhamdhere?s=20" target="_blank" rel="noopener noreferrer">Pandit</a> followed up and pointed me to <a href="https://x.com/stoczek_eth?s=20" target="_blank" rel="noopener noreferrer">Lukasz</a> from <a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a> who quickly gave me a rundown of their three layer architecture. It kinda clicked right off the bat considering my three year long DeFi journey. Smart contract development and deployment tooling is to say lightly not so friendly for an average dev coming from a conventional Web2 background like me.
 
 [todo: embed X post]
 
@@ -32,7 +32,7 @@ yarn global add @mimicprotocol/cli
 
 ![Mimic demo](/images/mimic.gif)
 
-## Plan
+## How We’ll Tackle This
 
 - Initialize the project
 - Edit the manifest (inputs, ABIs, metadata)
@@ -40,9 +40,9 @@ yarn global add @mimicprotocol/cli
 - Build to validate, generate artifacts, and compile
 - Deploy the output to the task registry for relayers
 
-> Companion walkthrough repo: <a href="https://github.com/mcmoodoo/token-transfer-with-mimic" target="_blank" rel="noopener noreferrer">mcmoodoo/token-transfer-with-mimic</a>
+> Follow along in the companion walkthrough repo: <a href="https://github.com/mcmoodoo/token-transfer-with-mimic" target="_blank" rel="noopener noreferrer">mcmoodoo/token-transfer-with-mimic</a>
 
-## Initialize the project
+## Spinning Up the Workspace
 
 I started by creating a new working directory with:
 
@@ -70,7 +70,7 @@ The manifest file is the task’s blueprint—a declarative spec defining its na
 
 This mindset reminds me of why I moved from Arch to NixOS: fewer surprises, less drift, and instant rollbacks when things break. Anyway—
 
-## Edit the Manifest
+## Defining the Rules (Manifest)
 
 The task I’m building checks an account’s USD-denominated balance for a specific ERC-20 token and triggers a token transfer if that balance falls below a threshold. To extend the base config, I added a `thresholdUsd` input and switched numeric fields like `amount` and `maxFee` to strings so they support human-readable decimals. With those changes, the task can evaluate USD value and execute the transfer only when the threshold is breached.
 
@@ -114,7 +114,7 @@ src/types/
 
 Those are included in the `.gitignore`.
 
-## Implement the Task Logic
+## Teaching the Task What to Do
 
 The task logic lives in AssemblyScript and must export two things: the generated input type and a main function that receives those inputs. This all comes together in the `./src/task.ts` file—where the actual task is defined.
 
@@ -148,7 +148,7 @@ So I just grabbed an example code from [mimic's tutorial](https://docs.mimic.fi/
  }
 ```
 
-## Time to Build
+## Turning Code into Artifacts
 
 Let's compile to convert my task logic and manifest into deployable artifacts:
 
@@ -166,7 +166,7 @@ build/
 ├── manifest.json     # Validated manifest
 ```
 
-## Time to deploy
+## Putting It on the Map (Deploy)
 
 Apparently I can upload my task artifacts to the network (Mimic Registry) so others can discover it, but I will need a `DEPLOYMENT_KEY`. So, I rushed to <a href="https://protocol.mimic.fi/api-key" target="_blank" rel="noopener noreferrer">explorer app ↗</a>
 
@@ -187,13 +187,13 @@ It deployed and saved the artifacts to IPFS with the `CID` <a href="https://ipfs
 
 ![Artifacts stored on IPFS](/images/mimic-deployment-ipfs.png)
 
-### Time to configure our task
+### Dialing In the Settings
 
 After deploying the task, I could have jumped into the explorer UI to set up my config—the place where you plug in the parameters from your manifest.yaml and sign everything with your wallet. I didn’t actually do that this time, but the flow is simple: open the explorer, find your task under Tasks, edit the fields, hit sign, done.
 
 What’s cool is that you never have to redeploy the task just to change something. If you want to tweak the config later, you just sign a new version in the explorer and relayers immediately switch to it.
 
-## Possible enhancements
+## What I’d Improve Next
 
 - Add completions to the mimic cli. I felt unnecessary friction when typing out all the commands by hand without the ability to use tab completion.
 - In the docs, the links with northeast arrows are misleading. I thought they would open in a new tab, but instead it changed the current page. I often lost the original tutorial and had to come back to the mimic site, then click on docs, then find that tutorial again.
