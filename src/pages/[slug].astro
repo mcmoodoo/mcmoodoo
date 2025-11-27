@@ -76,7 +76,7 @@ const { Content } = await render(post);
          prose-strong:text-base-content prose-strong:font-bold
          prose-em:italic
          prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-         prose-code:text-accent prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+         prose-code:text-base-content prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
          prose-pre:bg-base-200 prose-pre:border prose-pre:border-base-300 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto
          prose-pre-code:bg-transparent prose-pre-code:text-base-content prose-pre-code:p-0 prose-pre-code:rounded-none
          prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-4 prose-blockquote:italic
@@ -241,10 +241,15 @@ const { Content } = await render(post);
 	/* Inline code should remain styled differently */
 	.prose :not(pre) > code {
 		background-color: hsl(var(--b2)) !important;
-		color: hsl(var(--a)) !important;
+		color: hsl(var(--bc)) !important;
 		padding: 0.125rem 0.375rem !important;
 		border-radius: 0.25rem !important;
 		font-size: 0.875em !important;
+	}
+	/* Remove automatic backticks added by typography plugin */
+	.prose :not(pre) > code::before,
+	.prose :not(pre) > code::after {
+		content: '' !important;
 	}
 	
 	/* Ensure code blocks don't have weird spacing */
