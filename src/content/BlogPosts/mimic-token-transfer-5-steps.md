@@ -5,7 +5,7 @@ excerpt: "A hands‑on walkthrough building a Mimic task that automates a USD‑
 tags: ["DeFi", "Mimic", "Automation", "Tutorial", "Web3"]
 ---
 
-Mimic, a cross-chain DeFi automation layer, first landed on my radar through an unexpected chain of events at <a href="https://devconnect.org/" target="_blank" rel="noopener noreferrer">DevConnect</a> BA 2025.
+<a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a>, a cross-chain DeFi automation layer, first landed on my radar through an unexpected chain of events at <a href="https://devconnect.org/" target="_blank" rel="noopener noreferrer">DevConnect</a> BA 2025.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Getting settled at the <a href="https://twitter.com/hashtag/uniswapcup?src=hash&amp;ref_src=twsrc%5Etfw">#uniswapcup</a><br><br>Will be playing on the notorious Atrium Academy’s team <a href="https://t.co/PwXW9AZdY3">pic.twitter.com/PwXW9AZdY3</a></p>&mdash; Rashid McMoodoo (@mcmoodoo) <a href="https://twitter.com/mcmoodoo/status/1990065023050240306?ref_src=twsrc%5Etfw">November 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
