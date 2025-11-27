@@ -13,7 +13,6 @@ I’d joined the Uniswap Hooks Incubator run by Atrium Academy, which earned me 
 
 Pandit reached out to me and recommended to contact Lucasz from [mimic.fi] who quickly gave me a rundown of their 3 layer architecture. It kinda clicked right off the bat considering my 3 year long DeFi journey. Smart contract development and deployment tooling is to say lightly not so friendly for an average dev coming from a conventional Web2 background like me.
 
-![After a 40-minute crash course on mimic given by Lukasz](/images/Rashid-and-Lukasz.png)
 [todo: embed X post]
 
 So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows. I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the @mimicprotocol/cli package and built with Oclif for a clean developer experience. You can install it globally for convenience:
@@ -29,21 +28,17 @@ yarn global add @mimicprotocol/cli
 
 ![Mimic demo](/images/mimic.gif)
 
-### Here's my approach
+## Plan
 
-Initialize the project.
+- Initialize the project
+- Edit the manifest (inputs, ABIs, metadata)
+- Implement the task logic
+- Build to validate, generate artifacts, and compile
+- Deploy the output to the task registry for relayers
 
-Define the manifest (inputs, ABIs, metadata).
+## Initialize the project
 
-Implement the task logic.
-
-Build to validate, generate artifacts, and compile.
-
-Deploy the output to the task registry for relayers.
-
-### Initialize the project
-
-Let's start a new working directory to develop your task. To do that you can run the following command:
+I started by creating a new working directory with:
 
 ```bash
 mimic init -d token-transfer
@@ -51,7 +46,7 @@ mimic init -d token-transfer
 
 ![Mimic demo](/images/creating-mimic-task.gif)
 
-That generates a simple `manifest.yaml`:
+That generates a simple `manifest.yaml` inside the directory:
 
 ```yaml
 version: 1.0.0
@@ -65,13 +60,13 @@ inputs:
   - maxFee: uint256
 ```
 
-The manifest file is the blueprint of the task I’m building. It describes the task to Mimic in a clean, declarative way—its name, inputs, and contract dependencies. It acts as the task’s schema, and the tooling uses it to type-check the logic, generate bindings, and package the final task.
+The manifest file is the task’s blueprint—a declarative spec defining its name, inputs, and contract dependencies. Mimic treats it as the source of truth, using it to type-check the logic, generate bindings, and package the task. You describe the desired state; Mimic materializes it.
 
-So, you describe the task in a declarative way and Mimic will "manifest" it to the desired state. Love the idea - it reminds me of the reasons I switched from Arch Linux to NixOS. I was sick of packages breaking my setup and endless configuration drift (NixOS still breaks, but I can roll back with a single command).
+This mindset reminds me of why I moved from Arch to NixOS: fewer surprises, less drift, and instant rollbacks when things break. Anyway—
 
-Ok I digress, sorry. Let's define an automated task that checks an account’s USD-denominated balance for a specific ERC-20 token, and if that balance falls below a given USD threshold, it triggers a token transfer (with a specified amount, recipient, and max fee) on the given chain.
+## Edit the Manifest
 
-Compared to the base config, we add a new input called `thresholdUsd` and switch the numeric fields (`amount`, `maxFee`) to strings so they can accept human-readable decimals. With these additions, the task can now check the token’s USD value and only execute the transfer when the account’s USD-denominated balance drops below the specified threshold.
+The task I’m building checks an account’s USD-denominated balance for a specific ERC-20 token and triggers a token transfer if that balance falls below a threshold. To extend the base config, I added a `thresholdUsd` input and switched numeric fields like `amount` and `maxFee` to strings so they support human-readable decimals. With those changes, the task can evaluate USD value and execute the transfer only when the threshold is breached.
 
 ```diff
  version: 1.0.0
@@ -94,15 +89,13 @@ Compared to the base config, we add a new input called `thresholdUsd` and switch
 
 I had to provide [ERC20 abi](https://216358192-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F2K6E4Us9xYRIC0Tt0SIZ%2Fuploads%2FLzvR464ArklTLEA67qfw%2FERC20.json?alt=media&token=163296d8-8fd0-4376-a649-4c7c07f8b321) in `./abis/ERC20.json`
 
-Let's validate the manifest definitions and generate the corresponding code to access both, your declared inputs and the contract ojects for your declared ABIs.
-
-run:
+Now, to validate my changes in the manifest file are valid, I could run:
 
 ```bash
 mimic codegen
 ```
 
-It just generates these files which are ignored by git anyway:
+It just generates corresponding code to access the declared inputs and the contract object for the declared ABIs:
 
 ```
 ❯ tree src/types/
@@ -113,19 +106,13 @@ src/types/
 1 directory, 2 files
 ```
 
-This command will output the generated types to `./src/types` by default. It will also assume your manifest file is called `manifest.yaml`.
+Those are included in the `.gitignore`.
 
-### Let's write the task logic
+## Implement the Task Logic
 
-The task logic is implemented in AssemblyScript and must export:
+The task logic lives in AssemblyScript and must export two things: the generated input type and a main function that receives those inputs. This all comes together in the `./src/task.ts` file—where the actual task is defined.
 
-Input type: The generated inputs type from the previous step.
-
-Main function: The core task logic, which receives the inputs as an argument.
-
-So now we get to the meat of it all - creating a task! The task is defined in the magical `./src/task.ts` file.
-
-So I just grabbed an example code from [mimic's tutorial](https://docs.mimic.fi/examples/build-a-simple-task)
+So I just grabbed an example code from [mimic's tutorial](https://docs.mimic.fi/examples/build-a-simple-task) and edited my `manifest.yaml`:
 
 ```diff
 +import {
@@ -155,15 +142,9 @@ So I just grabbed an example code from [mimic's tutorial](https://docs.mimic.fi/
  }
 ```
 
-### Time to compile
+## Time to Build
 
-The compile process converts your task logic and manifest into deployable artifacts:
-
-build/task.wasm - Compiled WebAssembly binary
-
-build/manifest.json - Processed manifest configuration
-
-So, I decided to compile in a very confident way:
+Let's compile to convert my task logic and manifest into deployable artifacts:
 
 ```bash
 mimic compile
@@ -171,7 +152,7 @@ mimic compile
 
 ![Compiling](/images/mimic-compile.gif)
 
-Here's what it produces:
+The result:
 
 ```
 build/
@@ -179,44 +160,32 @@ build/
 ├── manifest.json     # Validated manifest
 ```
 
-### Time to deploy
+## Time to deploy
 
-This is where you upload your task artifacts to the network so others can discover it. To do this you can run the deploy command using the CLI:
+Apparently I can upload my task artifacts to the network (Mimic Registry) so others can discover it, but I will need a `DEPLOYMENT_KEY`. So, I rushed to <a href="https://protocol.mimic.fi/api-key" target="_blank" rel="noopener noreferrer">explorer app ↗</a>
+
+![Trying to get thet deployment key from the explorer app](/images/generating-deployment-key.png)
+to get a `DEPLOYMENT_KEY` which I saved in a local environment variable `$MIMIC_API_KEY`. After a quick login with my wallet, I was dropped to my dashboard with an API key generated for me already:
+
+![Mimic dashboard](/images/mimic-dashboard.png)
+
+I could have skipped the build via `--skip-compile` flag, because I've already compiled and generated the artifacts in the previous step, but I just regenerated it all:
 
 ```bash
-mimic deploy --key [DEPLOYMENT_KEY]
+mimic deploy --key $MIMIC_API_KEY
 ```
 
 ![Deploying artifacts](/images/mimic-deploy.gif)
 
-It deploys and stores the artifacts on IPFS https://ipfs.io/ipfs/QmSTBXXP2CjzRkxSYew9YPKU2m2qcUbvdyveUiqvQvoLZX/
-This command will upload your artifacts to the Mimic Registry (which stores them on IPFS) and pin the resultant CID so it can be discovered by others.
+It deployed and saved the artifacts to IPFS with the `CID` <a href="https://ipfs.io/ipfs/QmSTBXXP2CjzRkxSYew9YPKU2m2qcUbvdyveUiqvQvoLZX/" target="_blank" rel="noopener noreferrer">QmSTBXXP2CjzRkxSYew9YPKU2m2qcUbvdyveUiqvQvoLZX ↗</a>
 
 ![Artifacts stored on IPFS](/images/mimic-deployment-ipfs.png)
 
-Next I headed to <a href="https://protocol.mimic.fi/api-key" target="_blank" rel="noopener noreferrer">explorer app ↗</a> to genearate a deployment key:
-
-![Trying to get thet deployment key from the explorer app](/images/generating-deployment-key.png)
-
-and after a quick login with my wallet, I was thrown to my dashboard with an API key generated for me already:
-
-![Mimic dashboard](/images/mimic-dashboard.png)
-
-By default, this command will run code generation and compilation, then deploy the generated artifacts from the build directory. You can skip the build steps by passing --skip-compile if you already have up-to-date artifacts.
-
 ### Time to configure our task
 
-After deploying your task, you can now configure it to tell which config relayers should use to run your task. This means defining the parameters declared in your manifest.yml file. This configuration is done in the [explorer UI](https://protocol.mimic.fi/api-key) where you will be requested to sign your config with your wallet.
+After deploying the task, I could have jumped into the explorer UI to set up my config—the place where you plug in the parameters from your manifest.yaml and sign everything with your wallet. I didn’t actually do that this time, but the flow is simple: open the explorer, find your task under Tasks, edit the fields, hit sign, done.
 
-Open the explorer and locate the task you just deployed under the tasks section.
-
-Add or edit your config parameters
-
-Sign the new config
-
-This signature ensures relayers know the config is authorized by the task owner.
-
-You can update or deprecate this config at any point in time to reflect changes, without needing to redeploy the task code again. Just sign the new config in the explorer, and relayers will pick up the latest version.
+What’s cool is that you never have to redeploy the task just to change something. If you want to tweak the config later, you just sign a new version in the explorer and relayers immediately switch to it.
 
 ## Possible enhancements
 
