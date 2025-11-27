@@ -17,7 +17,9 @@ Entertained by my punchy message, <a href="https://x.com/panditdhamdhere?s=20" t
 
 [todo: embed X post]
 
-So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows. I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the `@mimicprotocol/cli` package and built with oclif for a clean developer experience.
+So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows.
+
+I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the `@mimicprotocol/cli` package and built with oclif for a clean developer experience.
 
 So I just installed it globally for convenience:
 
@@ -34,11 +36,12 @@ yarn global add @mimicprotocol/cli
 
 ## How We’ll Tackle This
 
-- Initialize the project
-- Edit the manifest (inputs, ABIs, metadata)
-- Implement the task logic
-- Build to validate, generate artifacts, and compile
-- Deploy the output to the task registry for relayers
+- [Initialize the project](#spinning-up-the-workspace)
+- [Edit the manifest (inputs, ABIs, metadata)](#defining-the-rules-manifest)
+- [Implement the task logic](#teaching-the-task-what-to-do)
+- [Build to validate, generate artifacts, and compile](#turning-code-into-artifacts)
+- [Deploy the output to the task registry for relayers](#putting-it-on-the-map-deploy)
+- [A Few Friendly Suggestions for Mimic](#a-few-friendly-suggestions-for-mimic)
 
 > Follow along in the companion walkthrough repo: <a href="https://github.com/mcmoodoo/token-transfer-with-mimic" target="_blank" rel="noopener noreferrer">mcmoodoo/token-transfer-with-mimic</a>
 
