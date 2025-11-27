@@ -93,7 +93,7 @@ The task I’m building checks an account’s USD-denominated balance for a spec
 +  - ERC20: ./abis/ERC20.json
 ```
 
-I had to provide an [ERC-20 ABI](https://216358192-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F2K6E4Us9xYRIC0Tt0SIZ%2Fuploads%2FLzvR464ArklTLEA67qfw%2FERC20.json?alt=media&token=163296d8-8fd0-4376-a649-4c7c07f8b321) in `./abis/ERC20.json`.
+I had to provide an <a href="https://216358192-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F2K6E4Us9xYRIC0Tt0SIZ%2Fuploads%2FLzvR464ArklTLEA67qfw%2FERC20.json?alt=media&token=163296d8-8fd0-4376-a649-4c7c07f8b321" target="_blank" rel="noopener noreferrer">ERC‑20 ABI</a> in `./abis/ERC20.json`.
 
 Now, to validate my manifest changes, I could run:
 
@@ -118,7 +118,7 @@ Those are included in the `.gitignore`.
 
 The task logic lives in AssemblyScript and must export two things: the generated input type and a main function that receives those inputs. This all comes together in the `./src/task.ts` file—where the actual task is defined.
 
-So I grabbed example code from [Mimic’s tutorial](https://docs.mimic.fi/examples/build-a-simple-task) and implemented it in `src/task.ts`:
+So I grabbed example code from <a href="https://docs.mimic.fi/examples/build-a-simple-task" target="_blank" rel="noopener noreferrer">Mimic’s tutorial</a> and implemented it in `src/task.ts`:
 
 ```diff
 +import {
@@ -193,13 +193,13 @@ After deploying the task, I could have jumped into the explorer UI to set up my 
 
 What’s cool is that you never have to redeploy the task just to change something. If you want to tweak the config later, you just sign a new version in the explorer and relayers immediately switch to it.
 
-## What I’d Improve Next
+## A Few Friendly Suggestions for Mimic
 
-- Add completions to the Mimic CLI. I felt unnecessary friction when typing out all the commands by hand without the ability to use tab completion.
-- In the docs, the links with northeast arrows are misleading. I thought they would open in a new tab, but instead they changed the current page. I often lost the original tutorial and had to come back to the Mimic site, then click on Docs, then find that tutorial again.
+- Ship shell completions in the Mimic CLI (tab‑complete commands and flags).
+- Make northeast‑arrow links open in a new tab to prevent context loss.
   ![Misleading northeast arrow next to a link](/images/misleading-northeast-arrow.png)
-- More visuals and less text in the docs (at least in the guides and tutorials)
-- A video walkthrough would have been helpful as a primer before the tutorial
-- More concise text in the docs to save developers time when ploughing through the docs
+- Add more visuals in docs (diagrams and short clips where helpful).
+- Publish a short video walkthrough to prime new users.
+- Tighten copy in guides: front‑load the “how,” trim repetition.
 
-_Follow them on_
+_Follow <a href="https://x.com/mimicfi?s=20" target="_blank" rel="noopener noreferrer">@mimicfi</a> on X_
