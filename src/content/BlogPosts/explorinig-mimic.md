@@ -1,8 +1,8 @@
 ---
-title: "Exploring Mimic"
+title: "How I Built a Token Transfer Task with Mimic in 5 Steps"
 date: "2025-11-25"
-excerpt: "Placeholder entry for an upcoming post on Mimic."
-tags: ["Placeholder"]
+excerpt: "A hands‑on walkthrough building a Mimic task that automates a USD‑threshold token transfer—from setup and manifest to logic, compile, and deploy."
+tags: ["DeFi", "Mimic", "Automation", "Tutorial", "Web3"]
 ---
 
 Mimic, a cross-chain DeFi automation layer, first landed on my radar through an unexpected chain of events at <a href="https://devconnect.org/" target="_blank" rel="noopener noreferrer">DevConnect</a> BA 2025.
@@ -14,8 +14,6 @@ I’d joined the Uniswap Hooks Incubator run by <a href="https://atrium.academy/
 ![the notorious Telegram message](/images/notorious-tg-message.png)
 
 Entertained by my punchy message, <a href="https://x.com/panditdhamdhere?s=20" target="_blank" rel="noopener noreferrer">Pandit</a> followed up and pointed me to <a href="https://x.com/stoczek_eth?s=20" target="_blank" rel="noopener noreferrer">Lukasz</a> from <a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a>, who quickly gave me a rundown of their three-layer architecture. It clicked right away, given my three-year DeFi journey. Smart contract development and deployment tooling is, to put it mildly, not very friendly to an average developer coming from a conventional Web2 background like me.
-
-[todo: embed X post]
 
 So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows.
 
