@@ -5,17 +5,21 @@ excerpt: "Placeholder entry for an upcoming post on Mimic."
 tags: ["Placeholder"]
 ---
 
-Mimic, a cross-chain DeFi automation layer, first landed on my radar through an unexpected chain of events at DevConnect BA 2025.
+Mimic, a cross-chain DeFi automation layer, first landed on my radar through an unexpected chain of events at <a href="https://devconnect.org/" target="_blank" rel="noopener noreferrer">DevConnect</a> BA 2025.
 
-I’d joined the Uniswap Hooks Incubator run by Atrium Academy, which earned me a spot on their Uniswap Cup team. That got me dropped into a chaotic Telegram group where players debated everything from cleat length to ball size. Since I was trying to get the attention of top DeFi teams, I fired off a deliberately bold message to shake things up:
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Getting settled at the <a href="https://twitter.com/hashtag/uniswapcup?src=hash&amp;ref_src=twsrc%5Etfw">#uniswapcup</a><br><br>Will be playing on the notorious Atrium Academy’s team <a href="https://t.co/PwXW9AZdY3">pic.twitter.com/PwXW9AZdY3</a></p>&mdash; Rashid McMoodoo (@mcmoodoo) <a href="https://twitter.com/mcmoodoo/status/1990065023050240306?ref_src=twsrc%5Etfw">November 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+I’d joined the Uniswap Hooks Incubator run by <a href="https://atrium.academy/" target="_blank" rel="noopener noreferrer">Atrium Academy</a>, which earned me a spot on their Uniswap Cup team. That got me dropped into a chaotic Telegram group where players debated everything from cleat length to ball size. Since I was trying to get the attention of top DeFi teams, I fired off a deliberately bold message to shake things up:
 
 ![the notorious Telegram message](/images/notorious-tg-message.png)
 
-Pandit reached out to me and recommended to contact Lucasz from [mimic.fi] who quickly gave me a rundown of their 3 layer architecture. It kinda clicked right off the bat considering my 3 year long DeFi journey. Smart contract development and deployment tooling is to say lightly not so friendly for an average dev coming from a conventional Web2 background like me.
+<a href="https://x.com/panditdhamdhere?s=20" target="_blank" rel="noopener noreferrer">Pandit</a> reached out to me and recommended to contact <a href="https://x.com/stoczek_eth?s=20" target="_blank" rel="noopener noreferrer">Lukasz</a> from <a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a> who quickly gave me a rundown of their three layer architecture. It kinda clicked right off the bat considering my three year long DeFi journey. Smart contract development and deployment tooling is to say lightly not so friendly for an average dev coming from a conventional Web2 background like me.
 
 [todo: embed X post]
 
-So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows. I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the @mimicprotocol/cli package and built with Oclif for a clean developer experience. You can install it globally for convenience:
+So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows. I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the `@mimicprotocol/cli` package and built with Oclif for a clean developer experience.
+
+So I just installed it globally for convenience:
 
 ```bash
 yarn global add @mimicprotocol/cli
