@@ -1,5 +1,5 @@
 ---
-title: "Explorinig Mimic"
+title: "Exploring Mimic"
 date: "2025-11-25"
 excerpt: "Placeholder entry for an upcoming post on Mimic."
 tags: ["Placeholder"]
@@ -13,11 +13,11 @@ I’d joined the Uniswap Hooks Incubator run by <a href="https://atrium.academy/
 
 ![the notorious Telegram message](/images/notorious-tg-message.png)
 
-Entertained by my punchy message, <a href="https://x.com/panditdhamdhere?s=20" target="_blank" rel="noopener noreferrer">Pandit</a> followed up and pointed me to <a href="https://x.com/stoczek_eth?s=20" target="_blank" rel="noopener noreferrer">Lukasz</a> from <a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a> who quickly gave me a rundown of their three layer architecture. It kinda clicked right off the bat considering my three year long DeFi journey. Smart contract development and deployment tooling is to say lightly not so friendly for an average dev coming from a conventional Web2 background like me.
+Entertained by my punchy message, <a href="https://x.com/panditdhamdhere?s=20" target="_blank" rel="noopener noreferrer">Pandit</a> followed up and pointed me to <a href="https://x.com/stoczek_eth?s=20" target="_blank" rel="noopener noreferrer">Lukasz</a> from <a href="https://mimic.fi" target="_blank" rel="noopener noreferrer">Mimic</a>, who quickly gave me a rundown of their three-layer architecture. It clicked right away, given my three-year DeFi journey. Smart contract development and deployment tooling is, to put it mildly, not very friendly to an average developer coming from a conventional Web2 background like me.
 
 [todo: embed X post]
 
-So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows. I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the `@mimicprotocol/cli` package and built with Oclif for a clean developer experience.
+So after a 40-minute crash course given to me by Lukasz, I figured: why not try it myself? Mimic sounded like the kind of abstraction layer that could dramatically speed up “time-to-chain” for common on-chain workflows. I started by building a simple task—the core unit you define in Mimic—and decided to automate a USD-threshold-based token transfer to see how the whole flow works end-to-end. The tooling is pleasantly straightforward, powered by the `@mimicprotocol/cli` package and built with oclif for a clean developer experience.
 
 So I just installed it globally for convenience:
 
@@ -93,9 +93,9 @@ The task I’m building checks an account’s USD-denominated balance for a spec
 +  - ERC20: ./abis/ERC20.json
 ```
 
-I had to provide [ERC20 abi](https://216358192-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F2K6E4Us9xYRIC0Tt0SIZ%2Fuploads%2FLzvR464ArklTLEA67qfw%2FERC20.json?alt=media&token=163296d8-8fd0-4376-a649-4c7c07f8b321) in `./abis/ERC20.json`
+I had to provide an [ERC-20 ABI](https://216358192-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F2K6E4Us9xYRIC0Tt0SIZ%2Fuploads%2FLzvR464ArklTLEA67qfw%2FERC20.json?alt=media&token=163296d8-8fd0-4376-a649-4c7c07f8b321) in `./abis/ERC20.json`.
 
-Now, to validate my changes in the manifest file are valid, I could run:
+Now, to validate my manifest changes, I could run:
 
 ```bash
 mimic codegen
@@ -118,7 +118,7 @@ Those are included in the `.gitignore`.
 
 The task logic lives in AssemblyScript and must export two things: the generated input type and a main function that receives those inputs. This all comes together in the `./src/task.ts` file—where the actual task is defined.
 
-So I just grabbed an example code from [mimic's tutorial](https://docs.mimic.fi/examples/build-a-simple-task) and edited my `manifest.yaml`:
+So I grabbed example code from [Mimic’s tutorial](https://docs.mimic.fi/examples/build-a-simple-task) and implemented it in `src/task.ts`:
 
 ```diff
 +import {
@@ -168,10 +168,10 @@ build/
 
 ## Putting It on the Map (Deploy)
 
-Apparently I can upload my task artifacts to the network (Mimic Registry) so others can discover it, but I will need a `DEPLOYMENT_KEY`. So, I rushed to <a href="https://protocol.mimic.fi/api-key" target="_blank" rel="noopener noreferrer">explorer app ↗</a>
+Apparently I can upload my task artifacts to the network (Mimic Registry) so others can discover them, but I will need a `DEPLOYMENT_KEY`. So, I rushed to <a href="https://protocol.mimic.fi/api-key" target="_blank" rel="noopener noreferrer">explorer app ↗</a>
 
-![Trying to get thet deployment key from the explorer app](/images/generating-deployment-key.png)
-to get a `DEPLOYMENT_KEY` which I saved in a local environment variable `$MIMIC_API_KEY`. After a quick login with my wallet, I was dropped to my dashboard with an API key generated for me already:
+![Trying to get the deployment key from the explorer app](/images/generating-deployment-key.png)
+to get a `DEPLOYMENT_KEY`, which I saved as a local environment variable `$MIMIC_API_KEY`. After a quick login with my wallet, I was dropped into my dashboard with an API key already generated for me:
 
 ![Mimic dashboard](/images/mimic-dashboard.png)
 
@@ -195,11 +195,11 @@ What’s cool is that you never have to redeploy the task just to change somethi
 
 ## What I’d Improve Next
 
-- Add completions to the mimic cli. I felt unnecessary friction when typing out all the commands by hand without the ability to use tab completion.
-- In the docs, the links with northeast arrows are misleading. I thought they would open in a new tab, but instead it changed the current page. I often lost the original tutorial and had to come back to the mimic site, then click on docs, then find that tutorial again.
+- Add completions to the Mimic CLI. I felt unnecessary friction when typing out all the commands by hand without the ability to use tab completion.
+- In the docs, the links with northeast arrows are misleading. I thought they would open in a new tab, but instead they changed the current page. I often lost the original tutorial and had to come back to the Mimic site, then click on Docs, then find that tutorial again.
   ![Misleading northeast arrow next to a link](/images/misleading-northeast-arrow.png)
-- more visuals and less text in the docs (at least in the guides and tutorials)
-- a video walkthrough would have been helpful as a primer before the tutorial
-- more concise text in the docs to save developers time when ploughing through the docs
+- More visuals and less text in the docs (at least in the guides and tutorials)
+- A video walkthrough would have been helpful as a primer before the tutorial
+- More concise text in the docs to save developers time when ploughing through the docs
 
 _Follow them on_
