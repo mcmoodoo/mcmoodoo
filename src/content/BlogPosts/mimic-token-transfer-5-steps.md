@@ -69,9 +69,7 @@ inputs:
   - maxFee: uint256
 ```
 
-The manifest file is the task’s blueprint—a declarative spec defining its name, inputs, and contract dependencies. Mimic treats it as the source of truth, using it to type-check the logic, generate bindings, and package the task. You describe the desired state; Mimic materializes it.
-
-This mindset reminds me of why I moved from Arch to NixOS: fewer surprises, less drift, and instant rollbacks when things break. Anyway—
+The manifest file defines the task's name, inputs, and contract dependencies. Mimic uses it to type-check the logic, generate bindings, and package the task.
 
 ## Defining the Rules (Manifest)
 
