@@ -1,6 +1,7 @@
 export const profile = {
+	name: 'Rashid',
 	fullName: 'Rashid McMoodoo',
-	title: 'Software Engineer | Technical Writer',
+	title: 'Dev | DevRel | Tech Writer',
 	institute: '',
 	author_name: 'Rashid McMoodoo', // Author name to be highlighted in the papers section
 	sidebar_title: 'Rashid', // Title/name displayed in the sidebar
