@@ -43,9 +43,12 @@ const { title, description, image } = Astro.props
 
 <!-- Theme selector scripts -->
 <script is:inline>
-  // Get stored theme or default to light
+  // Get stored theme or detect browser preference
   const getStoredTheme = () => {
-    return localStorage.getItem('theme') || 'light';
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored;
+    // Detect browser/OS preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
   // Apply theme immediately to prevent flash
