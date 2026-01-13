@@ -37,6 +37,7 @@ export const template = {
 
 export const seo = {
     default_title: 'Rashid McMoodoo',
-    default_description: 'Software Engineer and Technical Writer.',
-    default_image: '/images/rashidma-website-snapshot.png',
+    default_description: 'Dev | Tech Writer | DevRel in DeFi',
+    default_image: '/images/rashid-devrel-defi.png',
+
 }
