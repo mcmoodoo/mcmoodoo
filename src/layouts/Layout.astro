@@ -14,12 +14,16 @@ type Props = {
 	title?: string
 	description?: string
 	image?: string
+	type?: 'website' | 'article'
+	publishedDate?: string
 }
 
 const {
 	title = seo.default_title,
 	description = seo.default_description,
 	image = seo.default_image,
+	type = 'website',
+	publishedDate,
 } = Astro.props
 ---
 
@@ -28,7 +32,7 @@ const {
 	<head>
 		{template.transitions && <ClientRouter /> }
 
-		<Head title={title} description={description} image={image} />
+		<Head title={title} description={description} image={image} type={type} publishedDate={publishedDate} />
 
 
 

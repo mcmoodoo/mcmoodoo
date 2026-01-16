@@ -1,19 +1,66 @@
 ---
-import {template} from '@/settings'
+import {template, profile, social} from '@/settings'
 interface Props {
 	title: string
 	description: string
 	image: string
+	type?: 'website' | 'article'
+	publishedDate?: string
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
-const { title, description, image } = Astro.props
+const { title, description, image, type = 'website', publishedDate } = Astro.props
+
+// Extract Twitter handle from URL
+const twitterHandle = social.x ? '@' + social.x.split('/').pop() : ''
+
+// Build JSON-LD structured data
+const baseSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": profile.fullName,
+	"url": Astro.site?.toString(),
+	"author": {
+		"@type": "Person",
+		"name": profile.fullName,
+		"url": Astro.site?.toString(),
+		"sameAs": [
+			social.linkedin,
+			social.x,
+			social.github,
+			social.medium,
+		].filter(Boolean)
+	}
+}
+
+const articleSchema = type === 'article' ? {
+	"@context": "https://schema.org",
+	"@type": "Article",
+	"headline": title,
+	"description": description,
+	"image": new URL(image, Astro.url).toString(),
+	"url": canonicalURL.toString(),
+	"datePublished": publishedDate,
+	"author": {
+		"@type": "Person",
+		"name": profile.fullName,
+		"url": Astro.site?.toString()
+	},
+	"publisher": {
+		"@type": "Person",
+		"name": profile.fullName
+	}
+} : null
 ---
 
 <meta charset='utf-8' />
 <meta name='viewport' content='width=device-width,initial-scale=1' />
 <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+<link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+<link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
+<link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+<link rel='manifest' href='/site.webmanifest' />
 <meta name='generator' content={Astro.generator} />
 
 <!-- Sitemap -->
@@ -26,20 +73,29 @@ const { title, description, image } = Astro.props
 <title>{title}</title>
 <meta name='title' content={title} />
 <meta name='description' content={description} />
+<meta name='robots' content='index, follow' />
 
 <!-- Open Graph / Facebook -->
-<meta property='og:type' content='website' />
+<meta property='og:type' content={type} />
 <meta property='og:url' content={Astro.url} />
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
 <meta property='og:image' content={new URL(image, Astro.url)} />
+<meta property='og:locale' content='en_US' />
+<meta property='og:site_name' content={profile.fullName} />
 
 <!-- Twitter -->
-<meta property='twitter:card' content='summary_large_image' />
-<meta property='twitter:url' content={Astro.url} />
-<meta property='twitter:title' content={title} />
-<meta property='twitter:description' content={description} />
-<meta property='twitter:image' content={new URL(image, Astro.url)} />
+<meta name='twitter:card' content='summary_large_image' />
+<meta name='twitter:url' content={Astro.url} />
+<meta name='twitter:title' content={title} />
+<meta name='twitter:description' content={description} />
+<meta name='twitter:image' content={new URL(image, Astro.url)} />
+{twitterHandle && <meta name='twitter:site' content={twitterHandle} />}
+{twitterHandle && <meta name='twitter:creator' content={twitterHandle} />}
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
 
 <!-- Theme selector scripts -->
 <script is:inline>
