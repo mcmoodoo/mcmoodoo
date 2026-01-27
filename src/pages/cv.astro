@@ -60,17 +60,6 @@ if (publications.length > 0) {
 		</a>
 	</div>
 	{
-		orderedEducations.length > 0 && (
-			<section class='mb-12'>
-				<h2 class='text-2xl font-bold mb-6 border-b pb-2'>
-					Education
-				</h2>
-				<CvTimeline elements={orderedEducations} colored={true} />
-			</section>
-		)
-	}
-
-	{
 		orderedExperiences.length > 0 && (
 			<section class='mb-12'>
 				<h2 class='text-2xl font-bold mb-6 border-b pb-2'>
@@ -81,4 +70,14 @@ if (publications.length > 0) {
 		)
 	}
 
+	{
+		orderedEducations.length > 0 && (
+			<section class='mb-12'>
+				<h2 class='text-2xl font-bold mb-6 border-b pb-2'>
+					Education
+				</h2>
+				<CvTimeline elements={orderedEducations} colored={true} />
+			</section>
+		)
+	}
 </Layout>
