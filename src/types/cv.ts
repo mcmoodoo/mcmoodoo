@@ -1,9 +1,10 @@
 export interface Experience {
-  company: string;
+  company?: string;
   time: string;
   title: string;
   location?: string;
   description?: string;
+  link?: string;
 }
 
 export interface Education {
@@ -39,7 +40,7 @@ export interface Hackathon {
 }
 
 export function isExperience(element: Experience | Education): element is Experience {
-  return 'title' in element && 'company' in element;
+  return 'title' in element && !('school' in element);
 }
 
 export function isEducation(element: Education | Experience): element is Education {

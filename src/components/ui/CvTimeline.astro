@@ -42,6 +42,11 @@ const { elements, colored } = Astro.props
 					{element.description && (
 						<p class='text-base text-base-content/80 leading-relaxed mt-3 whitespace-pre-line'>{element.description}</p>
 					)}
+					{isExperience(element) && element.link && (
+						<a href={element.link} class='text-sm text-primary hover:underline mt-2 inline-block'>
+							Read more →
+						</a>
+					)}
 				</div>
         <hr class:list={[{ 'bg-accent': colored }]} />
 			</li>

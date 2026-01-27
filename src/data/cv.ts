@@ -4,6 +4,7 @@ export const experiences = [
 		title: 'Web3 & DeFi Hackathoner',
 		location: 'Worldwide | Remote',
 		description: 'Actively participated in Web3 hackathons, building DeFi primitives with Uniswap v4, 1inch Aqua, Chainlink CCIP, and more. Multiple prize winner 🏆 at EthGlobal events.',
+		link: '/hackathons',
 	},
 	{
 		company: 'Palo Alto Networks',
