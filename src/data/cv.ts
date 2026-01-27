@@ -1,10 +1,9 @@
 export const experiences = [
 	{
-		company: 'UnPin',
 		time: 'Sep 2023 - Present',
-		title: 'Web3 Builder',
+		title: 'Web3 & DeFi Hackathoner',
 		location: 'Worldwide | Remote',
-		description: 'Actively participated in Web3 hackathons, including ETHGlobal, Starknet Winter Hackathon, dAGI, Lambda, EthOnline, and easyA. 🏆 ETHGlobal 2024 Prize Winner for CollaSwitch — an automated collateral swapper.',
+		description: 'Actively participated in Web3 hackathons, building DeFi primitives with Uniswap v4, 1inch Aqua, Chainlink CCIP, and more. Multiple prize winner 🏆 at EthGlobal events.',
 	},
 	{
 		company: 'Palo Alto Networks',
@@ -100,6 +99,50 @@ export const publications = [
 		time: '',
 		link: '',
 		abstract: '',
+	},
+];
+
+export const hackathons = [
+	{
+		event: 'EthGlobal Buenos Aires',
+		time: 'Nov 2025',
+		location: 'Buenos Aires, Argentina',
+		result: '2nd Place - 1inch',
+		project: 'Privacy-preserving DeFi',
+		description: 'Built a privacy-preserving DeFi system using 1inch Aqua shared-liquidity protocol.',
+	},
+	{
+		event: 'EthGlobal NYC',
+		time: 'Aug 2025',
+		location: 'New York, USA',
+		result: '3rd Place - Uniswap Foundation',
+		project: 'Rebasing Token Pool',
+		description: 'Solo win implementing a custom pool for rebasing tokens using Uniswap v4 hooks.',
+	},
+	{
+		event: 'EthGlobal Bangkok',
+		time: 'Nov 2024',
+		location: 'Bangkok, Thailand',
+		result: 'Prize Winner',
+		project: 'CollaSwitch',
+		description: 'Team project integrating CoWSwap, Euler Finance, Pyth Network, and Brevis ZK.',
+	},
+	{
+		event: 'EthGlobal Brussels',
+		time: 'Jul 2024',
+		location: 'Brussels, Belgium',
+		result: 'Shipped',
+		project: 'Remote Minter',
+		description: 'Solo project minting NFTs on Base using Arbitrum liquidity via Chainlink CCIP.',
+		link: 'https://ethglobal.com/showcase/remote-minter-oehth',
+	},
+	{
+		event: 'dAGI Hackathon',
+		time: 'Jul 2024',
+		location: 'Brussels, Belgium',
+		result: '3rd Place',
+		project: 'AI DeFi Agent',
+		description: 'Autonomous AI agent with its own wallet powering DeFi actions.',
 	},
 	// {
 	// 	title: 'The Radiation of Uranium Compounds',

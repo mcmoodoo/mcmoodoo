@@ -28,6 +28,16 @@ export interface Publication {
   abstract?: string;
 }
 
+export interface Hackathon {
+  event: string;
+  time: string;
+  location: string;
+  result: string;
+  project?: string;
+  description?: string;
+  link?: string;
+}
+
 export function isExperience(element: Experience | Education): element is Experience {
   return 'title' in element && 'company' in element;
 }
