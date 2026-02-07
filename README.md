@@ -6,12 +6,14 @@ Polyglot software engineer and Technical Writer with of experience across cybers
 
 ## Hackathon Wins
 
-| Event                  | Project                                   | Result                                     |
-| ---------------------- | ----------------------------------------- | ------------------------------------------ |
-| EthGlobal Buenos Aires | Privacy-preserving DeFi on 1inch Aqua     | 2nd place (1inch)                          |
-| EthGlobal NYC          | Rebasing token pool with Uniswap v4 hooks | 3rd place (Uniswap Foundation)             |
-| EthGlobal Bangkok      | DeFi integrations                         | Bounties from CowSwap, Euler, Pyth, Brevis |
-| dAGI Brussels          | Autonomous AI agent with DeFi wallet      | 3rd place                                  |
+[Read the story of my 2-year hackathon journey around the globe →](https://www.mcmoodoo.com/hackathons)
+
+| Event                  | Project                                                                                                                              | Result                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| EthGlobal Buenos Aires | [Cleverly Using Money](https://ethglobal.com/showcase/cleverly-using-money-pogqu) · [GitHub](https://github.com/mcmoodoo/simple-cum) | 🥈 [(1inch)](https://1inch.com)                               |
+| EthGlobal NYC          | [stETHer](https://ethglobal.com/showcase/stether-b0moi) · [GitHub](https://github.com/mcmoodoo/stETHer)                              | 🥉 [(Uniswap Foundation)](https://www.uniswapfoundation.org/) |
+| EthGlobal Bangkok      | [Colla Switch](https://ethglobal.com/showcase/collaswitch-ahx66) · [GitHub](https://github.com/junta/auto-collateral-swapper)        | Bounties from [CowSwap](https://swap.cow.fi/), [Euler](https://euler.finance), [Pyth](https://pyth.network), [Brevis](https://brevis.network)                    |
+| dAGI House             | [Jarvis](https://github.com/fabriziogianni7/Jarvis) — Autonomous AI agent with DeFi wallet                                           | 🥉                                                            |
 
 ## Skills
 
