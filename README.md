@@ -12,10 +12,10 @@ Building in DeFi & DevRel; open to collaborations and speaking.
 
 | Year | Event                  | Project                                                                                                                              | Result                                                                                                                                  |
 | ---- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 2024 | dAGI House             | [Jarvis](https://github.com/fabriziogianni7/Jarvis) — Autonomous AI agent with DeFi wallet (team project)                            | 🥉                                                                                                                                      |
 | 2024 | EthGlobal Buenos Aires | [Cleverly Using Money](https://ethglobal.com/showcase/cleverly-using-money-pogqu) · [GitHub](https://github.com/mcmoodoo/simple-cum) | 🥈 [1inch](https://1inch.com)                                                                                                           |
 | 2024 | EthGlobal NYC          | [stETHer](https://ethglobal.com/showcase/stether-b0moi) · [GitHub](https://github.com/mcmoodoo/stETHer)                              | 🥉 [Uniswap Foundation](https://www.uniswapfoundation.org/)                                                                             |
 | 2025 | EthGlobal Bangkok      | [Colla Switch](https://ethglobal.com/showcase/collaswitch-ahx66) · [GitHub](https://github.com/junta/auto-collateral-swapper)        | 🥈[CowSwap](https://swap.cow.fi/), 🥈[Euler](https://euler.finance), 🥈[Pyth](https://pyth.network), 🥈[Brevis](https://brevis.network) |
-| 2024 | dAGI House             | [Jarvis](https://github.com/fabriziogianni7/Jarvis) — Autonomous AI agent with DeFi wallet (team project)                            | 🥉                                                                                                                                      |
 
 ## Skills
 
