@@ -6,6 +6,10 @@ Polyglot software engineer and Technical Writer with years of experience across 
 
 Building in DeFi & DevRel; open to collaborations and speaking.
 
+## Technical Writing
+
+As a Technical Writer I contributed to [Palo Alto Networks' pan.dev](https://github.com/PaloAltoNetworks/pan.dev): I owned the API reference docs site, gathering API spec files from many engineering teams and compiling them into one cohesive API reference. I also contributed directly to their repositories—fixing endpoints, adding or changing new ones, and updating or removing outdated ones—while advocating for users throughout.
+
 ## Hackathon Wins
 
 [Read the story of my 2-year hackathon journey around the globe →](https://www.mcmoodoo.com/hackathons)
