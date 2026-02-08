@@ -8,7 +8,7 @@ Building in DeFi & Web3; open to collaborations and speaking.
 
 ## Technical Writing
 
-As a Technical Writer I owned the [pan.dev](https://github.com/PaloAltoNetworks/pan.dev) API reference: I gathered specs from engineering teams into one cohesive site and contributed to their repos, fixing endpoints while advocating for users.
+As a Technical Writer I owned the [pan.dev](https://github.com/PaloAltoNetworks/pan.dev) API reference: I gathered specs from engineering teams into one cohesive site and contributed to their repos, fixing endpoints while advocating for users. I also wrote about [the Mainline Dashboard](https://mcmoodoo.com/blog/mainline-dashboard)—T-SQL, ASP.NET, and live analytics at a Kenworth plant—which showcases my relational database and data-pipeline experience.
 
 ## Hackathon Wins
 
@@ -17,9 +17,9 @@ As a Technical Writer I owned the [pan.dev](https://github.com/PaloAltoNetworks/
 | Year | Event                  | Project                                                                                                                              | Result                                                                                                                                  |
 | ---- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 2024 | dAGI House             | [Jarvis](https://github.com/fabriziogianni7/Jarvis) — Autonomous AI agent with DeFi wallet (team project)                            | 🥉                                                                                                                                      |
-| 2024 | EthGlobal Buenos Aires | [Cleverly Using Money](https://ethglobal.com/showcase/cleverly-using-money-pogqu) · [GitHub](https://github.com/mcmoodoo/simple-cum) | 🥈 [1inch](https://1inch.com)                                                                                                           |
-| 2024 | EthGlobal NYC          | [stETHer](https://ethglobal.com/showcase/stether-b0moi) · [GitHub](https://github.com/mcmoodoo/stETHer)                              | 🥉 [Uniswap Foundation](https://www.uniswapfoundation.org/)                                                                             |
-| 2025 | EthGlobal Bangkok      | [Colla Switch](https://ethglobal.com/showcase/collaswitch-ahx66) · [GitHub](https://github.com/junta/auto-collateral-swapper)        | 🥈[CowSwap](https://swap.cow.fi/), 🥈[Euler](https://euler.finance), 🥈[Pyth](https://pyth.network), 🥈[Brevis](https://brevis.network) |
+| 2024 | EthGlobal Bangkok      | [Colla Switch](https://ethglobal.com/showcase/collaswitch-ahx66) · [GitHub](https://github.com/junta/auto-collateral-swapper)        | 🥈[CowSwap](https://swap.cow.fi/), 🥈[Euler](https://euler.finance), 🥈[Pyth](https://pyth.network), 🥈[Brevis](https://brevis.network) |
+| 2025 | EthGlobal Buenos Aires | [Cleverly Using Money](https://ethglobal.com/showcase/cleverly-using-money-pogqu) · [GitHub](https://github.com/mcmoodoo/simple-cum) | 🥈 [1inch](https://1inch.com)                                                                                                           |
+| 2025 | EthGlobal NYC          | [stETHer](https://ethglobal.com/showcase/stether-b0moi) · [GitHub](https://github.com/mcmoodoo/stETHer)                              | 🥉 [Uniswap Foundation](https://www.uniswapfoundation.org/)                                                                             |
 
 ## Skills
 
