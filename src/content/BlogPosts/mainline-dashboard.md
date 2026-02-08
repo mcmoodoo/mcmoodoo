@@ -1,7 +1,16 @@
 ---
 title: "The Mainline Dashboard: T-SQL, ASP.NET, and 10k Lines of JavaScript"
-date: "2025-02-08"
-tags: ["Relational Databases", "T-SQL", "ASP.NET", "PLC", "Industrial Software", "JavaScript", "Personal Journey"]
+date: "2026-02-08"
+tags:
+  [
+    "Relational Databases",
+    "T-SQL",
+    "ASP.NET",
+    "PLC",
+    "Industrial Software",
+    "JavaScript",
+    "Personal Journey",
+  ]
 excerpt: "How I built the Mainline Dashboard at a Kenworth truck plant with T-SQL, ASP.NET, and 10k lines of JavaScript—still running over a decade later."
 ---
 
