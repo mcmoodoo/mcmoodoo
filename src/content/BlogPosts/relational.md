@@ -1,6 +1,6 @@
 ## Mainline Downtime
 
-It all started with the need to measure how long the mainline was down at the Kenworth Truck factory somewhere in Ohio. The factory was rolling out over 200 trucks per day. That's ~ one truck every 5 minutes. So a slight delay measured in just seconds could cost the plant a whole truck that could have rolled out that day but didn't!
+It all started with the need to measure how long the mainline was down at the Kenworth Truck factory somewhere in Ohio. The factory was rolling out over 200 trucks per day. That's roughly one truck every 5 minutes. So a slight delay measured in just seconds could cost the plant a whole truck that could have rolled out that day but didn't!
 
 Stopping any of the assembly lines, let alone mainline was a last resort, but unavoidable when issues arose. A single problem could halt the entire floor—and when it did, no one had a clear view of how long the line was down.
 
@@ -24,7 +24,7 @@ Time had slowed down and also that was supposed to be my side project, because I
 
 ## Fast forward
 
-After becoming a SQL wizard and wrangling data like a trained bull maestro professional (whoever that guy with a red blanket tricking bulls...), I had to display that data in a meaningful way so that we could show something useful on those huge screens on the production floor so that the managers and other interested parties could see in real time all the critical metrics. With the amount and diversity of data that I was collecting, I could show them a lot more! I thought to myself, I could surprise them with a lot more useful data.
+After becoming a SQL wizard and wrangling data like a trained bull maestro professional (whoever that guy with a red blanket tricking bulls...), I had to display that data in a meaningful way. We needed something useful on those huge screens on the production floor—so managers and other interested parties could see all the critical metrics in real time. With the amount and diversity of data that I was collecting, I could show them a lot more! I thought to myself, I could surprise them with a lot more useful data.
 
 So I started doing frequent trips to the production floor, interviewing managers, even the assembly line workers. I started gathering intel—what do they need, what do they want, what would make them happy. One supervisor asked for a simple rule: "If the line's been down more than five minutes, make that number red." That kind of ask—small, concrete—started to shape what the dashboard became. This part of my job I had never done before, but it was fun and I got hands-on looks at the actual production.
 
@@ -44,4 +44,4 @@ Working with JavaScript's native API felt like doing so much repetitive work—r
 
 Three months, ten thousand lines of pure JavaScript code, and hours of headache later, the Mainline Dashboard was beautifully displayed on tens of large screens across the plant floor. I still remember the first time I walked the floor and saw a manager glance at one of those screens before making a call—no more running to the control room to check. Never did I feel so proud of my creation being used daily, helping roll out that extra truck (~$200k+ in revenue for Kenworth) and keeping managers informed. When I last checked in 2022, the app was still displayed and used across the plant floor. The AI revolution hasn't affected them, and obviously changing that battle-tested but impossible-to-untangle "callback hell" JavaScript code is a feast on its own and I am sure nobody is volunteering to mess with it!
 
-I wish I had the code available to look at it, perhaps I could quickly rewrite it nowadays with the tools available. I'd probably keep the same relational backbone and the same idea—just swap the front end for something smaller and easier to maintain. Until next time.
+I wish I had the code available to look at it; perhaps I could quickly rewrite it nowadays with the tools available. I'd probably keep the same relational backbone and the same idea—just swap the front end for something smaller and easier to maintain. That project was my first real exposure to relational modeling, T-SQL, ASP.NET, and a lot of raw JavaScript—and it's still running. Until next time.
