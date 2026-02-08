@@ -8,7 +8,11 @@ Building in DeFi & Web3; open to collaborations and speaking.
 
 ## Technical Writing
 
-As a Technical Writer I owned the [pan.dev](https://github.com/PaloAltoNetworks/pan.dev) API reference: I gathered specs from engineering teams into one cohesive site and contributed to their repos, fixing endpoints while advocating for users. I also wrote about [the Mainline Dashboard](https://mcmoodoo.com/blog/mainline-dashboard)—T-SQL, ASP.NET, and live analytics at a Kenworth plant—which showcases my relational database and data-pipeline experience.
+As a Technical Writer I owned the [pan.dev](https://github.com/PaloAltoNetworks/pan.dev) API reference: I gathered specs from engineering teams into one cohesive site and contributed to their repos, fixing endpoints while advocating for users.
+
+## Relational Database
+
+First relational DB project: [Mainline Dashboard](https://mcmoodoo.com/mainline-dashboard) at a Kenworth plant—solo from scratch to production.
 
 ## Hackathon Wins
 
