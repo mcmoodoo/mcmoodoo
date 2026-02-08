@@ -1,3 +1,10 @@
+---
+title: "The Mainline Dashboard: T-SQL, ASP.NET, and 10k Lines of JavaScript"
+date: "2025-02-08"
+tags: ["Relational Databases", "T-SQL", "ASP.NET", "PLC", "Industrial Software", "JavaScript", "Personal Journey"]
+excerpt: "How I built the Mainline Dashboard at a Kenworth truck plant with T-SQL, ASP.NET, and 10k lines of JavaScript—still running over a decade later."
+---
+
 ## When the Line Stopped
 
 It all started with the need to measure how long the mainline was down at the Kenworth Truck factory somewhere in Ohio. The factory was rolling out over 200 trucks per day. That's roughly one truck every 5 minutes. So a slight delay measured in just seconds could cost the plant a whole truck that could have rolled out that day but didn't!
