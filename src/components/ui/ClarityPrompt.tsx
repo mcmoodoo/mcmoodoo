@@ -121,24 +121,34 @@ export default function ClarityPrompt() {
 
         <form
           onSubmit={handleSubmit}
-          className="flex w-full flex-col gap-2 sm:flex-row sm:items-center"
+          className="flex w-full flex-col gap-2 sm:flex-row sm:items-stretch"
         >
-          <input
-            type="text"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Ask about Rashid"
-            className="input input-bordered w-full flex-1 text-sm sm:text-base"
-            disabled={loading}
-            aria-label="Ask me a question"
-          />
-          <button
-            type="submit"
-            className="btn btn-primary w-full sm:w-auto"
-            disabled={loading || !question.trim()}
-          >
-            {loading ? "…" : "Ask"}
-          </button>
+          <div className="flex w-full flex-1 items-stretch gap-0 overflow-hidden rounded-xl border border-base-300 has-[:focus]:outline has-[:focus]:outline-2 has-[:focus]:outline-offset-0 has-[:focus]:outline-primary min-w-0">
+            <input
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Ask about Rashid"
+              className="input input-bordered w-full min-w-0 flex-1 rounded-none border-0 border-r border-base-300 text-sm focus:outline-none focus:ring-0 sm:text-base"
+              disabled={loading}
+              aria-label="Ask me a question"
+            />
+            <button
+              type="submit"
+              className="btn btn-primary text-primary-content min-w-12 shrink-0 rounded-none px-4"
+              disabled={loading || !question.trim()}
+              aria-label="Send"
+              title="Send"
+            >
+              {loading ? (
+                "…"
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-6" aria-hidden>
+                  <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
+                </svg>
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>
