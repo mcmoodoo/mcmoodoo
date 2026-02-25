@@ -1,6 +1,4 @@
-# Ask the clarity LLM endpoint (server must be running: cd clarity && cargo run)
-ask question:
-    curl -X POST http://localhost:3000/ask \
+cloudflare-ask:
+    curl -X POST https://clarity.mcmoodoo.workers.dev/ask \
         -H "Content-Type: application/json" \
-        -d '{"question": "{{ question }}"}'
-
+        -d '{"question": "What do you know about Rashid?"}'

@@ -1,0 +1,9 @@
+name = "clarity"
+main = "worker.mjs"
+compatibility_date = "2025-02-25"
+
+# Uncomment and customize this if you want to bind a custom route/domain
+# routes = [
+#   "https://api.mcmoodoo.com/clarity*"
+# ]
+
