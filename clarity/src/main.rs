@@ -23,8 +23,12 @@ struct ErrorResponse {
 
 #[tokio::main]
 async fn main() {
+    let port: u16 = std::env::var("PORT")
+        .unwrap_or_else(|_| "3000".into())
+        .parse()
+        .expect("invalid PORT");
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
     let app = Router::new().route("/ask", post(handle_ask));
-    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     println!("Server running on {}", addr);
     axum::serve(listener, app).await.unwrap();

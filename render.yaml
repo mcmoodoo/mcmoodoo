@@ -1,0 +1,16 @@
+# Render Blueprint: deploy clarity (Rust LLM API) from this repo.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# After connecting this repo in the Render dashboard, add OPENAI_API_KEY
+# as a secret env var for the clarity service (Dashboard → clarity → Environment).
+
+services:
+  - type: web
+    runtime: rust
+    name: clarity
+    rootDir: clarity
+    buildCommand: cargo build --release
+    startCommand: ./target/release/clarity
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false  # Set in Dashboard: secret for OpenAI API
