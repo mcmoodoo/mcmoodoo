@@ -1,0 +1,6 @@
+# Ask the clarity LLM endpoint (server must be running: cd clarity && cargo run)
+ask question:
+    curl -X POST http://localhost:3000/ask \
+        -H "Content-Type: application/json" \
+        -d '{"question": "{{ question }}"}'
+

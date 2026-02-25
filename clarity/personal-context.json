@@ -1,0 +1,284 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Structured personal context for Rashid McMoodoo. Use for LLM prompt injection. Update this file when bio, experience, or skills change."
+  },
+  "identity": {
+    "firstName": "Rashid",
+    "fullName": "Rashid Mak",
+    "title": "Dev | DevRel | Tech Writer",
+    "tagline": "Dev | Tech Writer | DevRel in DeFi",
+    "shortBio": "Web3/DeFi Dev & DevRel. Former Technical Writer in cybersecurity. Polyglot Software Engineer and Technical Writer across cybersecurity (Palo Alto Networks), industrial IoT (Baker Hughes/GE), logistics, and Web3. Building in DeFi & Web3; open to collaborations and speaking.",
+    "authorName": "Rashid McMoodoo"
+  },
+  "contact": {
+    "email": "",
+    "website": "https://mcmoodoo.com",
+    "linkedin": "https://www.linkedin.com/in/mcmoodoo",
+    "x": "https://x.com/mcmoodoo",
+    "github": "https://github.com/mcmoodoo",
+    "medium": "https://medium.com/@mcmoodoo"
+  },
+  "resume": {
+    "url": "https://mcmoodoo.s3.us-east-1.amazonaws.com/Resume_Rashid_Mak.pdf",
+    "label": "Download Resume"
+  },
+  "experience": [
+    {
+      "company": null,
+      "time": "Sep 2023 - Present",
+      "title": "Web3 & DeFi Hackathoner",
+      "location": "Worldwide | Remote",
+      "description": "Actively participated in Web3 hackathons, building DeFi primitives with Uniswap v4, 1inch Aqua, Chainlink CCIP, and more. Multiple prize winner at EthGlobal events.",
+      "link": "/hackathons"
+    },
+    {
+      "company": "Palo Alto Networks",
+      "time": "Sep 2022 - Sep 2023",
+      "title": "Hybrid Senior Technical Writer / Engineer",
+      "location": "Santa Clara, California | Remote",
+      "description": "Led docs-as-code transition and single-handedly migrated legacy API docs to a new domain. Improved accuracy and DX through CI/CD engineering in 30+ codebases. Collaborated with engineering teams to clearly expose backend systems via APIs. Wrote SDK code snippets in Go, Python, Java, and Node. Owned and maintained API reference docs (pan.dev)."
+    },
+    {
+      "company": "Baker Hughes",
+      "time": "Feb 2018 - Dec 2018",
+      "title": "Senior Software Engineer",
+      "location": "Minden, NV",
+      "description": "Contributed to the development of Scout portable devices for machine condition monitoring using C++, HTML5, Angular, and CSS. Also built a comprehensive testing framework in C# to validate system performance and reliability."
+    },
+    {
+      "company": "Digital Fleet, LLC.",
+      "time": "Sep 2016 - Jun 2017",
+      "title": "Senior Solutions Architect",
+      "location": "Greater Chicago Area",
+      "description": "Provisioned and managed AWS cloud infrastructure; rebuilt a legacy web app using Angular, Node, and MongoDB; created technical documentation and user manuals; mentored junior software engineers."
+    },
+    {
+      "company": "leadPops, Inc.",
+      "time": "Nov 2015 - Jun 2016",
+      "title": "Senior Software Engineer",
+      "location": "Greater San Diego Area",
+      "description": "Led development of a marketing automation platform and end-to-end lead generation and conversion optimization suite using Angular, PHP7, and Zend Framework."
+    },
+    {
+      "company": "Adicio",
+      "time": "Jan 2015 - Nov 2015",
+      "title": "Software Engineer",
+      "location": "Carlsbad, California",
+      "description": "Enhanced an existing web app with new features, worked with product owners to prioritize the backlog, wrote Bash and Python automation scripts."
+    },
+    {
+      "company": "PACCAR",
+      "time": "Apr 2013 - May 2014",
+      "title": "Software Engineer",
+      "location": "Chillicothe, OH",
+      "description": "Launched a new ASP.NET responsive web app for mobile and desktop use (Kenworth plant mainline dashboard). Independently developed and released a dashboard application that aggregated data from multiple systems."
+    },
+    {
+      "company": "Quad/Graphics",
+      "time": "Sep 2012 - Apr 2013",
+      "title": "Software Developer",
+      "location": "Sussex, WI",
+      "description": "Iteratively optimized and enhanced a Windows application, built integrations with other apps via APIs."
+    },
+    {
+      "company": "Nevada System of Higher Education",
+      "time": "Sep 2010 - Jun 2011",
+      "title": "Software Developer / Research Assistant",
+      "location": "University of Nevada, Reno – Brain Computation Lab",
+      "description": "Assisted in deploying deep neural network models, performed Linux system administration, provided programming support for researchers by modifying Perl, Python, and Bash scripts."
+    }
+  ],
+  "education": [
+    {
+      "school": "University of Nevada, Reno",
+      "time": "2008 - 2012",
+      "degree": "B.S. in Computer Science & Engineering",
+      "location": " Reno, Nevada",
+      "description": ""
+    }
+  ],
+  "skills": [
+    {
+      "category": "Blockchain & Web3",
+      "details": "Solidity on Ethereum, Base, Arbitrum; Cairo on Starknet; Rust on Arbitrum Stylus"
+    },
+    {
+      "category": "Full Stack",
+      "details": "Backend: Rust, C++, Python, C#; Frontend: React; Scripting: Bash, Python, jq"
+    }
+  ],
+  "skillKeywords": [
+    "Solidity",
+    "Rust",
+    "C++",
+    "Python",
+    "React",
+    "AWS",
+    "Technical Writing",
+    "Angular",
+    "Node",
+    "Go",
+    "Java",
+    "MongoDB",
+    "ASP.NET",
+    "SQL"
+  ],
+  "hackathons": [
+    {
+      "event": "EthGlobal Buenos Aires",
+      "time": "Nov 2025",
+      "location": "Buenos Aires, Argentina",
+      "result": "2nd Place - 1inch",
+      "project": "Cleverly Using Money",
+      "projectSlug": "cleverly-using-money-pogqu",
+      "description": "Privacy-preserving DeFi system using 1inch Aqua shared-liquidity protocol.",
+      "link": "https://ethglobal.com/showcase/cleverly-using-money-pogqu",
+      "github": "https://github.com/mcmoodoo/simple-cum"
+    },
+    {
+      "event": "EthGlobal NYC",
+      "time": "Aug 2025",
+      "location": "New York, USA",
+      "result": "3rd Place - Uniswap Foundation",
+      "project": "stETHer",
+      "projectSlug": "stether-b0moi",
+      "description": "Solo win implementing a custom pool for rebasing tokens using Uniswap v4 hooks.",
+      "link": "https://ethglobal.com/showcase/stether-b0moi",
+      "github": "https://github.com/mcmoodoo/stETHer"
+    },
+    {
+      "event": "EthGlobal Bangkok",
+      "time": "Nov 2024",
+      "location": "Bangkok, Thailand",
+      "result": "Prize Winner",
+      "project": "CollaSwitch",
+      "projectSlug": "collaswitch-ahx66",
+      "description": "Team project integrating CoWSwap, Euler Finance, Pyth Network, and Brevis ZK.",
+      "link": "https://ethglobal.com/showcase/collaswitch-ahx66",
+      "github": "https://github.com/junta/auto-collateral-swapper"
+    },
+    {
+      "event": "EthGlobal Brussels",
+      "time": "Jul 2024",
+      "location": "Brussels, Belgium",
+      "result": "Shipped",
+      "project": "Remote Minter",
+      "description": "Solo project minting NFTs on Base using Arbitrum liquidity via Chainlink CCIP.",
+      "link": "https://ethglobal.com/showcase/remote-minter-oehth",
+      "github": "https://github.com/mcmoodoo/remote-minter-oehth"
+    },
+    {
+      "event": "dAGI Hackathon",
+      "time": "Jul 2024",
+      "location": "Brussels, Belgium",
+      "result": "3rd Place",
+      "project": "Jarvis (AI DeFi Agent)",
+      "description": "Autonomous AI agent with its own wallet powering DeFi actions. Team project.",
+      "github": "https://github.com/fabriziogianni7/Jarvis"
+    }
+  ],
+  "publications": [],
+  "writing": {
+    "technicalWriting": "Owned pan.dev API reference at Palo Alto Networks; gathered specs from engineering teams into one cohesive site; contributed to repos and advocated for users. Ghostwrote technical content for XLAB Steampunk (Ansible/Red Hat).",
+    "blogPosts": [
+      {
+        "title": "The Polyglot Path: 20 Years Across Languages, Industries, and Continents",
+        "slug": "pascal-to-web3-developer-journey"
+      },
+      {
+        "title": "Why I left a Six-Figure Cybersecurity Job to Chase DeFi",
+        "slug": "hackathons"
+      },
+      {
+        "title": "From Code to Copy: Why I Traded My IDE for Google Docs",
+        "slug": "from-code-to-copy"
+      },
+      {
+        "title": "The Mainline Dashboard: T-SQL, ASP.NET, and 10k Lines of JavaScript",
+        "slug": "mainline-dashboard"
+      },
+      {
+        "title": "How I Built a Token Transfer Task with Mimic in 5 Steps",
+        "slug": "mimic-token-transfer-5-steps"
+      },
+      {
+        "title": "Building a Threshold-Based Token Sweeper with Mimic Protocol",
+        "slug": "mimic-threshold-based-token-sweeper"
+      },
+      {
+        "title": "Mimic: Skip the Infrastructure, Ship Faster to Chain",
+        "slug": "mimic-skip-infrastructure-ship-faster"
+      },
+      {
+        "title": "Borrowing Against Polymarket Positions using Morpho Markets through Vaults V2",
+        "slug": "borrowing-against-polymarket-positions"
+      },
+      {
+        "title": "Connecting Colossal Crypto Continents Trustlessly with Rift Hyperbridge",
+        "slug": "rift-hyperbridge"
+      },
+      {
+        "title": "Lido Dual Governance – Empowering stETH Holders and Balancing DAO Power",
+        "slug": "lido-dual-governance"
+      },
+      {
+        "title": "GenLayer's Intelligent Contracts – The Cognitive Evolution of Smart Contracts",
+        "slug": "genlayer-intelligent-contracts"
+      },
+      {
+        "title": "What Is Threat Intelligence and Why Does It Matter?",
+        "slug": "what-is-threat-intelligence"
+      },
+      {
+        "title": "Discovering Data Availability Sampling: A Global Web3 Revelation",
+        "slug": "ethereum-data-availability-sampling"
+      }
+    ]
+  },
+  "domainsAndInterests": [
+    "DeFi",
+    "Web3",
+    "Ethereum",
+    "Smart contracts (Solidity, Cairo, Rust)",
+    "Technical writing and API documentation",
+    "Docs-as-code and developer experience",
+    "Cybersecurity (threat intelligence, worked at Palo Alto Networks)",
+    "Industrial IoT and condition monitoring",
+    "Hackathons (EthGlobal, Uniswap v4, 1inch, Chainlink CCIP, CoWSwap, Euler, Pyth, Brevis, Mimic)",
+    "Morpho, prediction markets (Polymarket)",
+    "Data availability sampling (DAS)"
+  ],
+  "notableProjects": [
+    {
+      "name": "Mainline Dashboard",
+      "context": "First relational DB project at a Kenworth plant (PACCAR)—solo from scratch to production. MS SQL Server, ASP.NET, JavaScript."
+    },
+    {
+      "name": "pan.dev",
+      "context": "API reference and docs migration at Palo Alto Networks."
+    },
+    {
+      "name": "Remote Minter",
+      "context": "NFT minting on Base via Arbitrum liquidity using Chainlink CCIP."
+    },
+    {
+      "name": "stETHer",
+      "context": "Uniswap v4 rebasing token pool (solo hackathon win)."
+    },
+    {
+      "name": "Cleverly Using Money",
+      "context": "Privacy-preserving DeFi with 1inch Aqua."
+    },
+    {
+      "name": "leveraged-prediction-positions",
+      "context": "Open-source repo for borrowing against Polymarket positions; blog and Morpho Vaults V2 content."
+    }
+  ],
+  "links": {
+    "website": "https://mcmoodoo.com",
+    "cv": "https://mcmoodoo.com/cv",
+    "blog": "https://mcmoodoo.com/blog",
+    "resumePdf": "https://mcmoodoo.s3.us-east-1.amazonaws.com/Resume_Rashid_Mak.pdf"
+  }
+}
