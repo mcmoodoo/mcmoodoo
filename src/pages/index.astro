@@ -5,6 +5,7 @@ import { profile } from '@/settings'
 import { publications } from '@/data/cv'
 import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
+import ClarityPrompt from '@/components/ui/ClarityPrompt'
 import Grid from '@/components/ui/Grid.astro'
 import ArticleList from '@/components/ui/ArticleList.astro'
 
@@ -39,6 +40,7 @@ const { name, fullName, title, institute, research_areas } = profile
 				Download Resume
 			</a>
 		</div>
+		<ClarityPrompt client:load />
 	</section>
 
 </Layout>

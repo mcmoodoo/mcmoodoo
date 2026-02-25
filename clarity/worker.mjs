@@ -17,11 +17,18 @@ function jsonResponse(body, init = {}) {
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
-
     if (request.method === "OPTIONS") {
-      return jsonResponse({}, { status: 204 });
+      return new Response(null, {
+        status: 204,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+        },
+      });
     }
+
+    const url = new URL(request.url);
 
     if (url.pathname !== "/ask") {
       return jsonResponse({ error: "Not found" }, { status: 404 });
