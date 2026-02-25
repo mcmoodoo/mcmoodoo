@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-import { profile, social } from '@/settings'
+import { profile } from '@/settings'
 import { publications } from '@/data/cv'
 import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
@@ -25,7 +25,6 @@ const { name, fullName, title, institute, research_areas } = profile
 				title={title}
 				institute={institute}
 				profilePicture={ProfilePictures}
-				contactEmail={social.email}
 			/>
 		</div>
 		<div class='mt-6'>
