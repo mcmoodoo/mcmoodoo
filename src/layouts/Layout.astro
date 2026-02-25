@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro';
 
 import BetterIcon from '../components/ui/BetterIcon.astro'
 import DarkLightController from '../components/ui/DarkLightController.astro'
@@ -91,6 +92,7 @@ const {
 				<Navbar />
 			</div>
 		</div>
+		<Analytics />
 	</body>
 </html>
 
