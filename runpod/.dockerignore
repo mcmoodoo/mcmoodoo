@@ -1,0 +1,11 @@
+flake.nix
+flake.lock
+.env
+.env.*
+.git
+.gitignore
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.DS_Store

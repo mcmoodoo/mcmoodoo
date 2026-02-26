@@ -1,0 +1,237 @@
+# LLaMA 3.2 3B Serverless Chat on RunPod (vLLM)
+
+This directory contains the setup for a RunPod serverless endpoint that serves a **Llama‑3.2‑3B‑Instruct** chat assistant using **vLLM**, with a baked‑in JSON profile for context.
+
+The assistant answers visitor questions about you based on that JSON.
+
+---
+
+## Step 1 – Model & Runtime
+
+- **Model**: `Llama-3.2-3B-Instruct` (3B, instruct‑tuned).
+- **Runtime**: **vLLM** (OpenAI‑compatible HTTP API).
+- **Interaction pattern**:
+  - Client sends a single field: `message` (visitor question).
+  - Container injects your JSON profile as a **system** message.
+  - vLLM returns a non‑streaming chat completion.
+
+---
+
+## Step 2 – Where the Weights Live
+
+- **Storage**: RunPod **Network Volume**.
+- **Volume** (already created):
+  - ID: `4lqjmp64p7`
+  - Name: `llama3-model`
+  - Data center: `US-MO-2`
+  - Size: `20` GB
+- **Expected on‑disk layout (inside the volume)**:
+  - Mount path in container: `/runpod-volume`
+  - Model directory: `/runpod-volume/model`
+    - Contains standard Hugging Face model files (config, tokenizer, safetensors, etc.).
+  - **You will ensure the actual model files are placed at** `/runpod-volume/model` (placeholder assumption for now).
+
+---
+
+## Step 3 – Container Image Design
+
+- **Base image**: `vllm/vllm-openai:latest`
+- **App layout (in this repo, under `runpod/`)**:
+  - `Dockerfile` – builds the serverless image.
+  - `start.sh` – starts vLLM, waits for it to be ready, then starts the RunPod handler.
+  - `handler.py` – RunPod serverless handler:
+    - Reads baked‑in `context.json`.
+    - Builds system prompt from the JSON.
+    - Sends `messages` to vLLM `/v1/chat/completions`.
+    - Returns `{"response": "<answer>"}`.
+  - `context.json` – your structured, dense JSON profile (currently a placeholder; you will fill this in).
+  - `.dockerignore` – keeps image small.
+  - `Justfile` – helper commands for building/pushing the image to GHCR.
+
+### Key environment variables (with defaults)
+
+Set in `Dockerfile` and/or at runtime:
+
+- `CONTEXT_JSON_PATH` – default: `/app/context.json`
+- `MODEL_DIR` – default: `/runpod-volume/model`
+- `VLLM_API_URL` – default: `http://127.0.0.1:8000`
+- `VLLM_PORT` – default: `8000`
+- `SERVED_MODEL_NAME` – default: `llama-3.2-3b-instruct`
+- `TEMPERATURE` – default: `0.2`
+- `MAX_TOKENS` – default: `512`
+
+---
+
+## Step 4 – Handler Contract
+
+- **RunPod handler pattern**: `runpod.serverless.start({"handler": handler})` in `handler.py`.
+- **Input shape** (to the RunPod endpoint):
+
+```json
+{
+  "input": {
+    "message": "What are your main skills?"
+  }
+}
+```
+
+- **Prompting inside the container**:
+  - Load `context.json` once at startup and compact it to a dense JSON string.
+  - **System message**: describes the assistant’s behavior and embeds the JSON.
+  - **User message**: the `message` string from the request.
+  - Call vLLM with:
+    - `model = SERVED_MODEL_NAME`
+    - `messages = [system, user]`
+    - `temperature = TEMPERATURE`
+    - `top_p = TOP_P` (default `0.95` in `handler.py`)
+    - `max_tokens = MAX_TOKENS`
+
+- **Response shape** (from the RunPod endpoint):
+
+```json
+{
+  "response": "Short, dense, concise answer about you."
+}
+```
+
+---
+
+## Step 5 – Local Testing
+
+You **skipped local testing** (no GPU available). All validation will be done on RunPod after deployment.
+
+If needed later, you can:
+- Mount a dummy model directory to `/runpod-volume/model`.
+- Run the same container with CPU or a GPU machine to smoke‑test the HTTP contract.
+
+---
+
+## Step 6 – Build & Push Image to GHCR
+
+### Prerequisites
+
+- Docker installed and logged in locally.
+- `just` installed (already present on your system).
+- Environment variable `RUNPOD_GHCR_TOKEN` set to a valid GitHub Container Registry token.
+
+### Image naming
+
+- **Default image**: `ghcr.io/mcmoodoo/runpod-llama-chat:latest`
+- Overridable via env:
+  - `IMAGE` – default: `ghcr.io/mcmoodoo/runpod-llama-chat`
+  - `TAG` – default: `latest`
+
+### Justfile commands (from `runpod/`)
+
+- **Log in to GHCR (included in push)**:
+  - Uses `RUNPOD_GHCR_TOKEN`:
+    - `just ghcr-login`
+
+- **Build the image**:
+
+```bash
+cd runpod
+just docker-build
+```
+
+This runs:
+
+```bash
+docker build -t ghcr.io/mcmoodoo/runpod-llama-chat:latest .
+```
+
+- **Build and push to GHCR** (recommended command):
+
+```bash
+cd runpod
+just docker-push
+```
+
+This will:
+- Log in to `ghcr.io` with `RUNPOD_GHCR_TOKEN`.
+- Build the image.
+- Push `ghcr.io/mcmoodoo/runpod-llama-chat:latest`.
+
+You can override the tag, e.g.:
+
+```bash
+TAG=v0.1.0 just docker-push
+```
+
+Or override both:
+
+```bash
+IMAGE=ghcr.io/mcmoodoo/custom-llama-chat TAG=v0.1.0 just docker-push
+```
+
+---
+
+## Step 7 – RunPod Serverless Endpoint Configuration
+
+Once the image is pushed and the model exists on the volume at `/runpod-volume/model`, create a serverless endpoint in the RunPod UI (or via `runpodctl`).
+
+### Basic config
+
+- **Image**: `ghcr.io/mcmoodoo/runpod-llama-chat:latest`
+- **Entrypoint / Command**: `/app/start.sh` (this is already the image `CMD`).
+
+### GPU & resources
+
+- **Data center**: `US-MO-2` (to match volume `llama3-model`).
+- **GPU type**: `RTX 5090` (select matching SKU).
+- **Concurrency per worker**: start with `1`.
+- **CPU/RAM**: default for that GPU is fine initially.
+
+### Network volume
+
+- Attach:
+  - **Volume ID**: `4lqjmp64p7`
+  - **Name**: `llama3-model`
+  - **Mount path**: `/runpod-volume`
+
+- Inside the volume, ensure:
+  - Model directory exists at: `/runpod-volume/model`
+  - It contains the full Llama‑3.2‑3B‑Instruct model (config, tokenizer, weights).
+
+### Environment variables (in the endpoint config)
+
+You can rely on defaults baked into the image, or set explicitly:
+
+- `CONTEXT_JSON_PATH=/app/context.json`
+- `MODEL_DIR=/runpod-volume/model`
+- `VLLM_API_URL=http://127.0.0.1:8000`
+- `SERVED_MODEL_NAME=llama-3.2-3b-instruct`
+- `TEMPERATURE=0.2`
+- `MAX_TOKENS=512`
+
+---
+
+## Step 8 – Using the Endpoint
+
+Once the endpoint is running:
+
+1. **Update `context.json` in the image** to contain your real, dense, structured profile (then rebuild & push if you change it).
+2. **Ensure the model files** are present at `/runpod-volume/model` on the `llama3-model` volume.
+3. **Call the endpoint** with:
+
+```json
+{
+  "input": {
+    "message": "What is your background and main area of expertise?"
+  }
+}
+```
+
+4. **Expect a response**:
+
+```json
+{
+  "response": "Short, dense description of your background and expertise."
+}
+```
+
+You can iterate on:
+- The JSON structure in `context.json`.
+- Prompt wording in `handler.py` (system message).
+- vLLM parameters (`TEMPERATURE`, `MAX_TOKENS`, etc.).
+

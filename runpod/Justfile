@@ -1,0 +1,21 @@
+set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
+
+GHCR_USER := "mcmoodoo"
+IMAGE := env_var_or_default("IMAGE", "ghcr.io/mcmoodoo/runpod-llama-chat")
+TAG := env_var_or_default("TAG", "latest")
+
+FULL_IMAGE := "{{IMAGE}}:{{TAG}}"
+
+default:
+  @just --list
+
+ghcr-login:
+  @test -n "${RUNPOD_GHCR_TOKEN:-}" || (echo "RUNPOD_GHCR_TOKEN is not set" && exit 1)
+  echo "$RUNPOD_GHCR_TOKEN" | docker login ghcr.io -u {{GHCR_USER}} --password-stdin
+
+docker-build:
+  docker build -t {{FULL_IMAGE}} .
+
+docker-push: ghcr-login docker-build
+  docker push {{FULL_IMAGE}}
+

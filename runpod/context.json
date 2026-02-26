@@ -1,0 +1,36 @@
+{
+  "name": "YOUR_NAME",
+  "headline": "Short 1-line bio",
+  "location": "City, Country (optional)",
+  "links": {
+    "website": "https://example.com",
+    "github": "https://github.com/yourname",
+    "linkedin": "https://linkedin.com/in/yourname"
+  },
+  "skills": [
+    "Skill 1",
+    "Skill 2"
+  ],
+  "experience": [
+    {
+      "title": "Role",
+      "org": "Company",
+      "summary": "1-2 sentence summary of impact"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project name",
+      "summary": "What it does and your role",
+      "tech": ["Tech 1", "Tech 2"]
+    }
+  ],
+  "interests": [
+    "Interest 1",
+    "Interest 2"
+  ],
+  "notes": {
+    "tone": "dense and concise",
+    "contact": "How to reach you"
+  }
+}
