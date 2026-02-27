@@ -1,0 +1,13 @@
+default:
+    @just --list
+
+ssh:
+    ssh ubuntu@$(terraform output -raw public_dns)
+
+ssm-create-secret:
+  aws ssm put-parameter \
+  --name "/runpod/GHCR_TOKEN" \
+  --value "$RUNPOD_GHCR_TOKEN" \
+  --type "SecureString" \
+  --region "us-east-1" \
+  --overwrite

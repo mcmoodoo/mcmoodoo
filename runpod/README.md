@@ -29,7 +29,7 @@ The assistant answers visitor questions about you based on that JSON.
   - Mount path in container: `/runpod-volume`
   - Model directory: `/runpod-volume/model`
     - Contains standard Hugging Face model files (config, tokenizer, safetensors, etc.).
-  - **You will ensure the actual model files are placed at** `/runpod-volume/model` (placeholder assumption for now).
+- **Model download**: On first start, the container downloads the model from Hugging Face into `/runpod-volume/model` if `config.json` is not already present there. Subsequent starts skip the download. For gated models (e.g. `meta-llama/Llama-3.2-3B-Instruct`), set `HF_TOKEN` (or `HUGGING_FACE_HUB_TOKEN`) in the endpoint environment.
 
 ---
 
@@ -38,7 +38,7 @@ The assistant answers visitor questions about you based on that JSON.
 - **Base image**: `vllm/vllm-openai:latest`
 - **App layout (in this repo, under `runpod/`)**:
   - `Dockerfile` – builds the serverless image.
-  - `start.sh` – starts vLLM, waits for it to be ready, then starts the RunPod handler.
+  - `start.sh` – downloads the model into the volume if not present, starts vLLM, waits for it to be ready, then starts the RunPod handler.
   - `handler.py` – RunPod serverless handler:
     - Reads baked‑in `context.json`.
     - Builds system prompt from the JSON.
@@ -54,6 +54,8 @@ Set in `Dockerfile` and/or at runtime:
 
 - `CONTEXT_JSON_PATH` – default: `/app/context.json`
 - `MODEL_DIR` – default: `/runpod-volume/model`
+- `MODEL_ID` – default: `meta-llama/Llama-3.2-3B-Instruct` (Hugging Face repo ID; used to download the model into the volume if missing).
+- `HF_TOKEN` or `HUGGING_FACE_HUB_TOKEN` – optional; required for gated models like Meta LLaMA.
 - `VLLM_API_URL` – default: `http://127.0.0.1:8000`
 - `VLLM_PORT` – default: `8000`
 - `SERVED_MODEL_NAME` – default: `llama-3.2-3b-instruct`
@@ -101,6 +103,7 @@ Set in `Dockerfile` and/or at runtime:
 You **skipped local testing** (no GPU available). All validation will be done on RunPod after deployment.
 
 If needed later, you can:
+
 - Mount a dummy model directory to `/runpod-volume/model`.
 - Run the same container with CPU or a GPU machine to smoke‑test the HTTP contract.
 
@@ -148,6 +151,7 @@ just docker-push
 ```
 
 This will:
+
 - Log in to `ghcr.io` with `RUNPOD_GHCR_TOKEN`.
 - Build the image.
 - Push `ghcr.io/mcmoodoo/runpod-llama-chat:latest`.
@@ -168,7 +172,7 @@ IMAGE=ghcr.io/mcmoodoo/custom-llama-chat TAG=v0.1.0 just docker-push
 
 ## Step 7 – RunPod Serverless Endpoint Configuration
 
-Once the image is pushed and the model exists on the volume at `/runpod-volume/model`, create a serverless endpoint in the RunPod UI (or via `runpodctl`).
+Once the image is pushed, create a serverless endpoint in the RunPod UI (or via `runpodctl`). The model will be downloaded into the volume on first worker start if not already present.
 
 ### Basic config
 
@@ -189,9 +193,7 @@ Once the image is pushed and the model exists on the volume at `/runpod-volume/m
   - **Name**: `llama3-model`
   - **Mount path**: `/runpod-volume`
 
-- Inside the volume, ensure:
-  - Model directory exists at: `/runpod-volume/model`
-  - It contains the full Llama‑3.2‑3B‑Instruct model (config, tokenizer, weights).
+- The container will create `/runpod-volume/model` and download the model on first start if the directory is empty. You can pre-populate the volume to avoid the first-run download.
 
 ### Environment variables (in the endpoint config)
 
@@ -199,6 +201,8 @@ You can rely on defaults baked into the image, or set explicitly:
 
 - `CONTEXT_JSON_PATH=/app/context.json`
 - `MODEL_DIR=/runpod-volume/model`
+- `MODEL_ID=meta-llama/Llama-3.2-3B-Instruct` (for automatic download)
+- `HF_TOKEN=<your-token>` (required for gated Meta LLaMA; set as a secret in RunPod)
 - `VLLM_API_URL=http://127.0.0.1:8000`
 - `SERVED_MODEL_NAME=llama-3.2-3b-instruct`
 - `TEMPERATURE=0.2`
@@ -211,7 +215,7 @@ You can rely on defaults baked into the image, or set explicitly:
 Once the endpoint is running:
 
 1. **Update `context.json` in the image** to contain your real, dense, structured profile (then rebuild & push if you change it).
-2. **Ensure the model files** are present at `/runpod-volume/model` on the `llama3-model` volume.
+2. **Set `HF_TOKEN`** in the endpoint if using the default gated model (`meta-llama/Llama-3.2-3B-Instruct`). The model is downloaded into the volume on first worker start.
 3. **Call the endpoint** with:
 
 ```json
@@ -231,7 +235,11 @@ Once the endpoint is running:
 ```
 
 You can iterate on:
+
 - The JSON structure in `context.json`.
 - Prompt wording in `handler.py` (system message).
 - vLLM parameters (`TEMPERATURE`, `MAX_TOKENS`, etc.).
 
+## My log book
+
+- uploading to ghcr takes forever. The image is at 20Gb. Better uploaded from an EC2 instance. Will need to spin up one with terraform.
