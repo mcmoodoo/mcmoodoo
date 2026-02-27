@@ -54,6 +54,7 @@ resource "aws_instance" "bastion" {
   instance_type          = "t3.micro"
   key_name               = aws_key_pair.bastion_key.key_name
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
+  iam_instance_profile   = "bastion-role"
 
   user_data = <<-EOF
               #!/bin/bash

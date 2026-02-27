@@ -243,3 +243,4 @@ You can iterate on:
 ## My log book
 
 - uploading to ghcr takes forever. The image is at 20Gb. Better uploaded from an EC2 instance. Will need to spin up one with terraform.
+  - docker and nix installed
