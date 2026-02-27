@@ -55,6 +55,7 @@ resource "aws_instance" "bastion" {
   key_name               = aws_key_pair.bastion_key.key_name
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
   iam_instance_profile   = "bastion-role"
+  user_data_replace_on_change = true
 
   user_data = <<-EOF
               #!/bin/bash
@@ -62,8 +63,14 @@ resource "aws_instance" "bastion" {
 
               if id ubuntu >/dev/null 2>&1; then
                 echo 'set -o vi' >> /home/ubuntu/.bashrc
+                echo '. /etc/profile.d/nix.sh || true' >> /home/ubuntu/.bashrc
                 chown ubuntu:ubuntu /home/ubuntu/.bashrc
               fi
+
+              # Install Nix non-interactively and log output
+              export HOME=/root
+              curl -L https://nixos.org/nix/install \
+                | sh -s -- --daemon --yes > /var/log/nix-install.log 2>&1
               EOF
 
   tags = {
