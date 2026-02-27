@@ -62,33 +62,7 @@ resource "aws_instance" "bastion" {
     volume_type = "gp3"
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              set -eux
-
-              # Docker (daemon + client)
-              apt-get update -y
-              apt-get install -y ca-certificates curl gnupg
-              install -m 0755 -d /etc/apt/keyrings
-              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-              chmod a+r /etc/apt/keyrings/docker.gpg
-              echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$${VERSION_CODENAME}") stable" > /etc/apt/sources.list.d/docker.list
-              apt-get update -y
-              apt-get install -y docker-ce docker-ce-cli containerd.io
-              systemctl enable --now docker
-              if id ubuntu >/dev/null 2>&1; then
-                usermod -aG docker ubuntu
-                echo 'set -o vi' >> /home/ubuntu/.bashrc
-                echo '. /etc/profile.d/nix.sh || true' >> /home/ubuntu/.bashrc
-                chown ubuntu:ubuntu /home/ubuntu/.bashrc
-              fi
-
-              # Nix
-              HOME=/root curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes > /var/log/nix-install.log 2>&1 || true
-              mkdir -p /etc/nix
-              echo 'build-users-group = nixbld' > /etc/nix/nix.conf
-              echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf
-              EOF
+  user_data = file("${path.module}/userdata.sh")
 
   tags = {
     Name = "bastion"

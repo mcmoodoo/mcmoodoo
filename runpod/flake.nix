@@ -35,7 +35,6 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             runpodctl-latest
-            awscli2
           ];
         };
       });
