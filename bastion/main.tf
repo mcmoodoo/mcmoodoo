@@ -57,27 +57,37 @@ resource "aws_instance" "bastion" {
   iam_instance_profile        = "bastion-role"
   user_data_replace_on_change = true
 
+  root_block_device {
+    volume_size = 40
+    volume_type = "gp3"
+  }
+
   user_data = <<-EOF
               #!/bin/bash
               set -eux
 
+              # Docker (daemon + client)
+              apt-get update -y
+              apt-get install -y ca-certificates curl gnupg
+              install -m 0755 -d /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              chmod a+r /etc/apt/keyrings/docker.gpg
+              echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$${VERSION_CODENAME}") stable" > /etc/apt/sources.list.d/docker.list
+              apt-get update -y
+              apt-get install -y docker-ce docker-ce-cli containerd.io
+              systemctl enable --now docker
               if id ubuntu >/dev/null 2>&1; then
+                usermod -aG docker ubuntu
                 echo 'set -o vi' >> /home/ubuntu/.bashrc
                 echo '. /etc/profile.d/nix.sh || true' >> /home/ubuntu/.bashrc
                 chown ubuntu:ubuntu /home/ubuntu/.bashrc
               fi
 
-              # Install Nix non-interactively and log output
-              export HOME=/root
-              curl -L https://nixos.org/nix/install \
-                | sh -s -- --daemon --yes > /var/log/nix-install.log 2>&1
-
-              # Configure Nix experimental features so nix-command and flakes are enabled
+              # Nix
+              HOME=/root curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes > /var/log/nix-install.log 2>&1 || true
               mkdir -p /etc/nix
-              cat << 'NIXCONF' >/etc/nix/nix.conf
-              build-users-group = nixbld
-              experimental-features = nix-command flakes
-              NIXCONF
+              echo 'build-users-group = nixbld' > /etc/nix/nix.conf
+              echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf
               EOF
 
   tags = {
