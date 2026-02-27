@@ -50,11 +50,11 @@ resource "aws_security_group" "bastion_sg" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                    = "ami-0b6c6ebed2801a5cb"
-  instance_type          = "t3.micro"
-  key_name               = aws_key_pair.bastion_key.key_name
-  vpc_security_group_ids = [aws_security_group.bastion_sg.id]
-  iam_instance_profile   = "bastion-role"
+  ami                         = "ami-0b6c6ebed2801a5cb"
+  instance_type               = "t3.micro"
+  key_name                    = aws_key_pair.bastion_key.key_name
+  vpc_security_group_ids      = [aws_security_group.bastion_sg.id]
+  iam_instance_profile        = "bastion-role"
   user_data_replace_on_change = true
 
   user_data = <<-EOF
@@ -71,6 +71,13 @@ resource "aws_instance" "bastion" {
               export HOME=/root
               curl -L https://nixos.org/nix/install \
                 | sh -s -- --daemon --yes > /var/log/nix-install.log 2>&1
+
+              # Configure Nix experimental features so nix-command and flakes are enabled
+              mkdir -p /etc/nix
+              cat << 'NIXCONF' >/etc/nix/nix.conf
+              build-users-group = nixbld
+              experimental-features = nix-command flakes
+              NIXCONF
               EOF
 
   tags = {

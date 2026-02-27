@@ -11,3 +11,10 @@ ssm-create-secret:
   --type "SecureString" \
   --region "us-east-1" \
   --overwrite
+
+ssm-get-secret:
+  aws ssm get-parameter \
+  --name "/runpod/GHCR_TOKEN" \
+  --with-decryption \
+  --query "Parameter.Value" \
+  --output text
