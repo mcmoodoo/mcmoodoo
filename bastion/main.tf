@@ -51,7 +51,7 @@ resource "aws_security_group" "bastion_sg" {
 
 resource "aws_instance" "bastion" {
   ami                         = "ami-0b6c6ebed2801a5cb"
-  instance_type               = "t3.micro"
+  instance_type               = "t3.xlarge"
   key_name                    = aws_key_pair.bastion_key.key_name
   vpc_security_group_ids      = [aws_security_group.bastion_sg.id]
   iam_instance_profile        = "bastion-role"
