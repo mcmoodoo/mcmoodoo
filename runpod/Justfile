@@ -6,7 +6,7 @@ TAG := env_var_or_default("TAG", "latest")
 
 # RunPod serverless: pass TEMPLATE_ID, GPU_ID, DATACENTER_ID, HF_TOKEN, RUNPOD_API_KEY as needed
 TEMPLATE_ID := env_var_or_default("TEMPLATE_ID", "")
-GPU_ID := env_var_or_default("GPU_ID", "RTX 4090")
+GPU_ID := env_var_or_default("GPU_ID", "NVIDIA GeForce RTX 4090")
 DATACENTER_ID := env_var_or_default("DATACENTER_ID", "US-MO-1")
 ENDPOINT_ID := env_var_or_default("ENDPOINT_ID", "")
 
