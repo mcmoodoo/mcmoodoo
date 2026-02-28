@@ -37,8 +37,14 @@ if id ubuntu >/dev/null 2>&1; then
   sudo -u ubuntu git clone --branch runpod https://github.com/mcmoodoo/mcmoodoo /home/ubuntu/mcmoodoo || true
 fi
 
-# Nix
-HOME=/root curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes > /var/log/nix-install.log 2>&1 || true
+# Nix (install script requires HOME; user_data can run with minimal env)
+NIX_LOG=/var/log/nix-install.log
+echo "=== Nix install started at $(date) ===" | tee "$NIX_LOG"
+env HOME=/root bash -c '
+  curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes
+  echo "=== Nix install exit code: $? ==="
+' >> "$NIX_LOG" 2>&1 || true
+echo "=== Nix install block finished at $(date) ===" >> "$NIX_LOG"
 mkdir -p /etc/nix
 echo 'build-users-group = nixbld' > /etc/nix/nix.conf
 echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf

@@ -58,7 +58,7 @@ resource "aws_instance" "bastion" {
   user_data_replace_on_change = true
 
   root_block_device {
-    volume_size = 40
+    volume_size = 50
     volume_type = "gp3"
   }
 
