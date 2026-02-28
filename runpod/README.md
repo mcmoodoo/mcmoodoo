@@ -170,43 +170,93 @@ IMAGE=ghcr.io/mcmoodoo/custom-llama-chat TAG=v0.1.0 just docker-push
 
 ---
 
-## Step 7 – RunPod Serverless Endpoint Configuration
+## Step 7 – RunPod Serverless Endpoint (runpodctl only)
 
-Once the image is pushed, create a serverless endpoint in the RunPod UI (or via `runpodctl`). The model will be downloaded into the volume on first worker start if not already present.
+Once the image is pushed to GHCR, use **runpodctl** only to create the endpoint. The model will be downloaded into the volume on first worker start if not already present.
 
-### Basic config
+### 7.1 Configure API key
 
-- **Image**: `ghcr.io/mcmoodoo/runpod-llama-chat:latest`
-- **Entrypoint / Command**: `/app/start.sh` (this is already the image `CMD`).
+```bash
+runpodctl config --apiKey="$RUNPOD_API_KEY"
+```
 
-### GPU & resources
+### 7.2 (If image is private) Add GHCR registry auth
 
-- **Data center**: `US-MO-2` (to match volume `llama3-model`).
-- **GPU type**: `RTX 5090` (select matching SKU).
-- **Concurrency per worker**: start with `1`.
-- **CPU/RAM**: default for that GPU is fine initially.
+So RunPod can pull `ghcr.io/mcmoodoo/runpod-llama-chat:latest`:
 
-### Network volume
+```bash
+runpodctl registry create \
+  --name ghcr-mcmoodoo \
+  --username YOUR_GITHUB_USERNAME \
+  --password "$RUNPOD_GHCR_TOKEN"
+```
 
-- Attach:
-  - **Volume ID**: `4lqjmp64p7`
-  - **Name**: `llama3-model`
-  - **Mount path**: `/runpod-volume`
+Use the same GitHub username that can pull the image. RunPod will use this when the template specifies a `ghcr.io` image.
 
-- The container will create `/runpod-volume/model` and download the model on first start if the directory is empty. You can pre-populate the volume to avoid the first-run download.
+### 7.3 Look up IDs
 
-### Environment variables (in the endpoint config)
+- **Data center** (for volume `llama3-model` and endpoint):  
+  `runpodctl datacenter list --output=table`  
+  Find the ID for `US-MO-2` (e.g. use it in `--data-center-ids`).
 
-You can rely on defaults baked into the image, or set explicitly:
+- **GPU type**:  
+  `runpodctl gpu list --output=table`  
+  Find the GPU id for the SKU you want (e.g. RTX 5090).
 
-- `CONTEXT_JSON_PATH=/app/context.json`
-- `MODEL_DIR=/runpod-volume/model`
-- `MODEL_ID=meta-llama/Llama-3.2-3B-Instruct` (for automatic download)
-- `HF_TOKEN=<your-token>` (required for gated Meta LLaMA; set as a secret in RunPod)
-- `VLLM_API_URL=http://127.0.0.1:8000`
-- `SERVED_MODEL_NAME=llama-3.2-3b-instruct`
-- `TEMPERATURE=0.2`
-- `MAX_TOKENS=512`
+### 7.4 Create a serverless template
+
+Template = image + entrypoint + env + volume mount. Use your HF token for gated LLaMA:
+
+```bash
+runpodctl template create \
+  --name runpod-llama-chat \
+  --image ghcr.io/mcmoodoo/runpod-llama-chat:latest \
+  --serverless \
+  --docker-start-cmd "/app/start.sh" \
+  --container-disk-in-gb 20 \
+  --volume-mount-path /runpod-volume \
+  --env '{"HF_TOKEN":"YOUR_HF_TOKEN","MODEL_DIR":"/runpod-volume/model","MODEL_ID":"meta-llama/Llama-3.2-3B-Instruct"}'
+```
+
+Note the returned **template id** (e.g. from `runpodctl template list` if not printed).
+
+- **Existing network volume**: The template defines the mount path. To attach your **existing** volume (ID `4lqjmp64p7`) instead of a new one, you may need to set that when creating the endpoint (if runpodctl supports it) or in the RunPod UI once. Check `runpodctl serverless create --help` and RunPod docs for “attach network volume to endpoint”.
+
+### 7.5 Create the serverless endpoint
+
+Use the template id from 7.4 and the IDs from 7.3:
+
+```bash
+runpodctl serverless create \
+  --name llama-chat-endpoint \
+  --template-id TEMPLATE_ID \
+  --gpu-id GPU_TYPE_ID \
+  --data-center-ids US_MO_2_DATACENTER_ID \
+  --workers-min 0 \
+  --workers-max 3 \
+  --gpu-count 1
+```
+
+Replace `TEMPLATE_ID`, `GPU_TYPE_ID`, and `US_MO_2_DATACENTER_ID` with the actual values.
+
+### 7.6 Inspect and get the endpoint URL
+
+```bash
+runpodctl serverless list --output=table
+runpodctl serverless get ENDPOINT_ID
+```
+
+Use the endpoint’s HTTP URL to send requests (see Step 8).
+
+### Reference (same config as before)
+
+| Item | Value |
+|------|--------|
+| Image | `ghcr.io/mcmoodoo/runpod-llama-chat:latest` |
+| Entrypoint / Command | `/app/start.sh` |
+| Data center | `US-MO-2` (volume `llama3-model`) |
+| Network volume | ID `4lqjmp64p7`, mount `/runpod-volume` |
+| Env (optional) | `CONTEXT_JSON_PATH`, `MODEL_DIR`, `MODEL_ID`, `HF_TOKEN`, `VLLM_API_URL`, `SERVED_MODEL_NAME`, `TEMPERATURE`, `MAX_TOKENS` |
 
 ---
 
