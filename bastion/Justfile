@@ -17,6 +17,12 @@ ssm-create-secrets:
   --type "SecureString" \
   --region "us-east-1" \
   --overwrite
+  aws ssm put-parameter \
+  --name "/runpod/HF_TOKEN" \
+  --value "$HF_TOKEN" \
+  --type "SecureString" \
+  --region "us-east-1" \
+  --overwrite
 
 ssm-get-secrets:
   @echo "RUNPOD_GHCR_TOKEN:"
@@ -28,6 +34,12 @@ ssm-get-secrets:
   @echo "RUNPOD_API_KEY:"
   aws ssm get-parameter \
   --name "/runpod/API_KEY" \
+  --with-decryption \
+  --query "Parameter.Value" \
+  --output text
+  @echo "HF_TOKEN:"
+  aws ssm get-parameter \
+  --name "/runpod/HF_TOKEN" \
   --with-decryption \
   --query "Parameter.Value" \
   --output text
