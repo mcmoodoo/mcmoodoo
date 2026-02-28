@@ -78,9 +78,12 @@ runpod-get:
 
 # Call the serverless endpoint (sync). Set ENDPOINT_ID and RUNPOD_API_KEY. Optional: MESSAGE (default below).
 runpod-call:
-  @test -n "{{ENDPOINT_ID}}" || (echo "ENDPOINT_ID is not set" && exit 1)
-  @test -n "${RUNPOD_API_KEY:-}" || (echo "RUNPOD_API_KEY is not set" && exit 1)
+  #!/usr/bin/env bash
+  set -eu
+  test -n "{{ENDPOINT_ID}}" || (echo "ENDPOINT_ID is not set" && exit 1)
+  test -n "${RUNPOD_API_KEY:-}" || (echo "RUNPOD_API_KEY is not set" && exit 1)
+  BODY=$(jq -n --arg msg "${MESSAGE:-What are your main skills?}" '{input: {message: $msg}}')
   curl -sS -X POST "https://api.runpod.ai/v2/{{ENDPOINT_ID}}/runsync" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $RUNPOD_API_KEY" \
-    -d "$$(jq -n --arg msg \"$${MESSAGE:-What are your main skills?}\" '{input: {message: $$msg}}')"
+    -d "$BODY"
