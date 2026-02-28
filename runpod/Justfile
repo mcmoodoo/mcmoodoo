@@ -63,7 +63,7 @@ runpod-endpoint:
   runpodctl serverless create \
     --name llama-chat-endpoint \
     --template-id {{TEMPLATE_ID}} \
-    --gpu-id {{GPU_ID}} \
+    --gpu-id "{{GPU_ID}}" \
     --data-center-ids {{DATACENTER_ID}} \
     --workers-min 0 \
     --workers-max 3 \
