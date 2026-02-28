@@ -11,6 +11,15 @@ apt-get install -y ca-certificates curl gnupg git just unzip
 curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o /tmp/awscliv2.zip
 unzip -q -o /tmp/awscliv2.zip -d /tmp && /tmp/aws/install -b /usr/local/bin
 rm -rf /tmp/awscliv2.zip /tmp/aws
+
+# Zellij (terminal multiplexer)
+ZELLIJ_VERSION=$(curl -s https://api.github.com/repos/zellij-org/zellij/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p')
+ARCH=$(uname -m)
+curl -sSL "https://github.com/zellij-org/zellij/releases/download/${ZELLIJ_VERSION}/zellij-${ARCH}-unknown-linux-musl.tar.gz" -o /tmp/zellij.tar.gz
+tar -xzf /tmp/zellij.tar.gz -C /tmp
+install -m 0755 "$(find /tmp -maxdepth 2 -name zellij -type f 2>/dev/null | head -1)" /usr/local/bin/zellij
+rm -rf /tmp/zellij /tmp/zellij.tar.gz /tmp/zellij-*
+
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
