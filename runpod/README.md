@@ -266,7 +266,26 @@ Once the endpoint is running:
 
 1. **Update `context.json` in the image** to contain your real, dense, structured profile (then rebuild & push if you change it).
 2. **Set `HF_TOKEN`** in the endpoint if using the default gated model (`meta-llama/Llama-3.2-3B-Instruct`). The model is downloaded into the volume on first worker start.
-3. **Call the endpoint** with:
+3. **Call the endpoint** (sync request; waits for the result):
+
+**With the Justfile** (needs `jq`, `ENDPOINT_ID`, and `RUNPOD_API_KEY`):
+
+```bash
+ENDPOINT_ID=your_endpoint_id RUNPOD_API_KEY=your_api_key just runpod-call
+# or with a custom message:
+MESSAGE='What is your background?' ENDPOINT_ID=... RUNPOD_API_KEY=... just runpod-call
+```
+
+**With curl** (replace `ENDPOINT_ID` and `RUNPOD_API_KEY`):
+
+```bash
+curl -sS -X POST "https://api.runpod.ai/v2/ENDPOINT_ID/runsync" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer RUNPOD_API_KEY" \
+  -d '{"input":{"message":"What is your background and main area of expertise?"}}'
+```
+
+**Request body** (your handler expects `input.message`):
 
 ```json
 {
@@ -276,11 +295,15 @@ Once the endpoint is running:
 }
 ```
 
-4. **Expect a response**:
+4. **Response**: RunPod returns JSON with `status` and `output`. Your handler puts the model reply in `output.response`:
 
 ```json
 {
-  "response": "Short, dense description of your background and expertise."
+  "id": "...",
+  "status": "COMPLETED",
+  "output": {
+    "response": "Short, dense description of your background and expertise."
+  }
 }
 ```
 
