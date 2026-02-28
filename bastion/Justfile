@@ -4,17 +4,30 @@ default:
 ssh:
     ssh ubuntu@$(terraform output -raw public_dns)
 
-ssm-create-secret:
+ssm-create-secrets:
   aws ssm put-parameter \
   --name "/runpod/GHCR_TOKEN" \
   --value "$RUNPOD_GHCR_TOKEN" \
   --type "SecureString" \
   --region "us-east-1" \
   --overwrite
+  aws ssm put-parameter \
+  --name "/runpod/API_KEY" \
+  --value "$RUNPOD_API_KEY" \
+  --type "SecureString" \
+  --region "us-east-1" \
+  --overwrite
 
-ssm-get-secret:
+ssm-get-secrets:
+  @echo "RUNPOD_GHCR_TOKEN:"
   aws ssm get-parameter \
   --name "/runpod/GHCR_TOKEN" \
+  --with-decryption \
+  --query "Parameter.Value" \
+  --output text
+  @echo "RUNPOD_API_KEY:"
+  aws ssm get-parameter \
+  --name "/runpod/API_KEY" \
   --with-decryption \
   --query "Parameter.Value" \
   --output text

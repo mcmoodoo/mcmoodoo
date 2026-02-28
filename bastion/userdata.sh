@@ -32,6 +32,7 @@ if id ubuntu >/dev/null 2>&1; then
   echo 'set -o vi' >> /home/ubuntu/.bashrc
   echo '[ -f /etc/profile.d/nix.sh ] && . /etc/profile.d/nix.sh' >> /home/ubuntu/.bashrc
   echo 'export RUNPOD_GHCR_TOKEN=$(aws ssm get-parameter --name "/runpod/GHCR_TOKEN" --with-decryption --query "Parameter.Value" --output text)' >> /home/ubuntu/.bashrc
+  echo 'export RUNPOD_API_KEY=$(aws ssm get-parameter --name "/runpod/API_KEY" --with-decryption --query "Parameter.Value" --output text)' >> /home/ubuntu/.bashrc
   chown ubuntu:ubuntu /home/ubuntu/.bashrc
   sudo -u ubuntu git clone --branch runpod https://github.com/mcmoodoo/mcmoodoo /home/ubuntu/mcmoodoo || true
 fi
