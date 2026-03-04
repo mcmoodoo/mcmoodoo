@@ -6,6 +6,7 @@ import { publications } from '@/data/cv'
 import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
 import ClarityPrompt from '@/components/ui/ClarityPrompt'
+import AsrRecorder from '@/components/ui/AsrRecorder'
 import Grid from '@/components/ui/Grid.astro'
 import ArticleList from '@/components/ui/ArticleList.astro'
 
@@ -28,6 +29,7 @@ const { name, fullName, title, institute, research_areas } = profile
 			/>
 		</div>
 		<ClarityPrompt client:load />
+		<AsrRecorder client:load />
 	</section>
 
 </Layout>
