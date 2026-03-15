@@ -35,7 +35,7 @@ The assistant answers visitor questions about you based on that JSON.
 
 ## Step 3 – Container Image Design
 
-- **Base image**: `vllm/vllm-openai:latest`
+- **Base image**: `vllm/vllm-openai:v0.16.0`
 - **App layout (in this repo, under `runpod/`)**:
   - `Dockerfile` – builds the serverless image.
   - `start.sh` – downloads the model into the volume if not present, starts vLLM, waits for it to be ready, then starts the RunPod handler.
@@ -182,16 +182,19 @@ runpodctl config --apiKey="$RUNPOD_API_KEY"
 
 ### 7.2 (If image is private) Add GHCR registry auth
 
-So RunPod can pull `ghcr.io/mcmoodoo/runpod-llama-chat:latest`:
+Workers must authenticate to pull `ghcr.io/mcmoodoo/runpod-llama-chat:latest`. Do this **before** creating the template (or attach the auth to your existing template).
 
-```bash
-runpodctl registry create \
-  --name ghcr-mcmoodoo \
-  --username YOUR_GITHUB_USERNAME \
-  --password "$RUNPOD_GHCR_TOKEN"
-```
+1. **Create** registry auth (from `runpod/`):
 
-Use the same GitHub username that can pull the image. RunPod will use this when the template specifies a `ghcr.io` image.
+   ```bash
+   just runpod-registry
+   ```
+
+   Requires `RUNPOD_GHCR_TOKEN` (e.g. a GitHub PAT with `read:packages`) and uses `GHCR_USER` (default `mcmoodoo`).
+
+2. **Get the registry auth ID**: run `just runpod-registry-list` or in RunPod Console go to **Settings → Container Registry** and copy the **ID** of the `ghcr-mcmoodoo` entry.
+
+3. **Use it when creating the template**: set `REGISTRY_AUTH_ID` to that ID so the template is created with `--container-registry-auth-id` (see 7.4). If the template already exists, edit it in the RunPod Console and set **Container Registry Auth** to this credential so workers are authorized to pull the image.
 
 ### 7.3 Look up IDs
 
@@ -205,16 +208,23 @@ Use the same GitHub username that can pull the image. RunPod will use this when 
 
 ### 7.4 Create a serverless template
 
-Template = image + entrypoint + env + volume mount. Use your HF token for gated LLaMA:
+Template = image + entrypoint + env + volume mount. Use your HF token for gated LLaMA. **For a private GHCR image**, set `REGISTRY_AUTH_ID` to the ID from step 7.2:
+
+```bash
+REGISTRY_AUTH_ID=<id-from-runpod-registry-list> just runpod-template-create
+```
+
+Or manually:
 
 ```bash
 runpodctl template create \
   --name runpod-llama-chat \
   --image ghcr.io/mcmoodoo/runpod-llama-chat:latest \
   --serverless \
-  --docker-start-cmd "/app/start.sh" \
+  --docker-entrypoint "/app/start.sh" \
   --container-disk-in-gb 20 \
   --volume-mount-path /runpod-volume \
+  --container-registry-auth-id REGISTRY_AUTH_ID_FROM_STEP_7_2 \
   --env '{"HF_TOKEN":"YOUR_HF_TOKEN","MODEL_DIR":"/runpod-volume/model","MODEL_ID":"meta-llama/Llama-3.2-3B-Instruct"}'
 ```
 
@@ -248,12 +258,24 @@ runpodctl serverless get ENDPOINT_ID
 
 Use the endpoint’s HTTP URL to send requests (see Step 8).
 
+### Troubleshooting: "config file at '/app/start.sh' is not a valid JSON file"
+
+The vLLM base image’s default entrypoint runs the vLLM server and treats the first argument as the model path. If the template used `--docker-start-cmd "/app/start.sh"`, that path was passed as the model, so vLLM tried to read `start.sh` as a model config. The template must use `--docker-entrypoint "/app/start.sh"` (and no start-cmd) so the container runs your script, which then starts vLLM with `--model /runpod-volume/model`. Recreate the template with the corrected entrypoint and redeploy the endpoint.
+
+### Troubleshooting: "error pulling image: unauthorized"
+
+Workers see this when the template does **not** have container registry auth for GHCR. Fix:
+
+1. Create GHCR registry auth: `just runpod-registry` (needs `RUNPOD_GHCR_TOKEN`).
+2. Get the auth ID: `just runpod-registry-list`, or RunPod Console → **Settings** → **Container Registry** → copy the ID for `ghcr-mcmoodoo`.
+3. Either **create a new template** with that ID: `REGISTRY_AUTH_ID=<id> just runpod-template-create`, then create a new endpoint with the new template; or **edit the existing template** in RunPod Console and set **Container Registry Auth** to the credential you created.
+
 ### Reference (same config as before)
 
 | Item | Value |
 |------|--------|
 | Image | `ghcr.io/mcmoodoo/runpod-llama-chat:latest` |
-| Entrypoint / Command | `/app/start.sh` |
+| Entrypoint | `/app/start.sh` (overrides vLLM image so the script runs; do not use start-cmd or vLLM will treat it as model path) |
 | Data center | `US-MO-2` (volume `llama3-model`) |
 | Network volume | ID `4lqjmp64p7`, mount `/runpod-volume` |
 | Env (optional) | `CONTEXT_JSON_PATH`, `MODEL_DIR`, `MODEL_ID`, `HF_TOKEN`, `VLLM_API_URL`, `SERVED_MODEL_NAME`, `TEMPERATURE`, `MAX_TOKENS` |
