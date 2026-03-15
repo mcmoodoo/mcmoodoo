@@ -1,6 +1,9 @@
 default:
     @just --list
 
+enter-env:
+    aws-vault exec mcmoodoo --duration=4h
+
 ssh:
     ssh ubuntu@$(terraform output -raw public_dns)
 
