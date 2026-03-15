@@ -1,341 +1,108 @@
-# LLaMA 3.2 3B Serverless Chat on RunPod (vLLM)
+# RunPod GPU Pod – vLLM
 
-This directory contains the setup for a RunPod serverless endpoint that serves a **Llama‑3.2‑3B‑Instruct** chat assistant using **vLLM**, with a baked‑in JSON profile for context.
-
-The assistant answers visitor questions about you based on that JSON.
+This directory builds a Docker image that runs **vLLM** (OpenAI-compatible API) on a **regular RunPod GPU pod**. The model (default: `OpenHands/openhands-lm-7b-v0.1`) is stored on a volume mounted at `/workspace` and is downloaded from Hugging Face on first start if not already present.
 
 ---
 
-## Step 1 – Model & Runtime
+## What the image does
 
-- **Model**: `Llama-3.2-3B-Instruct` (3B, instruct‑tuned).
-- **Runtime**: **vLLM** (OpenAI‑compatible HTTP API).
-- **Interaction pattern**:
-  - Client sends a single field: `message` (visitor question).
-  - Container injects your JSON profile as a **system** message.
-  - vLLM returns a non‑streaming chat completion.
+- **Entrypoint**: `/app/start.sh`
+- **start.sh**: If `/workspace/config.json` is missing, downloads `MODEL_ID` into `/workspace`; then starts the vLLM OpenAI server in the **foreground** on port 8000. The container stays up as long as vLLM is running.
+
+No serverless handler: the pod exposes vLLM’s HTTP API directly (e.g. `/v1/chat/completions`, `/v1/models`).
 
 ---
 
-## Step 2 – Where the Weights Live
+## Volume and model
 
-- **Storage**: RunPod **Network Volume**.
-- **Volume** (already created):
-  - ID: `4lqjmp64p7`
-  - Name: `llama3-model`
-  - Data center: `US-MO-2`
-  - Size: `20` GB
-- **Expected on‑disk layout (inside the volume)**:
-  - Mount path in container: `/runpod-volume`
-  - Model directory: `/runpod-volume/model`
-    - Contains standard Hugging Face model files (config, tokenizer, safetensors, etc.).
-- **Model download**: On first start, the container downloads the model from Hugging Face into `/runpod-volume/model` if `config.json` is not already present there. Subsequent starts skip the download. For gated models (e.g. `meta-llama/Llama-3.2-3B-Instruct`), set `HF_TOKEN` (or `HUGGING_FACE_HUB_TOKEN`) in the endpoint environment.
+- **Mount path**: `/workspace` (set when you create the pod).
+- **Model**: Stored at `/workspace` (Hugging Face snapshot: `config.json`, tokenizer, safetensors, etc.).
+- **Default model**: `OpenHands/openhands-lm-7b-v0.1`. Override with env `MODEL_ID`; for gated models set `HF_TOKEN` (or `HUGGING_FACE_HUB_TOKEN`).
 
 ---
 
-## Step 3 – Container Image Design
+## Build and push
 
-- **Base image**: `vllm/vllm-openai:v0.16.0`
-- **App layout (in this repo, under `runpod/`)**:
-  - `Dockerfile` – builds the serverless image.
-  - `start.sh` – downloads the model into the volume if not present, starts vLLM, waits for it to be ready, then starts the RunPod handler.
-  - `handler.py` – RunPod serverless handler:
-    - Reads baked‑in `context.json`.
-    - Builds system prompt from the JSON.
-    - Sends `messages` to vLLM `/v1/chat/completions`.
-    - Returns `{"response": "<answer>"}`.
-  - `context.json` – your structured, dense JSON profile (currently a placeholder; you will fill this in).
-  - `.dockerignore` – keeps image small.
-  - `Justfile` – helper commands for building/pushing the image to GHCR.
-
-### Key environment variables (with defaults)
-
-Set in `Dockerfile` and/or at runtime:
-
-- `CONTEXT_JSON_PATH` – default: `/app/context.json`
-- `MODEL_DIR` – default: `/runpod-volume/model`
-- `MODEL_ID` – default: `meta-llama/Llama-3.2-3B-Instruct` (Hugging Face repo ID; used to download the model into the volume if missing).
-- `HF_TOKEN` or `HUGGING_FACE_HUB_TOKEN` – optional; required for gated models like Meta LLaMA.
-- `VLLM_API_URL` – default: `http://127.0.0.1:8000`
-- `VLLM_PORT` – default: `8000`
-- `SERVED_MODEL_NAME` – default: `llama-3.2-3b-instruct`
-- `TEMPERATURE` – default: `0.2`
-- `MAX_TOKENS` – default: `512`
-
----
-
-## Step 4 – Handler Contract
-
-- **RunPod handler pattern**: `runpod.serverless.start({"handler": handler})` in `handler.py`.
-- **Input shape** (to the RunPod endpoint):
-
-```json
-{
-  "input": {
-    "message": "What are your main skills?"
-  }
-}
-```
-
-- **Prompting inside the container**:
-  - Load `context.json` once at startup and compact it to a dense JSON string.
-  - **System message**: describes the assistant’s behavior and embeds the JSON.
-  - **User message**: the `message` string from the request.
-  - Call vLLM with:
-    - `model = SERVED_MODEL_NAME`
-    - `messages = [system, user]`
-    - `temperature = TEMPERATURE`
-    - `top_p = TOP_P` (default `0.95` in `handler.py`)
-    - `max_tokens = MAX_TOKENS`
-
-- **Response shape** (from the RunPod endpoint):
-
-```json
-{
-  "response": "Short, dense, concise answer about you."
-}
-```
-
----
-
-## Step 5 – Local Testing
-
-You **skipped local testing** (no GPU available). All validation will be done on RunPod after deployment.
-
-If needed later, you can:
-
-- Mount a dummy model directory to `/runpod-volume/model`.
-- Run the same container with CPU or a GPU machine to smoke‑test the HTTP contract.
-
----
-
-## Step 6 – Build & Push Image to GHCR
-
-### Prerequisites
-
-- Docker installed and logged in locally.
-- `just` installed (already present on your system).
-- Environment variable `RUNPOD_GHCR_TOKEN` set to a valid GitHub Container Registry token.
-
-### Image naming
-
-- **Default image**: `ghcr.io/mcmoodoo/runpod-llama-chat:latest`
-- Overridable via env:
-  - `IMAGE` – default: `ghcr.io/mcmoodoo/runpod-llama-chat`
-  - `TAG` – default: `latest`
-
-### Justfile commands (from `runpod/`)
-
-- **Log in to GHCR (included in push)**:
-  - Uses `RUNPOD_GHCR_TOKEN`:
-    - `just ghcr-login`
-
-- **Build the image**:
+From this directory:
 
 ```bash
-cd runpod
 just docker-build
-```
-
-This runs:
-
-```bash
-docker build -t ghcr.io/mcmoodoo/runpod-llama-chat:latest .
-```
-
-- **Build and push to GHCR** (recommended command):
-
-```bash
-cd runpod
+# or build and push to GHCR (requires RUNPOD_GHCR_TOKEN):
 just docker-push
 ```
 
-This will:
-
-- Log in to `ghcr.io` with `RUNPOD_GHCR_TOKEN`.
-- Build the image.
-- Push `ghcr.io/mcmoodoo/runpod-llama-chat:latest`.
-
-You can override the tag, e.g.:
-
-```bash
-TAG=v0.1.0 just docker-push
-```
-
-Or override both:
-
-```bash
-IMAGE=ghcr.io/mcmoodoo/custom-llama-chat TAG=v0.1.0 just docker-push
-```
+Image name: `ghcr.io/mcmoodoo/runpod-llama-chat:latest` (override with `IMAGE` and `TAG`).
 
 ---
 
-## Step 7 – RunPod Serverless Endpoint (runpodctl only)
+## Run on a GPU pod
 
-Once the image is pushed to GHCR, use **runpodctl** only to create the endpoint. The model will be downloaded into the volume on first worker start if not already present.
-
-### 7.1 Configure API key
-
-```bash
-runpodctl config --apiKey="$RUNPOD_API_KEY"
-```
-
-### 7.2 (If image is private) Add GHCR registry auth
-
-Workers must authenticate to pull `ghcr.io/mcmoodoo/runpod-llama-chat:latest`. Do this **before** creating the template (or attach the auth to your existing template).
-
-1. **Create** registry auth (from `runpod/`):
+1. **Configure runpodctl** (once):
 
    ```bash
-   just runpod-registry
+   runpodctl config --apiKey="$RUNPOD_API_KEY"
    ```
 
-   Requires `RUNPOD_GHCR_TOKEN` (e.g. a GitHub PAT with `read:packages`) and uses `GHCR_USER` (default `mcmoodoo`).
+2. **Create a pod** (from this directory):
 
-2. **Get the registry auth ID**: run `just runpod-registry-list` or in RunPod Console go to **Settings → Container Registry** and copy the **ID** of the `ghcr-mcmoodoo` entry.
+   ```bash
+   just runpod-pod-create
+   ```
 
-3. **Use it when creating the template**: set `REGISTRY_AUTH_ID` to that ID so the template is created with `--container-registry-auth-id` (see 7.4). If the template already exists, edit it in the RunPod Console and set **Container Registry Auth** to this credential so workers are authorized to pull the image.
+   This runs `runpodctl create pod` with the vLLM image, GPU type from `GPU_TYPE` (default: RTX 4090), 50 GB volume at `/workspace`, and port 8000 exposed. Optional: set `HF_TOKEN` for gated models.
 
-### 7.3 Look up IDs
+   For an existing **network volume** instead of a new one, use RunPod Console or `runpodctl create pod ... --networkVolumeId <id>` (see RunPod docs).
 
-- **Data center** (for volume `llama3-model` and endpoint):  
-  `runpodctl datacenter list --output=table`  
-  Find the ID for `US-MO-2` (e.g. use it in `--data-center-ids`).
+3. **List / inspect / stop / delete pods**:
 
-- **GPU type**:  
-  `runpodctl gpu list --output=table`  
-  Find the GPU id for the SKU you want (e.g. RTX 5090).
+   ```bash
+   just runpod-pod-list
+   POD_ID=<id> just runpod-pod-get
+   POD_ID=<id> just runpod-pod-stop
+   POD_ID=<id> just runpod-pod-delete
+   ```
 
-### 7.4 Create a serverless template
+4. **Call vLLM** once the pod is running and you have its URL (e.g. from the RunPod dashboard, or the HTTP endpoint for port 8000):
 
-Template = image + entrypoint + env + volume mount. Use your HF token for gated LLaMA. **For a private GHCR image**, set `REGISTRY_AUTH_ID` to the ID from step 7.2:
+   ```bash
+   POD_URL=https://your-pod-id.runpod.net  just vllm-chat
+   # or with a message:
+   POD_URL=https://... MESSAGE="Your prompt" just vllm-chat
+   ```
 
-```bash
-REGISTRY_AUTH_ID=<id-from-runpod-registry-list> just runpod-template-create
-```
-
-Or manually:
-
-```bash
-runpodctl template create \
-  --name runpod-llama-chat \
-  --image ghcr.io/mcmoodoo/runpod-llama-chat:latest \
-  --serverless \
-  --docker-entrypoint "/app/start.sh" \
-  --container-disk-in-gb 20 \
-  --volume-mount-path /runpod-volume \
-  --container-registry-auth-id REGISTRY_AUTH_ID_FROM_STEP_7_2 \
-  --env '{"HF_TOKEN":"YOUR_HF_TOKEN","MODEL_DIR":"/runpod-volume/model","MODEL_ID":"meta-llama/Llama-3.2-3B-Instruct"}'
-```
-
-Note the returned **template id** (e.g. from `runpodctl template list` if not printed).
-
-- **Existing network volume**: The template defines the mount path. To attach your **existing** volume (ID `4lqjmp64p7`) instead of a new one, you may need to set that when creating the endpoint (if runpodctl supports it) or in the RunPod UI once. Check `runpodctl serverless create --help` and RunPod docs for “attach network volume to endpoint”.
-
-### 7.5 Create the serverless endpoint
-
-Use the template id from 7.4 and the IDs from 7.3:
-
-```bash
-runpodctl serverless create \
-  --name llama-chat-endpoint \
-  --template-id TEMPLATE_ID \
-  --gpu-id GPU_TYPE_ID \
-  --data-center-ids US_MO_2_DATACENTER_ID \
-  --workers-min 0 \
-  --workers-max 3 \
-  --gpu-count 1
-```
-
-Replace `TEMPLATE_ID`, `GPU_TYPE_ID`, and `US_MO_2_DATACENTER_ID` with the actual values.
-
-### 7.6 Inspect and get the endpoint URL
-
-```bash
-runpodctl serverless list --output=table
-runpodctl serverless get ENDPOINT_ID
-```
-
-Use the endpoint’s HTTP URL to send requests (see Step 8).
-
-### Troubleshooting: "config file at '/app/start.sh' is not a valid JSON file"
-
-The vLLM base image’s default entrypoint runs the vLLM server and treats the first argument as the model path. If the template used `--docker-start-cmd "/app/start.sh"`, that path was passed as the model, so vLLM tried to read `start.sh` as a model config. The template must use `--docker-entrypoint "/app/start.sh"` (and no start-cmd) so the container runs your script, which then starts vLLM with `--model /runpod-volume/model`. Recreate the template with the corrected entrypoint and redeploy the endpoint.
-
-### Troubleshooting: "error pulling image: unauthorized"
-
-Workers see this when the template does **not** have container registry auth for GHCR. Fix:
-
-1. Create GHCR registry auth: `just runpod-registry` (needs `RUNPOD_GHCR_TOKEN`).
-2. Get the auth ID: `just runpod-registry-list`, or RunPod Console → **Settings** → **Container Registry** → copy the ID for `ghcr-mcmoodoo`.
-3. Either **create a new template** with that ID: `REGISTRY_AUTH_ID=<id> just runpod-template-create`, then create a new endpoint with the new template; or **edit the existing template** in RunPod Console and set **Container Registry Auth** to the credential you created.
-
-### Reference (same config as before)
-
-| Item | Value |
-|------|--------|
-| Image | `ghcr.io/mcmoodoo/runpod-llama-chat:latest` |
-| Entrypoint | `/app/start.sh` (overrides vLLM image so the script runs; do not use start-cmd or vLLM will treat it as model path) |
-| Data center | `US-MO-2` (volume `llama3-model`) |
-| Network volume | ID `4lqjmp64p7`, mount `/runpod-volume` |
-| Env (optional) | `CONTEXT_JSON_PATH`, `MODEL_DIR`, `MODEL_ID`, `HF_TOKEN`, `VLLM_API_URL`, `SERVED_MODEL_NAME`, `TEMPERATURE`, `MAX_TOKENS` |
+   `vllm-chat` sends a single user message to `/v1/chat/completions` and prints the JSON response. You can also use `curl` or any OpenAI-compatible client against `POD_URL` (port 8000).
 
 ---
 
-## Step 8 – Using the Endpoint
+## Environment variables (container)
 
-Once the endpoint is running:
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MODEL_DIR` | `/workspace` | Where the model lives (and where it’s downloaded). |
+| `MODEL_ID` | `OpenHands/openhands-lm-7b-v0.1` | Hugging Face repo to download if `MODEL_DIR/config.json` is missing. |
+| `HF_TOKEN` / `HUGGING_FACE_HUB_TOKEN` | — | For gated models. |
+| `VLLM_PORT` | `8000` | Port vLLM listens on. |
+| `SERVED_MODEL_NAME` | `openhands-lm-7b-v0.1` | Model name in the API. |
+| `GPU_MEMORY_UTILIZATION` | `0.90` | vLLM GPU memory fraction. |
+| `MAX_MODEL_LEN` | `8192` | vLLM max sequence length. |
 
-1. **Update `context.json` in the image** to contain your real, dense, structured profile (then rebuild & push if you change it).
-2. **Set `HF_TOKEN`** in the endpoint if using the default gated model (`meta-llama/Llama-3.2-3B-Instruct`). The model is downloaded into the volume on first worker start.
-3. **Call the endpoint** (sync request; waits for the result):
+---
 
-**With the Justfile** (needs `jq`, `ENDPOINT_ID`, and `RUNPOD_API_KEY`):
+## Justfile summary
 
-```bash
-ENDPOINT_ID=your_endpoint_id RUNPOD_API_KEY=your_api_key just runpod-call
-# or with a custom message:
-MESSAGE='What is your background?' ENDPOINT_ID=... RUNPOD_API_KEY=... just runpod-call
-```
+| Command | Description |
+|---------|-------------|
+| `just docker-build` | Build the image. |
+| `just docker-push` | Log in to GHCR, build, push. |
+| `just runpod-pod-create` | Create a GPU pod with this image and volume at `/workspace`. |
+| `just runpod-pod-list` | List pods. |
+| `just runpod-pod-get` | Get pod details (set `POD_ID`). |
+| `just runpod-pod-stop` / `runpod-pod-delete` | Stop or delete pod (`POD_ID`). |
+| `just vllm-chat` | POST one chat message to vLLM (set `POD_URL`; optional `MESSAGE`). |
+| `just runpod-gpus` / `runpod-datacenters` | List GPU types and datacenters. |
 
-**With curl** (replace `ENDPOINT_ID` and `RUNPOD_API_KEY`):
+---
 
-```bash
-curl -sS -X POST "https://api.runpod.ai/v2/ENDPOINT_ID/runsync" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer RUNPOD_API_KEY" \
-  -d '{"input":{"message":"What is your background and main area of expertise?"}}'
-```
+## Log book
 
-**Request body** (your handler expects `input.message`):
-
-```json
-{
-  "input": {
-    "message": "What is your background and main area of expertise?"
-  }
-}
-```
-
-4. **Response**: RunPod returns JSON with `status` and `output`. Your handler puts the model reply in `output.response`:
-
-```json
-{
-  "id": "...",
-  "status": "COMPLETED",
-  "output": {
-    "response": "Short, dense description of your background and expertise."
-  }
-}
-```
-
-You can iterate on:
-
-- The JSON structure in `context.json`.
-- Prompt wording in `handler.py` (system message).
-- vLLM parameters (`TEMPERATURE`, `MAX_TOKENS`, etc.).
-
-## My log book
-
-- uploading to ghcr takes forever. The image is at 20Gb. Better uploaded from an EC2 instance. Will need to spin up one with terraform.
-  - docker and nix installed
+- Uploading to GHCR takes a long time (image ~20 GB). Consider building and pushing from an EC2 instance with Docker and Nix installed.
