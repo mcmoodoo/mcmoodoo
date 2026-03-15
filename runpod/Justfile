@@ -3,13 +3,10 @@ set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 GHCR_USER := "mcmoodoo"
 IMAGE := env_var_or_default("IMAGE", "ghcr.io/mcmoodoo/runpod-llama-chat")
 TAG := env_var_or_default("TAG", "latest")
-S3_BUCKET := env_var_or_default("S3_BUCKET", "mcmoodoo")
-
 # GPU pod: set POD_ID after creating; set POD_URL to the pod's vLLM base URL (e.g. https://xxx.runpod.net) for vllm-chat
 POD_ID := env_var_or_default("POD_ID", "")
 POD_URL := env_var_or_default("POD_URL", "")
 GPU_TYPE := env_var_or_default("GPU_TYPE", "NVIDIA GeForce RTX 4090")
-REGISTRY_AUTH_ID := env_var_or_default("REGISTRY_AUTH_ID", "")
 
 default:
   @just --list
@@ -46,12 +43,8 @@ runpod-datacenters:
 runpod-gpus:
   runpodctl gpu list --output=table
 
-runpod-template-list:
-  runpodctl template list --type user --output=table
-
-# Create a GPU pod running the vLLM image. Optional: HF_TOKEN, NETWORK_VOLUME_ID. Exposes port 8000.
+# Create a GPU pod running the vLLM image. Optional: HF_TOKEN. Exposes port 8000.
 runpod-pod-create:
-  # For private GHCR image: run `just runpod-registry` then set REGISTRY_AUTH_ID from `just runpod-registry-list`
   runpodctl create pod \
     --name vllm-pod \
     --imageName {{IMAGE}}:{{TAG}} \
@@ -87,38 +80,3 @@ vllm-chat:
   jq -n --arg msg "${MESSAGE:-Hello, what model are you?}" \
     '{model: "openhands-lm-7b-v0.1", messages: [{role: "user", content: $msg}], max_tokens: 256}' \
     | curl -sS -X POST "$$base/v1/chat/completions" -H "Content-Type: application/json" -d @-
-
-s3-upload local_path s3_key:
-  @test -f "{{local_path}}" || (echo "File '{{local_path}}' not found" && exit 1)
-  aws s3 cp "{{local_path}}" "s3://{{S3_BUCKET}}/{{s3_key}}"
-
-s3-url s3_key:
-  @test -n "{{s3_key}}" || (echo "s3_key is required" && exit 1)
-  echo "https://{{S3_BUCKET}}.s3.amazonaws.com/{{s3_key}}"
-
-tts-sample-call:
-  @test -n "${RUNPOD_API_KEY:-}" || (echo "RUNPOD_API_KEY is not set" && exit 1)
-  curl -X POST https://api.runpod.ai/v2/chatterbox-turbo/runsync \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $RUNPOD_API_KEY" \
-    -d '{"input":{"prompt":"Sorry, I misspoke earlier—Git reflogs are purely local. Once a commit leaves your machine, the remote may still retain the old commit even if you rewrite history. Dangling commits aren’t visible in the normal branch graph, but secret-scanning bots are extremely fast and can pick up leaked data in seconds. Bottom line: if a secret ever left your machine in raw form, assume it’s leaked. Revoke tokens, deactivate API keys, and if it’s a private key for a non-custodial wallet—withdraw funds immediately and hope no bot got there first.\n","voice":"gordon","format":"wav"}}'
-
-tts-sample-status job_id:
-  @test -n "${RUNPOD_API_KEY:-}" || (echo "RUNPOD_API_KEY is not set" && exit 1)
-  curl -X GET "https://api.runpod.ai/v2/chatterbox-turbo/status/{{job_id}}" \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $RUNPOD_API_KEY"
-
-asr-sample-call audio_url:
-  @test -n "${RUNPOD_API_KEY:-}" || (echo "RUNPOD_API_KEY is not set" && exit 1)
-  @test -n "{{audio_url}}" || (echo "audio_url is required" && exit 1)
-  curl -X POST https://api.runpod.ai/v2/whisper-v3-large/runsync \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $RUNPOD_API_KEY" \
-    -d '{"input":{"prompt":"","audio":"{{audio_url}}"}}'
-
-asr-sample-status job_id:
-  @test -n "${RUNPOD_API_KEY:-}" || (echo "RUNPOD_API_KEY is not set" && exit 1)
-  curl -X GET "https://api.runpod.ai/v2/whisper-v3-large/status/{{job_id}}" \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $RUNPOD_API_KEY"
