@@ -1,9 +1,11 @@
 set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 
+# Image to build and run on the pod
 GHCR_USER := "mcmoodoo"
-IMAGE := env_var_or_default("IMAGE", "ghcr.io/mcmoodoo/runpod-llama-chat")
+IMAGE := env_var_or_default("IMAGE", "ghcr.io/mcmoodoo/runpod-vllm")
 TAG := env_var_or_default("TAG", "latest")
-# GPU pod: set POD_ID after creating; set POD_URL to the pod's vLLM base URL (e.g. https://xxx.runpod.net) for vllm-chat
+
+# GPU pod: set POD_ID after creating; set POD_URL (e.g. https://xxx.runpod.net) for vllm-chat
 POD_ID := env_var_or_default("POD_ID", "")
 POD_URL := env_var_or_default("POD_URL", "")
 GPU_TYPE := env_var_or_default("GPU_TYPE", "NVIDIA GeForce RTX 4090")
@@ -34,15 +36,6 @@ runpod-registry:
     --username {{GHCR_USER}} \
     --password "$RUNPOD_GHCR_TOKEN"
 
-runpod-registry-list:
-  runpodctl registry list --output=table
-
-runpod-datacenters:
-  runpodctl datacenter list --output=table
-
-runpod-gpus:
-  runpodctl gpu list --output=table
-
 # Create a GPU pod running the vLLM image. Optional: HF_TOKEN. Exposes port 8000.
 runpod-pod-create:
   runpodctl create pod \
@@ -64,6 +57,10 @@ runpod-pod-list:
 runpod-pod-get:
   @test -n "{{POD_ID}}" || (echo "POD_ID is not set" && exit 1)
   runpodctl pod get {{POD_ID}}
+
+runpod-pod-start:
+  @test -n "{{POD_ID}}" || (echo "POD_ID is not set" && exit 1)
+  runpodctl pod start {{POD_ID}}
 
 runpod-pod-stop:
   @test -n "{{POD_ID}}" || (echo "POD_ID is not set" && exit 1)

@@ -31,7 +31,7 @@ just docker-build
 just docker-push
 ```
 
-Image name: `ghcr.io/mcmoodoo/runpod-llama-chat:latest` (override with `IMAGE` and `TAG`).
+Image name: `ghcr.io/mcmoodoo/runpod-vllm:latest` (override with `IMAGE` and `TAG`).
 
 ---
 
@@ -97,7 +97,7 @@ Image name: `ghcr.io/mcmoodoo/runpod-llama-chat:latest` (override with `IMAGE` a
 | `just runpod-pod-create` | Create a GPU pod with this image and volume at `/workspace`. |
 | `just runpod-pod-list` | List pods. |
 | `just runpod-pod-get` | Get pod details (set `POD_ID`). |
-| `just runpod-pod-stop` / `runpod-pod-delete` | Stop or delete pod (`POD_ID`). |
+| `just runpod-pod-start` / `runpod-pod-stop` / `runpod-pod-delete` | Start, stop, or delete pod (`POD_ID`). |
 | `just vllm-chat` | POST one chat message to vLLM (set `POD_URL`; optional `MESSAGE`). |
 | `just runpod-gpus` / `runpod-datacenters` | List GPU types and datacenters. |
 
