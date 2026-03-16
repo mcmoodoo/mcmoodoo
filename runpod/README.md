@@ -76,33 +76,35 @@ Image name: `ghcr.io/mcmoodoo/runpod-vllm:latest` (override with `IMAGE` and `TA
 
 ## Environment variables (container)
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `MODEL_DIR` | `/workspace` | Where the model lives (and where it’s downloaded). |
-| `MODEL_ID` | `OpenHands/openhands-lm-7b-v0.1` | Hugging Face repo to download if `MODEL_DIR/config.json` is missing. |
-| `HF_TOKEN` / `HUGGING_FACE_HUB_TOKEN` | — | For gated models. |
-| `VLLM_PORT` | `8000` | Port vLLM listens on. |
-| `SERVED_MODEL_NAME` | `openhands-lm-7b-v0.1` | Model name in the API. |
-| `GPU_MEMORY_UTILIZATION` | `0.90` | vLLM GPU memory fraction. |
-| `MAX_MODEL_LEN` | `8192` | vLLM max sequence length. |
+| Variable                              | Default                          | Description                                                          |
+| ------------------------------------- | -------------------------------- | -------------------------------------------------------------------- |
+| `MODEL_DIR`                           | `/workspace`                     | Where the model lives (and where it’s downloaded).                   |
+| `MODEL_ID`                            | `OpenHands/openhands-lm-7b-v0.1` | Hugging Face repo to download if `MODEL_DIR/config.json` is missing. |
+| `HF_TOKEN` / `HUGGING_FACE_HUB_TOKEN` | —                                | For gated models.                                                    |
+| `VLLM_PORT`                           | `8000`                           | Port vLLM listens on.                                                |
+| `SERVED_MODEL_NAME`                   | `openhands-lm-7b-v0.1`           | Model name in the API.                                               |
+| `GPU_MEMORY_UTILIZATION`              | `0.90`                           | vLLM GPU memory fraction.                                            |
+| `MAX_MODEL_LEN`                       | `8192`                           | vLLM max sequence length.                                            |
 
 ---
 
 ## Justfile summary
 
-| Command | Description |
-|---------|-------------|
-| `just docker-build` | Build the image. |
-| `just docker-push` | Log in to GHCR, build, push. |
-| `just runpod-pod-create` | Create a GPU pod with this image and volume at `/workspace`. |
-| `just runpod-pod-list` | List pods. |
-| `just runpod-pod-get` | Get pod details (set `POD_ID`). |
-| `just runpod-pod-start` / `runpod-pod-stop` / `runpod-pod-delete` | Start, stop, or delete pod (`POD_ID`). |
-| `just vllm-chat` | POST one chat message to vLLM (set `POD_URL`; optional `MESSAGE`). |
-| `just runpod-gpus` / `runpod-datacenters` | List GPU types and datacenters. |
+| Command                                                           | Description                                                        |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `just docker-build`                                               | Build the image.                                                   |
+| `just docker-push`                                                | Log in to GHCR, build, push.                                       |
+| `just runpod-pod-create`                                          | Create a GPU pod with this image and volume at `/workspace`.       |
+| `just runpod-pod-list`                                            | List pods.                                                         |
+| `just runpod-pod-get`                                             | Get pod details (set `POD_ID`).                                    |
+| `just runpod-pod-start` / `runpod-pod-stop` / `runpod-pod-delete` | Start, stop, or delete pod (`POD_ID`).                             |
+| `just vllm-chat`                                                  | POST one chat message to vLLM (set `POD_URL`; optional `MESSAGE`). |
+| `just runpod-gpus` / `runpod-datacenters`                         | List GPU types and datacenters.                                    |
 
 ---
 
 ## Log book
 
-- Uploading to GHCR takes a long time (image ~20 GB). Consider building and pushing from an EC2 instance with Docker and Nix installed.
+[x] Uploading to GHCR takes a long time (image ~20 GB). Consider building and pushing from an EC2 instance with Docker and Nix installed.
+[] Need a speedway for uploading secrets to the bastion instance
+[] Not properly binding to 8000, the pod starts vllm at 8001. Also ssh access is not working. Perhaps need to open those ports. Also need to mount the network volume
