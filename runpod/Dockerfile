@@ -12,4 +12,4 @@ ENV MODEL_DIR=/workspace \
     VLLM_PORT=8000 \
     SERVED_MODEL_NAME=openhands-lm-7b-v0.1
 
-CMD ["/app/start.sh"]
+ENTRYPOINT ["/app/start.sh"]
