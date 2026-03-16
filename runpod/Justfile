@@ -92,3 +92,66 @@ vllm-chat msg:
   jq -n --arg msg {{msg}} \
     '{model: "openhands-lm-7b-v0.1", messages: [{role: "user", content: $msg}], max_tokens: 256}' \
     | curl -sS -X POST "${POD_URL%/}/v1/chat/completions" -H "Content-Type: application/json" -d @-
+
+secretsmanager-create-secrets:
+    aws secretsmanager create-secret \
+      --name "runpod/GHCR_TOKEN" \
+      --secret-string "$RUNPOD_GHCR_TOKEN" \
+      --region "us-east-1" \
+    || aws secretsmanager put-secret-value \
+      --secret-id "runpod/GHCR_TOKEN" \
+      --secret-string "$RUNPOD_GHCR_TOKEN" \
+      --region "us-east-1"
+    aws secretsmanager create-secret \
+      --name "runpod/API_KEY" \
+      --secret-string "$RUNPOD_API_KEY" \
+      --region "us-east-1" \
+    || aws secretsmanager put-secret-value \
+      --secret-id "runpod/API_KEY" \
+      --secret-string "$RUNPOD_API_KEY" \
+      --region "us-east-1"
+    aws secretsmanager create-secret \
+      --name "runpod/HF_TOKEN" \
+      --secret-string "$HF_TOKEN" \
+      --region "us-east-1" \
+    || aws secretsmanager put-secret-value \
+      --secret-id "runpod/HF_TOKEN" \
+      --secret-string "$HF_TOKEN" \
+      --region "us-east-1"
+
+secretsmanager-get-secrets:
+    @echo "RUNPOD_GHCR_TOKEN:"
+    aws secretsmanager get-secret-value \
+      --secret-id "runpod/GHCR_TOKEN" \
+      --query "SecretString" \
+      --output text \
+      --region "us-east-1"
+    @echo "RUNPOD_API_KEY:"
+    aws secretsmanager get-secret-value \
+      --secret-id "runpod/API_KEY" \
+      --query "SecretString" \
+      --output text \
+      --region "us-east-1"
+    @echo "HF_TOKEN:"
+    aws secretsmanager get-secret-value \
+      --secret-id "runpod/HF_TOKEN" \
+      --query "SecretString" \
+      --output text \
+      --region "us-east-1"
+
+secretsmanager-export-env:
+    echo "export RUNPOD_GHCR_TOKEN=$(aws secretsmanager get-secret-value \
+      --secret-id "runpod/GHCR_TOKEN" \
+      --query "SecretString" \
+      --output text \
+      --region "us-east-1")"
+    echo "export RUNPOD_API_KEY=$(aws secretsmanager get-secret-value \
+      --secret-id "runpod/API_KEY" \
+      --query "SecretString" \
+      --output text \
+      --region "us-east-1")"
+    echo "export HF_TOKEN=$(aws secretsmanager get-secret-value \
+      --secret-id "runpod/HF_TOKEN" \
+      --query "SecretString" \
+      --output text \
+      --region "us-east-1")"
