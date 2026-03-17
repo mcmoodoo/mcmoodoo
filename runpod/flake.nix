@@ -13,11 +13,11 @@
 
         runpodctl-latest = pkgs.stdenv.mkDerivation {
           pname = "runpodctl";
-          version = "v2.1.0";
+          version = "v2.1.6";
 
           src = pkgs.fetchurl {
-            url = "https://github.com/runpod/runpodctl/releases/download/v2.1.0/runpodctl-linux-amd64.tar.gz";
-            hash = "sha256-96pJQHqNLY1EUgk4zp62bZ2C4heKwD9a3qGLnMAM9o0=";
+            url = "https://github.com/runpod/runpodctl/releases/download/v2.1.6/runpodctl-linux-amd64.tar.gz";
+            hash = "sha256-9i+ylKOrv6F8+pMYqAUkjslVt3yc7vjYFaOkR7Yy6OY=";
           };
 
           nativeBuildInputs = [ pkgs.autoPatchelfHook ];

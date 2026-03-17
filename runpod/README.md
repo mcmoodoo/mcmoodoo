@@ -99,7 +99,7 @@ Image name: `ghcr.io/mcmoodoo/runpod-vllm:latest` (override with `IMAGE` and `TA
 | `just runpod-pod-get`                                             | Get pod details (set `POD_ID`).                                    |
 | `just runpod-pod-start` / `runpod-pod-stop` / `runpod-pod-delete` | Start, stop, or delete pod (`POD_ID`).                             |
 | `just vllm-chat`                                                  | POST one chat message to vLLM (set `POD_URL`; optional `MESSAGE`). |
-| `just runpod-gpus` / `runpod-datacenters`                         | List GPU types and datacenters.                                    |
+| `just runpod-gpus` / `just datacenters [gpu_id]`                  | List GPU types and datacenters (optionally filter by GPU id).      |
 
 ---
 

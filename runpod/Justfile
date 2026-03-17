@@ -155,3 +155,7 @@ secretsmanager-export-env:
       --query "SecretString" \
       --output text \
       --region "us-east-1")"
+
+# List US datacenters with available GPUs; optionally filter by GPU id.
+datacenters gpu_id="":
+  runpodctl datacenter list | jq --arg gpu_id "{{gpu_id}}" 'def matches_gpu($gid): ($gid|length)==0 or ((.gpuAvailability // []) | any(((.gpuId? // .gpuTypeId? // .id? // "") | tostring) == $gid)); .[] | select(.location == "United States" and ((.gpuAvailability // []) | any(.stockStatus == "High" or .stockStatus == "Medium")) and matches_gpu($gpu_id))'
