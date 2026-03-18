@@ -89,7 +89,7 @@ runpod-pod-delete:
 # Call vLLM chat completions on the pod. Set POD_URL (e.g. https://xxx.runpod.net or http://pod-ip:8000).
 vllm-chat msg:
   @test -n "${POD_URL:-}" || (echo "POD_URL is not set" && exit 1) ; \
-  jq -n --arg msg {{msg}} \
+  jq -n --arg msg "{{msg}}" \
     '{model: "openhands-lm-7b-v0.1", messages: [{role: "user", content: $msg}], max_tokens: 256}' \
     | curl -sS -X POST "${POD_URL%/}/v1/chat/completions" -H "Content-Type: application/json" -d @-
 
