@@ -8,7 +8,6 @@ TAG := env_var_or_default("TAG", "latest")
 # GPU pod: set POD_ID after creating; set POD_URL (e.g. https://xxx.runpod.net) for vllm-chat
 POD_ID := env_var_or_default("POD_ID", "")
 POD_URL := env_var_or_default("POD_URL", "")
-GPU_TYPE := env_var_or_default("GPU_TYPE", "NVIDIA RTX A6000")
 
 default:
   @just --list
@@ -37,34 +36,32 @@ runpod-registry:
     --password "$RUNPOD_GHCR_TOKEN"
 
 # Create a GPU pod running the vLLM image. Exposes port 8000 and 22.
+# All defaults: runpod-pod-profile.json (container_env + runpod). Override path with POD_PROFILE_JSON.
+# HF_TOKEN merged into container env from the shell when set. GPU_TYPE overrides runpod.gpu_id.
+# GPU_COUNT overrides runpod.gpu_count (Runpod --gpu-count; default 1 in profile).
 runpod-pod-create:
   hf="${HF_TOKEN:-${HUGGING_FACE_HUB_TOKEN:-}}" ; \
-  env_json="$(jq -n \
-    --arg MODEL_DIR "${MODEL_DIR:-/workspace}" \
-    --arg MODEL_ID "${MODEL_ID:-OpenHands/openhands-lm-7b-v0.1}" \
-    --arg HF_TOKEN "$hf" \
-    '({MODEL_DIR: $MODEL_DIR, MODEL_ID: $MODEL_ID} + (if ($HF_TOKEN|length) > 0 then {HF_TOKEN: $HF_TOKEN} else {} end))' \
-  )" ; \
+  profile="${POD_PROFILE_JSON:-{{justfile_directory()}}/runpod-pod-profile.json}" ; \
+  test -f "$profile" || (echo "missing pod profile: $profile" >&2 && exit 1) ; \
+  env_json="$(jq -c --arg HF_TOKEN "$hf" \
+    'if ($HF_TOKEN|length) > 0 then .container_env + {HF_TOKEN: $HF_TOKEN} else .container_env end' \
+    "$profile")" ; \
+  pod_name="$(jq -r '.runpod.name' "$profile")" ; \
+  gpu_id="$(jq -r '.runpod.gpu_id' "$profile")" ; \
+  if [ -n "${GPU_TYPE:-}" ]; then gpu_id="$GPU_TYPE" ; fi ; \
+  gpu_count="$(jq -r '.runpod.gpu_count // 1' "$profile")" ; \
+  if [ -n "${GPU_COUNT:-}" ]; then gpu_count="$GPU_COUNT" ; fi ; \
+  disk_gb="$(jq -r '.runpod.container_disk_in_gb' "$profile")" ; \
+  vol_gb="$(jq -r '.runpod.volume_in_gb' "$profile")" ; \
+  ports="$(jq -r '.runpod.ports' "$profile")" ; \
   runpodctl pod create \
-    --name vllm-pod \
+    --name "$pod_name" \
     --image {{IMAGE}}:{{TAG}} \
-    --gpu-id "{{GPU_TYPE}}" \
-    --container-disk-in-gb 30 \
-    --volume-in-gb 50 \
-    --ports 8000/http,22/tcp \
-    --env "$env_json"
-
-# Same as runpod-pod-create, but takes --env JSON from stdin:
-#   cat env.json | just runpod-pod-create-stdin-env
-runpod-pod-create-stdin-env:
-  env_json="$(cat | jq -c .)" ; \
-  runpodctl pod create \
-    --name vllm-pod \
-    --image {{IMAGE}}:{{TAG}} \
-    --gpu-id "{{GPU_TYPE}}" \
-    --container-disk-in-gb 30 \
-    --volume-in-gb 50 \
-    --ports 8000/http,22/tcp \
+    --gpu-id "$gpu_id" \
+    --gpu-count "$gpu_count" \
+    --container-disk-in-gb "$disk_gb" \
+    --volume-in-gb "$vol_gb" \
+    --ports "$ports" \
     --env "$env_json"
 
 runpod-pod-list:
