@@ -13,7 +13,7 @@
   "runpod": {
     "name": "vllm-pod",
     "gpu_id": "NVIDIA A40",
-    "gpu_count": 1,
+    "gpu_count": 3,
     "container_disk_in_gb": 30,
     "volume_in_gb": 50,
     "ports": "8000/http,22/tcp"
