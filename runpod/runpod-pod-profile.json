@@ -6,15 +6,15 @@
     "SERVED_MODEL_NAME": "openhands-lm-32b-v0.1",
     "GPU_MEMORY_UTILIZATION": "0.90",
     "MAX_MODEL_LEN": "65536",
-    "TENSOR_PARALLEL_SIZE": "3",
+    "TENSOR_PARALLEL_SIZE": "2",
     "PIPELINE_PARALLEL_SIZE": "1",
     "TOOL_CALL_PARSER": "hermes"
   },
   "runpod": {
     "name": "vllm-pod",
-    "gpu_id": "NVIDIA A40",
-    "gpu_count": 3,
-    "container_disk_in_gb": 30,
+    "gpu_id": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "gpu_count": 2,
+    "container_disk_in_gb": 60,
     "volume_in_gb": 50,
     "ports": "8000/http,22/tcp"
   }
