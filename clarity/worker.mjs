@@ -75,7 +75,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gpt-4-0613",
+          model: "gpt-4o-mini",
           messages: [{ role: "user", content: prompt }],
           max_tokens: 500,
         }),
