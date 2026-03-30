@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import { seo } from "../settings";
+import { seo, template } from "../settings";
 import { getCollection } from "astro:content";
 
 export async function GET(context) {
@@ -18,7 +18,7 @@ export async function GET(context) {
             title: post.data.title,
             pubDate: post.data.date,
             description: post.data.excerpt,
-            link: `/${post.id}`,
+            link: `${template.base}/${post.id}`,
         })),
         // (optional) inject custom xml
         customData: `<language>en-us</language>`,
